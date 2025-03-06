@@ -8,12 +8,6 @@ public abstract class BaseModel {
     protected LocalDateTime updatedAt;
     protected LocalDateTime deletedAt;
 
-    BaseModel(LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
-        this.deletedAt = deletedAt;
-    }
-
     protected void markUpdated(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
