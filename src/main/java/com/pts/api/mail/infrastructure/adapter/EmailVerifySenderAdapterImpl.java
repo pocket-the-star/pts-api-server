@@ -1,6 +1,6 @@
 package com.pts.api.mail.infrastructure.adapter;
 
-import com.pts.api.mail.application.port.out.AuthMailSenderPort;
+import com.pts.api.mail.application.port.out.EmailVerifySenderPort;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.mail.SimpleMailMessage;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class AuthMailSenderAdapterImpl implements AuthMailSenderPort {
+public class EmailVerifySenderAdapterImpl implements EmailVerifySenderPort {
 
     private final JavaMailSender javaMailSender;
     private static final String SUBJECT = "포켓더스타 인증 코드 안내";

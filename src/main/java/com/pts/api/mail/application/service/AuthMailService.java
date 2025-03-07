@@ -1,7 +1,7 @@
 package com.pts.api.mail.application.service;
 
 import com.pts.api.mail.application.port.in.AuthMailUseCase;
-import com.pts.api.mail.application.port.out.AuthMailSenderPort;
+import com.pts.api.mail.application.port.out.EmailVerifySenderPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -9,10 +9,10 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class AuthMailService implements AuthMailUseCase {
 
-    private final AuthMailSenderPort authMailSenderPort;
+    private final EmailVerifySenderPort emailVerifySenderPort;
 
     @Override
     public void send(String email, String authCode) {
-        authMailSenderPort.send(email, authCode);
+        emailVerifySenderPort.send(email, authCode);
     }
 }
