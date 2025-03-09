@@ -13,13 +13,13 @@ import com.pts.api.user.application.port.in.EmailVerifyUseCase;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.bean.override.mockito.MockitoBean;
 
 @DisplayName("EmailVerifyController 클래스")
 public class EmailVerifyControllerTest extends BaseIntegrationTest {
 
-    @MockitoBean
+    @Autowired
     private EmailVerifyUseCase emailVerifyUseCase;
 
     private static final String VERIFY_URL = "/api/v1/users/email/verify";
