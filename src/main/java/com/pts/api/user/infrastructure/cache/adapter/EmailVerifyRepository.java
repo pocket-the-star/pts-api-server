@@ -1,4 +1,4 @@
-package com.pts.api.user.infrastructure.cache;
+package com.pts.api.user.infrastructure.cache.adapter;
 
 import com.pts.api.user.application.port.out.EmailVerifyRepositoryPort;
 import com.pts.api.user.domain.model.EmailVerify;

@@ -1,4 +1,4 @@
-package com.pts.api.user.infrastructure.event;
+package com.pts.api.user.infrastructure.event.adapter;
 
 import com.pts.api.lib.internal.shared.event.EmailVerifyEvent;
 import com.pts.api.user.application.port.out.EmailVerifyProducerPort;
