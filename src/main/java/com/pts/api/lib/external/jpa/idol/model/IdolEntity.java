@@ -8,7 +8,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import java.time.OffsetDateTime;
+import java.time.LocalDateTime;
 import java.util.List;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -33,7 +33,7 @@ public class IdolEntity extends BaseEntity {
 
     @Builder
     public IdolEntity(Long id, String name, List<MemberEntity> artists,
-        OffsetDateTime createdAt, OffsetDateTime updatedAt, OffsetDateTime deletedAt) {
+        LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.name = name;
         this.artists = artists;

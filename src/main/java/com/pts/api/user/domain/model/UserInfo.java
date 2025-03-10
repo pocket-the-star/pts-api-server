@@ -2,7 +2,10 @@ package com.pts.api.user.domain.model;
 
 import com.pts.api.lib.internal.shared.base.model.BaseModel;
 import java.time.LocalDateTime;
+import lombok.Builder;
+import lombok.Getter;
 
+@Getter
 public class UserInfo extends BaseModel {
 
     private Long id;
@@ -12,6 +15,7 @@ public class UserInfo extends BaseModel {
     private String address;
     private String extraInfo;
 
+    @Builder
     public UserInfo(Long id, Long userId, String fullName, String phone, String address,
         String extraInfo,
         LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {

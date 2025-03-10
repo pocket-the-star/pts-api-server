@@ -12,7 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import java.time.OffsetDateTime;
+import java.time.LocalDateTime;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -37,7 +37,7 @@ public class MemberEntity extends BaseEntity {
 
     @Builder
     public MemberEntity(Long id, IdolEntity idol, String name,
-        OffsetDateTime createdAt, OffsetDateTime updatedAt, OffsetDateTime deletedAt) {
+        LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.idol = idol;
         this.name = name;

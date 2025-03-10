@@ -3,7 +3,10 @@ package com.pts.api.user.domain.model;
 import com.pts.api.lib.internal.shared.base.model.BaseModel;
 import com.pts.api.lib.internal.shared.enums.UserRole;
 import java.time.LocalDateTime;
+import lombok.Builder;
+import lombok.Getter;
 
+@Getter
 public class User extends BaseModel {
 
     private Long id;
@@ -12,6 +15,7 @@ public class User extends BaseModel {
     private LocalAccount localAccount;
     private UserInfo userInfo;
 
+    @Builder
     public User(Long id, String nickname, UserRole role, LocalAccount localAccount,
         UserInfo userInfo,
         LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
