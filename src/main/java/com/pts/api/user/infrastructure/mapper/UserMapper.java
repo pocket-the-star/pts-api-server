@@ -6,9 +6,12 @@ import com.pts.api.lib.external.jpa.user.model.UserInfoEntity;
 import com.pts.api.user.domain.model.LocalAccount;
 import com.pts.api.user.domain.model.User;
 import com.pts.api.user.domain.model.UserInfo;
+import org.springframework.stereotype.Component;
 
-public class UserMapper {
+@Component
+public class UserMapper implements IUserMapper {
 
+    @Override
     public User mapToModel(UserEntity userEntity) {
         return User.builder()
             .id(userEntity.getId())
@@ -19,6 +22,7 @@ public class UserMapper {
             .build();
     }
 
+    @Override
     public UserEntity mapToEntity(User user) {
         UserInfoEntity userInfoEntity = null;
         if (user.getUserInfo() != null) {
