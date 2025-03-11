@@ -27,19 +27,11 @@ public class CategoryEntity extends BaseEntity {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "parent_id")
-    private Long parentId;
-
-    @Column(name = "depth")
-    private Integer depth;
-
     @Builder
-    public CategoryEntity(Long id, String name, Long parentId, Integer depth,
-        LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
+    public CategoryEntity(Long id, String name, LocalDateTime createdAt, LocalDateTime updatedAt,
+        LocalDateTime deletedAt) {
         this.id = id;
         this.name = name;
-        this.parentId = parentId;
-        this.depth = depth;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
