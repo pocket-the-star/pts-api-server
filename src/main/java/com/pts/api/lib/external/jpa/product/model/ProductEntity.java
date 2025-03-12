@@ -28,17 +28,17 @@ public class ProductEntity extends BaseEntity {
     @Column(name = "title", nullable = false)
     private String title;
 
-    @Column(columnDefinition = "TEXT", name = "description", nullable = false)
-    private String description;
-
     @Column(name = "category_id", nullable = false)
     private Long categoryId;
 
     @Column(name = "group_id", nullable = false)
     private Long groupId;
 
-    @Column(columnDefinition = "json", name = "extra_info", nullable = false)
-    private String extraInfo;
+    @Column(name = "max_sell_price", nullable = false)
+    private Long maxSellPrice;
+
+    @Column(name = "min_buy_price", nullable = false)
+    private Long minBuyPrice;
 
     @OneToMany(mappedBy = "product")
     private List<ProductOptionEntity> options;
@@ -47,15 +47,16 @@ public class ProductEntity extends BaseEntity {
     private List<ProductImageEntity> images;
 
     @Builder
-    public ProductEntity(Long id, String title, String description, Long categoryId, Long groupId,
-        String extraInfo, List<ProductOptionEntity> options, List<ProductImageEntity> images,
-        LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
+    public ProductEntity(Long id, String title, Long categoryId, Long groupId, Long maxSellPrice,
+        Long minBuyPrice,
+        List<ProductOptionEntity> options, List<ProductImageEntity> images, LocalDateTime createdAt,
+        LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.title = title;
-        this.description = description;
         this.categoryId = categoryId;
         this.groupId = groupId;
-        this.extraInfo = extraInfo;
+        this.maxSellPrice = maxSellPrice;
+        this.minBuyPrice = minBuyPrice;
         this.options = options;
         this.images = images;
         this.createdAt = createdAt;

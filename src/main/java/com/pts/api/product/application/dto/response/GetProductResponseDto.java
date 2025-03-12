@@ -2,7 +2,7 @@ package com.pts.api.product.application.dto.response;
 
 public record GetProductResponseDto(
     Long id,
-    String name,
+    String title,
     String imageUrl,
     Long groupId,
     Long categoryId,
@@ -12,4 +12,5 @@ public record GetProductResponseDto(
     String createdAt,
     String updatedAt
 ) {
-} 
+
+}
