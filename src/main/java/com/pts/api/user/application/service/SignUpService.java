@@ -14,6 +14,7 @@ import com.pts.api.user.common.exception.PasswordMismatchException;
 import com.pts.api.user.domain.model.EmailVerify;
 import com.pts.api.user.domain.model.LocalAccount;
 import com.pts.api.user.domain.model.User;
+import com.pts.api.user.domain.model.UserInfo;
 import jakarta.transaction.Transactional;
 import java.time.LocalDateTime;
 import lombok.RequiredArgsConstructor;
@@ -72,7 +73,16 @@ public class SignUpService implements SignUpUseCase {
             .localAccount(
                 LocalAccount.builder()
                     .email(signUpRequestDto.email())
-                    .password(passwordEncoderPort.encode(signUpRequestDto.password()))
+                    .password(encodePassword(signUpRequestDto.password()))
+                    .createdAt(now)
+                    .updatedAt(now)
+                    .build()
+            )
+            .userInfo(
+                UserInfo.builder()
+                    .fullName(signUpRequestDto.nickname())
+                    .phone("")
+                    .address("")
                     .createdAt(now)
                     .updatedAt(now)
                     .build()

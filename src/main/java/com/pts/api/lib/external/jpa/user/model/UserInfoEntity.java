@@ -3,10 +3,15 @@ package com.pts.api.lib.external.jpa.user.model;
 import com.pts.api.lib.external.jpa.base.model.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ForeignKey;
+import jakarta.persistence.ConstraintMode;
 import java.time.LocalDateTime;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -23,8 +28,9 @@ public class UserInfoEntity extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "user_id", nullable = false)
-    private Long userId;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+    private UserEntity user;
 
     @Column(name = "full_name", nullable = false)
     private String fullName;
@@ -39,11 +45,11 @@ public class UserInfoEntity extends BaseEntity {
     private String extraInfo;
 
     @Builder
-    public UserInfoEntity(Long id, Long userId, String fullName, String phone, String address,
+    public UserInfoEntity(Long id, UserEntity user, String fullName, String phone, String address,
         String extraInfo,
         LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
-        this.userId = userId;
+        this.user = user;
         this.fullName = fullName;
         this.phone = phone;
         this.address = address;

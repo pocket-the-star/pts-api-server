@@ -2,10 +2,15 @@ package com.pts.api.lib.external.jpa.user.model;
 
 import com.pts.api.lib.external.jpa.base.model.BaseEntity;
 import jakarta.persistence.Column;
+import jakarta.persistence.ConstraintMode;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import java.time.LocalDateTime;
 import lombok.AccessLevel;
@@ -23,8 +28,9 @@ public class LocalAccountEntity extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "user_id")
-    private Long userId;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+    private UserEntity user;
 
     @Column(name = "email", nullable = false, unique = true)
     private String email;
@@ -33,10 +39,10 @@ public class LocalAccountEntity extends BaseEntity {
     private String password;
 
     @Builder
-    public LocalAccountEntity(Long id, Long userId, String email, String password,
+    public LocalAccountEntity(Long id, UserEntity user, String email, String password,
         LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
-        this.userId = userId;
+        this.user = user;
         this.email = email;
         this.password = password;
         this.createdAt = createdAt;

@@ -2,17 +2,15 @@ package com.pts.api.lib.external.jpa.user.model;
 
 import com.pts.api.lib.external.jpa.base.model.BaseEntity;
 import com.pts.api.lib.internal.shared.enums.UserRole;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
-import jakarta.persistence.ConstraintMode;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
-import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import java.time.LocalDateTime;
@@ -38,12 +36,10 @@ public class UserEntity extends BaseEntity {
     @Column(name = "role", nullable = false)
     private UserRole role;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
     private LocalAccountEntity localAccount;
 
-    @OneToOne(fetch = FetchType.LAZY, optional = true)
-    @JoinColumn(name = "user_info_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = true)
     private UserInfoEntity userInfo;
 
     @Builder
@@ -58,5 +54,13 @@ public class UserEntity extends BaseEntity {
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
+    }
+
+    public void setLocalAccount(LocalAccountEntity localAccount) {
+        this.localAccount = localAccount;
+    }
+
+    public void setUserInfo(UserInfoEntity userInfo) {
+        this.userInfo = userInfo;
     }
 } 

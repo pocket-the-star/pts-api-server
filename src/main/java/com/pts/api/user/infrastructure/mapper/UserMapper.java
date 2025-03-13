@@ -19,29 +19,59 @@ public class UserMapper implements IUserMapper {
             .role(userEntity.getRole())
             .localAccount(mapLocalAccountToModel(userEntity.getLocalAccount()))
             .userInfo(mapUserInfoToModel(userEntity.getUserInfo()))
+            .createdAt(userEntity.getCreatedAt())
+            .updatedAt(userEntity.getUpdatedAt())
+            .deletedAt(userEntity.getDeletedAt())
             .build();
     }
 
     @Override
     public UserEntity mapToEntity(User user) {
-        UserInfoEntity userInfoEntity = null;
-        if (user.getUserInfo() != null) {
-            userInfoEntity = mapUserInfoToEntity(user.getUserInfo());
-        }
-
-        return UserEntity.builder()
+        UserEntity userEntity = UserEntity.builder()
             .id(user.getId())
             .nickname(user.getNickname())
             .role(user.getRole())
-            .localAccount(mapLocalAccountToEntity(user.getLocalAccount()))
-            .userInfo(userInfoEntity)
+            .createdAt(user.getCreatedAt())
+            .updatedAt(user.getUpdatedAt())
+            .deletedAt(user.getDeletedAt())
             .build();
+
+        if (user.getLocalAccount() != null) {
+            LocalAccountEntity localAccountEntity = LocalAccountEntity.builder()
+                .id(user.getLocalAccount().getId())
+                .email(user.getLocalAccount().getEmail())
+                .password(user.getLocalAccount().getPassword())
+                .user(userEntity)
+                .createdAt(user.getLocalAccount().getCreatedAt())
+                .updatedAt(user.getLocalAccount().getUpdatedAt())
+                .deletedAt(user.getLocalAccount().getDeletedAt())
+                .build();
+            userEntity.setLocalAccount(localAccountEntity);
+        }
+
+        if (user.getUserInfo() != null) {
+            UserInfoEntity userInfoEntity = UserInfoEntity.builder()
+                .id(user.getUserInfo().getId())
+                .fullName(user.getUserInfo().getFullName())
+                .phone(user.getUserInfo().getPhone())
+                .address(user.getUserInfo().getAddress())
+                .extraInfo(user.getUserInfo().getExtraInfo())
+                .user(userEntity)
+                .createdAt(user.getUserInfo().getCreatedAt())
+                .updatedAt(user.getUserInfo().getUpdatedAt())
+                .deletedAt(user.getUserInfo().getDeletedAt())
+                .build();
+            userEntity.setUserInfo(userInfoEntity);
+        }
+
+        return userEntity;
     }
 
     private UserInfo mapUserInfoToModel(UserInfoEntity userInfoEntity) {
+        if (userInfoEntity == null) return null;
         return UserInfo.builder()
             .id(userInfoEntity.getId())
-            .userId(userInfoEntity.getUserId())
+            .userId(userInfoEntity.getUser().getId())
             .fullName(userInfoEntity.getFullName())
             .phone(userInfoEntity.getPhone())
             .address(userInfoEntity.getAddress())
@@ -52,36 +82,11 @@ public class UserMapper implements IUserMapper {
             .build();
     }
 
-    private UserInfoEntity mapUserInfoToEntity(UserInfo userInfo) {
-        return UserInfoEntity.builder()
-            .id(userInfo.getId())
-            .userId(userInfo.getUserId())
-            .fullName(userInfo.getFullName())
-            .phone(userInfo.getPhone())
-            .address(userInfo.getAddress())
-            .extraInfo(userInfo.getExtraInfo())
-            .createdAt(userInfo.getCreatedAt())
-            .updatedAt(userInfo.getUpdatedAt())
-            .deletedAt(userInfo.getDeletedAt())
-            .build();
-    }
-
-    private LocalAccountEntity mapLocalAccountToEntity(LocalAccount localAccount) {
-        return LocalAccountEntity.builder()
-            .id(localAccount.getId())
-            .userId(localAccount.getUserId())
-            .email(localAccount.getEmail())
-            .password(localAccount.getPassword())
-            .createdAt(localAccount.getCreatedAt())
-            .updatedAt(localAccount.getUpdatedAt())
-            .deletedAt(localAccount.getDeletedAt())
-            .build();
-    }
-
     private LocalAccount mapLocalAccountToModel(LocalAccountEntity localAccountEntity) {
+        if (localAccountEntity == null) return null;
         return LocalAccount.builder()
             .id(localAccountEntity.getId())
-            .userId(localAccountEntity.getUserId())
+            .userId(localAccountEntity.getUser().getId())
             .email(localAccountEntity.getEmail())
             .password(localAccountEntity.getPassword())
             .createdAt(localAccountEntity.getCreatedAt())
