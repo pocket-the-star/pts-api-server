@@ -5,6 +5,8 @@ import com.pts.api.global.presentation.response.ResponseGenerator;
 import com.pts.api.global.presentation.response.ResponseMsg;
 import com.pts.api.product.application.dto.response.GetProductResponseDto;
 import com.pts.api.product.application.service.GetProductService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+@Tag(name = "상품", description = "상품 API")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1")
@@ -21,6 +24,7 @@ public class GetProductController {
 
     private final GetProductService getProductService;
 
+    @Operation(summary = "상품 조회", description = "상품 목록을 조회합니다.")
     @GetMapping("/products")
     public ResponseEntity<BaseResponse<List<GetProductResponseDto>>> getProducts(
         @RequestParam(value = "groupId", required = false) Long groupId,
