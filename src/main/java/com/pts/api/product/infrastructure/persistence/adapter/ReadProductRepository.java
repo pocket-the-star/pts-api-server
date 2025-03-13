@@ -25,25 +25,15 @@ public class ReadProductRepository implements ReadProductRepositoryPort {
     private final JPAQueryFactory queryFactory;
 
     @Override
-    public List<GetProductResponseDto> findAll(Long groupId, Long categoryId,
-        Long subCategoryId,
+    public List<GetProductResponseDto> findAll(Long groupId, Long categoryId, Long subCategoryId,
         int offset) {
         int LIMIT = 20;
         int IMAGE_LIMIT = 1;
-        JPAQuery
-            <GetProductResponseDto> query = queryFactory
-            .select(Projections.constructor(GetProductResponseDto.class,
-                productEntity.id,
-                productEntity.title,
-                productImageEntity.imageUrl,
-                productEntity.groupId,
-                productEntity.categoryId,
-                subCategoryEntity.id,
-                productEntity.minBuyPrice,
-                productEntity.maxSellPrice,
-                productEntity.createdAt,
-                productEntity.updatedAt
-            ))
+        JPAQuery<GetProductResponseDto> query = queryFactory.select(
+                Projections.constructor(GetProductResponseDto.class, productEntity.id,
+                    productEntity.title, productImageEntity.imageUrl, productEntity.groupId,
+                    productEntity.categoryId, productEntity.categoryId, productEntity.minBuyPrice,
+                    productEntity.maxSellPrice, productEntity.createdAt, productEntity.updatedAt))
             .from(productEntity);
 
         BooleanBuilder builder = new BooleanBuilder();
@@ -54,30 +44,22 @@ public class ReadProductRepository implements ReadProductRepositoryPort {
 
         if (subCategoryId != null) {
             builder.and(productEntity.categoryId.eq(subCategoryId));
-            builder.and(subCategoryEntity.categoryId.eq(categoryId));
-            query.innerJoin(subCategoryEntity)
-                .on(subCategoryEntity.id.eq(productEntity.categoryId));
-
+            query.innerJoin(subCategoryEntity).on(subCategoryEntity.id.eq(subCategoryId));
+            if (categoryId != null) {
+                builder.and(subCategoryEntity.categoryId.eq(categoryId));
+            }
         }
 
         builder.and(productEntity.deletedAt.isNull());
 
         QProductImageEntity productImageEntitySub = new QProductImageEntity(
             "productImageEntitySub");
-        JPQLQuery<Long> firstProductImageQuery = JPAExpressions
-            .select(productImageEntitySub.id)
-            .from(productImageEntitySub)
-            .where(productImageEntitySub.product.eq(productEntity))
-            .orderBy(productImageEntitySub.id.desc())
-            .limit(IMAGE_LIMIT);
+        JPQLQuery<Long> firstProductImageQuery = JPAExpressions.select(productImageEntitySub.id)
+            .from(productImageEntitySub).where(productImageEntitySub.product.eq(productEntity))
+            .orderBy(productImageEntitySub.id.desc()).limit(IMAGE_LIMIT);
 
-        return query
-            .innerJoin(productImageEntity)
-            .on(productImageEntity.id.eq(firstProductImageQuery))
-            .where(builder)
-            .limit(LIMIT)
-            .offset(offset)
-            .orderBy(productEntity.updatedAt.desc())
-            .fetch();
+        return query.innerJoin(productImageEntity)
+            .on(productImageEntity.id.eq(firstProductImageQuery)).where(builder).limit(LIMIT)
+            .offset(offset).orderBy(productEntity.updatedAt.desc()).fetch();
     }
 }
