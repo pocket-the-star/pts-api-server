@@ -1,8 +1,10 @@
 package com.pts.api.user.infrastructure.mapper;
 
-public interface IEmailVerifyMapper<T> {
+import com.pts.api.user.domain.model.EmailVerify;
 
-    String mapToString(T object);
+public interface IEmailVerifyMapper {
 
-    T mapToObject(String value, Class<T> clazz);
+    String mapToString(EmailVerify object);
+
+    EmailVerify mapToObject(String value);
 }

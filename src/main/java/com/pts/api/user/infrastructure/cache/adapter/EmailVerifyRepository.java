@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
 public class EmailVerifyRepository implements EmailVerifyRepositoryPort {
 
     private final StringRedisTemplate redisTemplate;
-    private final IEmailVerifyMapper<EmailVerify> emailVerifyMapper;
+    private final IEmailVerifyMapper emailVerifyMapper;
     private static final String KEY_PREFIX = "EA:";
     private static final String LOCK_KEY_PREFIX = "EALOCK:";
     private static final long EMAIL_AUTH_EXPIRATION = 10L * 60L * 1000L;
@@ -68,7 +68,7 @@ public class EmailVerifyRepository implements EmailVerifyRepositoryPort {
     }
 
     private EmailVerify convertValue(String value) {
-        return emailVerifyMapper.mapToObject(value, EmailVerify.class);
+        return emailVerifyMapper.mapToObject(value);
     }
 
     private String convertValue(EmailVerify emailAuth) {
