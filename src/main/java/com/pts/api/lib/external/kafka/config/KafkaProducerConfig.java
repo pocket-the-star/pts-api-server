@@ -30,16 +30,14 @@ public class KafkaProducerConfig {
         props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
         props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
         props.put(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, enableIdempotence);
-        props.put(ProducerConfig.TRANSACTIONAL_ID_CONFIG, transactionalId);
+
         return props;
     }
 
     @Bean
     public ProducerFactory<String, String> producerFactory() {
-        DefaultKafkaProducerFactory<String, String> factory =
-            new DefaultKafkaProducerFactory<>(producerConfigs());
-        factory.setTransactionIdPrefix(transactionalId);
-        return factory;
+
+        return new DefaultKafkaProducerFactory<>(producerConfigs());
     }
 
     @Bean
