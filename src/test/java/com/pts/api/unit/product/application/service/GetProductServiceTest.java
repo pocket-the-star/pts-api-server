@@ -7,6 +7,7 @@ import com.pts.api.common.base.BaseUnitTest;
 import com.pts.api.product.application.dto.response.GetProductResponseDto;
 import com.pts.api.product.application.port.out.ReadProductRepositoryPort;
 import com.pts.api.product.application.service.GetProductService;
+import java.time.LocalDateTime;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -29,6 +30,7 @@ class GetProductServiceTest extends BaseUnitTest {
     private final Long CATEGORY_ID = 2L;
     private final Long SUBCATEGORY_ID = 3L;
     private final int OFFSET = 0;
+    private final LocalDateTime NOW = LocalDateTime.now();
 
     @BeforeEach
     void setUp() {
@@ -44,14 +46,15 @@ class GetProductServiceTest extends BaseUnitTest {
         @DisplayName("유효한 파라미터로 조회 시 상품 리스트를 반환한다")
         void itReturnsProductList() {
             // Given
+
             List<GetProductResponseDto> expectedList = List.of(
                 new GetProductResponseDto(
                     101L, "Product1", "http://image1.jpg", GROUP_ID, CATEGORY_ID, SUBCATEGORY_ID,
-                    100, 200, "2023-01-01T00:00:00", "2023-01-02T00:00:00"
+                    100L, 200L, NOW, NOW
                 ),
                 new GetProductResponseDto(
                     102L, "Product2", "http://image2.jpg", GROUP_ID, CATEGORY_ID, SUBCATEGORY_ID,
-                    150, 250, "2023-01-03T00:00:00", "2023-01-04T00:00:00"
+                    150L, 250L, NOW, NOW
                 )
             );
             when(readProductRepositoryPort.findAll(GROUP_ID, CATEGORY_ID, SUBCATEGORY_ID, OFFSET))

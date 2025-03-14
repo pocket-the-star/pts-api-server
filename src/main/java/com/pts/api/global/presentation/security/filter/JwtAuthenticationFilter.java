@@ -2,9 +2,8 @@ package com.pts.api.global.presentation.security.filter;
 
 import com.pts.api.global.presentation.exception.UnauthorizedException;
 import com.pts.api.lib.external.security.model.CustomAuthenticationToken;
-import com.pts.api.user.application.port.in.ValidateTokenUseCase;
-import com.pts.api.user.common.exception.InvalidTokenException;
-import com.pts.api.user.domain.model.TokenPayload;
+import com.pts.api.user.exception.InvalidTokenException;
+import com.pts.api.user.service.TokenService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
@@ -20,15 +19,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 @Slf4j
-@Component
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
-    private final ValidateTokenUseCase validateTokenUseCase;
+    private final TokenService tokenService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,
@@ -39,12 +36,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         if (bearerToken != null) {
             try {
                 String refreshToken = extractRefreshToken(request.getCookies());
-                TokenPayload tokenPayload = validateTokenUseCase.execute(bearerToken, refreshToken);
+                tokenService.parse(bearerToken, refreshToken);
                 List<GrantedAuthority> authorities = buildAuthorities(
-                    tokenPayload.getUserRoleValue());
+                    tokenService.getUserRole(bearerToken).getRole());
 
                 CustomAuthenticationToken authenticationToken =
-                    new CustomAuthenticationToken(tokenPayload.getUserId(), authorities);
+                    new CustomAuthenticationToken(tokenService.getUserId(bearerToken), authorities);
                 SecurityContextHolder.getContext().setAuthentication(authenticationToken);
             } catch (InvalidTokenException e) {
                 log.error("Invalid Token", e);

@@ -9,6 +9,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import com.pts.api.common.base.BaseIntegrationTest;
 import com.pts.api.product.application.dto.response.GetProductResponseDto;
 import com.pts.api.product.application.port.in.GetProductUseCase;
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
@@ -44,10 +45,10 @@ public class GetProductControllerTest extends BaseIntegrationTest {
                     10L,
                     20L,
                     30L,
-                    100,
-                    200,
-                    "2025-03-12T10:00:00",
-                    "2025-03-12T10:05:00"
+                    100L,
+                    200L,
+                    LocalDateTime.now().plusHours(1),
+                    LocalDateTime.now().plusHours(1)
                 );
                 List<GetProductResponseDto> productList = Collections.singletonList(sampleProduct);
                 when(getProductUseCase.getProducts(null, null, null, 0))
@@ -81,10 +82,10 @@ public class GetProductControllerTest extends BaseIntegrationTest {
                     groupId,
                     categoryId,
                     subCategoryId,
-                    150,
-                    250,
-                    "2025-03-12T11:00:00",
-                    "2025-03-12T11:05:00"
+                    150L,
+                    250L,
+                    LocalDateTime.now().plusHours(1),
+                    LocalDateTime.now().plusHours(1)
                 );
                 List<GetProductResponseDto> productList = Collections.singletonList(sampleProduct);
                 when(getProductUseCase.getProducts(groupId, categoryId, subCategoryId, offset))

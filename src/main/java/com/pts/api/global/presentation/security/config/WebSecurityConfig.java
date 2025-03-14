@@ -1,7 +1,7 @@
 package com.pts.api.global.presentation.security.config;
 
 import com.pts.api.global.presentation.security.filter.JwtAuthenticationFilter;
-import com.pts.api.user.application.port.in.ValidateTokenUseCase;
+import com.pts.api.user.service.TokenService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,13 +17,13 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @RequiredArgsConstructor
 public class WebSecurityConfig {
 
-    private final ValidateTokenUseCase validateTokenUseCase;
+    private final TokenService tokenService;
 
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter(
-            validateTokenUseCase);
+            tokenService);
 
         http.csrf(AbstractHttpConfigurer::disable)
             .httpBasic(AbstractHttpConfigurer::disable).formLogin(AbstractHttpConfigurer::disable)
