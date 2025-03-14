@@ -1,7 +1,7 @@
 package com.pts.api.product.infrastructure.persistence.adapter;
 
-import static com.pts.api.lib.external.jpa.category.model.QCategoryEntity.categoryEntity;
-import static com.pts.api.lib.external.jpa.category.model.QSubCategoryEntity.subCategoryEntity;
+import static com.pts.api.category.model.QCategory.category;
+import static com.pts.api.category.model.QSubCategory.subCategory;
 import static com.pts.api.lib.external.jpa.product.model.QProductEntity.productEntity;
 import static com.pts.api.lib.external.jpa.product.model.QProductImageEntity.productImageEntity;
 
@@ -39,14 +39,14 @@ public class ReadProductRepository implements ReadProductRepositoryPort {
         BooleanBuilder builder = new BooleanBuilder();
         if (groupId != null) {
             builder.and(productEntity.groupId.eq(groupId));
-            query.innerJoin(categoryEntity).on(categoryEntity.id.eq(productEntity.categoryId));
+            query.innerJoin(category).on(category.id.eq(productEntity.categoryId));
         }
 
         if (subCategoryId != null) {
             builder.and(productEntity.categoryId.eq(subCategoryId));
-            query.innerJoin(subCategoryEntity).on(subCategoryEntity.id.eq(subCategoryId));
+            query.innerJoin(subCategory).on(subCategory.id.eq(subCategoryId));
             if (categoryId != null) {
-                builder.and(subCategoryEntity.categoryId.eq(categoryId));
+                builder.and(subCategory.categoryId.eq(categoryId));
             }
         }
 

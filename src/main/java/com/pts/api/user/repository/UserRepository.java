@@ -9,9 +9,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
-    @Query("SELECT u FROM UserEntity u JOIN FETCH u.localAccount la WHERE la.email = :email")
+    @Query("SELECT u FROM User u JOIN FETCH u.localAccount la WHERE la.email = :email")
     Optional<User> findOneByEmail(String email);
 
-    @Query("SELECT CASE WHEN COUNT(u) > 0 THEN TRUE ELSE FALSE END FROM UserEntity u JOIN u.localAccount la WHERE la.email = :email")
+    @Query("SELECT CASE WHEN COUNT(u) > 0 THEN TRUE ELSE FALSE END FROM User u JOIN u.localAccount la WHERE la.email = :email")
     boolean existsByEmail(String email);
 } 
