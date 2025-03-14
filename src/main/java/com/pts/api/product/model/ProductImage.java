@@ -1,4 +1,4 @@
-package com.pts.api.lib.external.jpa.product.model;
+package com.pts.api.product.model;
 
 import com.pts.api.lib.external.jpa.base.model.BaseEntity;
 import jakarta.persistence.Column;
@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "product_images")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class ProductImageEntity extends BaseEntity {
+public class ProductImage extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,7 +30,7 @@ public class ProductImageEntity extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
-    private ProductEntity product;
+    private Product product;
 
     @Column(name = "image_url", nullable = false)
     private String imageUrl;
@@ -39,7 +39,7 @@ public class ProductImageEntity extends BaseEntity {
     private int sortOrder;
 
     @Builder
-    public ProductImageEntity(Long id, ProductEntity product, String imageUrl, int sortOrder,
+    public ProductImage(Long id, Product product, String imageUrl, int sortOrder,
         LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.product = product;

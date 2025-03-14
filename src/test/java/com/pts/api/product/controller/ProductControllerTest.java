@@ -1,4 +1,4 @@
-package com.pts.api.integration.product.presentation.controller;
+package com.pts.api.product.controller;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
@@ -7,8 +7,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.pts.api.common.base.BaseIntegrationTest;
-import com.pts.api.product.application.dto.response.GetProductResponseDto;
-import com.pts.api.product.application.port.in.GetProductUseCase;
+import com.pts.api.product.dto.response.GetProductResponseDto;
+import com.pts.api.product.service.ProductService;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
@@ -19,39 +19,34 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 
 @DisplayName("GetProductController 클래스")
-public class GetProductControllerTest extends BaseIntegrationTest {
+public class ProductControllerTest extends BaseIntegrationTest {
 
     private static final String PRODUCTS_URL = "/api/v1/products";
 
     @Autowired
-    private GetProductUseCase getProductUseCase;
+    private ProductService productService;
 
     @Nested
     @DisplayName("getProducts 메서드 호출 시")
     class DescribeGetProducts {
 
+        LocalDateTime NOW = LocalDateTime.now();
+
         @Nested
         @DisplayName("필터 없이 요청하는 경우")
         class ContextWithoutFilters {
+
 
             @Test
             @DisplayName("200 OK 상태코드를 반환한다")
             void itReturns200Ok() throws Exception {
                 // Given
                 GetProductResponseDto sampleProduct = new GetProductResponseDto(
-                    1L,
-                    "Test Product",
-                    "http://example.com/image.jpg",
-                    10L,
-                    20L,
-                    30L,
-                    100L,
-                    200L,
-                    LocalDateTime.now().plusHours(1),
-                    LocalDateTime.now().plusHours(1)
+                    101L, "Product1", "http://image1.jpg",
+                    100L, 200L, NOW, NOW
                 );
                 List<GetProductResponseDto> productList = Collections.singletonList(sampleProduct);
-                when(getProductUseCase.getProducts(null, null, null, 0))
+                when(productService.getProducts(null, null, null, 0))
                     .thenReturn(productList);
 
                 // When & Then
@@ -76,19 +71,11 @@ public class GetProductControllerTest extends BaseIntegrationTest {
                 Long subCategoryId = 3L;
                 int offset = 0;
                 GetProductResponseDto sampleProduct = new GetProductResponseDto(
-                    2L,
-                    "Filtered Product",
-                    "http://example.com/filtered.jpg",
-                    groupId,
-                    categoryId,
-                    subCategoryId,
-                    150L,
-                    250L,
-                    LocalDateTime.now().plusHours(1),
-                    LocalDateTime.now().plusHours(1)
+                    101L, "Product1", "http://image1.jpg",
+                    100L, 200L, NOW, NOW
                 );
                 List<GetProductResponseDto> productList = Collections.singletonList(sampleProduct);
-                when(getProductUseCase.getProducts(groupId, categoryId, subCategoryId, offset))
+                when(productService.getProducts(groupId, categoryId, subCategoryId, offset))
                     .thenReturn(productList);
 
                 // When & Then

@@ -1,4 +1,4 @@
-package com.pts.api.lib.external.jpa.product.model;
+package com.pts.api.product.model;
 
 import com.pts.api.lib.external.jpa.base.model.BaseEntity;
 import jakarta.persistence.Column;
@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "products")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class ProductEntity extends BaseEntity {
+public class Product extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,15 +41,15 @@ public class ProductEntity extends BaseEntity {
     private Long minBuyPrice;
 
     @OneToMany(mappedBy = "product")
-    private List<ProductOptionEntity> options;
+    private List<ProductOption> options;
 
     @OneToMany(mappedBy = "product")
-    private List<ProductImageEntity> images;
+    private List<ProductImage> images;
 
     @Builder
-    public ProductEntity(Long id, String title, Long categoryId, Long groupId, Long maxSellPrice,
+    public Product(Long id, String title, Long categoryId, Long groupId, Long maxSellPrice,
         Long minBuyPrice,
-        List<ProductOptionEntity> options, List<ProductImageEntity> images, LocalDateTime createdAt,
+        List<ProductOption> options, List<ProductImage> images, LocalDateTime createdAt,
         LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.title = title;
@@ -62,5 +62,9 @@ public class ProductEntity extends BaseEntity {
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
+    }
+
+    public String getProductThumbnail() {
+        return images.get(0).getImageUrl();
     }
 } 

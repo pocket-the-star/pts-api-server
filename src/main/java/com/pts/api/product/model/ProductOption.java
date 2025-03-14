@@ -1,4 +1,4 @@
-package com.pts.api.lib.external.jpa.product.model;
+package com.pts.api.product.model;
 
 import com.pts.api.lib.external.jpa.base.model.BaseEntity;
 import jakarta.persistence.Column;
@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "product_options")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class ProductOptionEntity extends BaseEntity {
+public class ProductOption extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,7 +30,7 @@ public class ProductOptionEntity extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
-    private ProductEntity product;
+    private Product product;
 
     @Column(name = "name", nullable = false)
     private String name;
@@ -39,7 +39,7 @@ public class ProductOptionEntity extends BaseEntity {
     private String value;
 
     @Builder
-    public ProductOptionEntity(Long id, ProductEntity product, String name, String value,
+    public ProductOption(Long id, Product product, String name, String value,
         LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.product = product;
