@@ -1,4 +1,4 @@
-package com.pts.api.lib.external.jpa.order.model;
+package com.pts.api.order.model;
 
 import com.pts.api.lib.external.jpa.base.model.BaseEntity;
 import jakarta.persistence.Column;
