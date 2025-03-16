@@ -1,7 +1,7 @@
-package com.pts.api.lib.external.jpa.payment.model;
+package com.pts.api.payment.model;
 
 import com.pts.api.lib.external.jpa.base.model.BaseEntity;
-import com.pts.api.lib.external.jpa.order.model.MarketOrderEntity;
+import com.pts.api.order.model.MarketOrderEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.ConstraintMode;
 import jakarta.persistence.Entity;
