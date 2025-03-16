@@ -1,4 +1,4 @@
-package com.pts.api.lib.external.jpa.idol.model;
+package com.pts.api.idol.model;
 
 import com.pts.api.lib.external.jpa.base.model.BaseEntity;
 import jakarta.persistence.Column;
