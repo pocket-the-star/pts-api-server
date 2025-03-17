@@ -1,5 +1,6 @@
 package com.pts.api.user.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,6 +30,7 @@ public class EmailVerify {
         this.tryCount++;
     }
 
+    @JsonIgnore
     public boolean isOverTryCount() {
         int MAX_TRY_COUNT = 3;
         return this.tryCount >= MAX_TRY_COUNT;
@@ -37,8 +39,4 @@ public class EmailVerify {
     public void setVerified(boolean verified) {
         this.verified = verified;
     }
-
-    public boolean isVerified() {
-        return verified;
-    }
-} 
+}

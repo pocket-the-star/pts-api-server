@@ -1,7 +1,7 @@
 package com.pts.api.user.repository;
 
+import com.pts.api.lib.internal.shared.util.serializer.DataSerializer;
 import com.pts.api.user.model.EmailVerify;
-import com.pts.api.user.repository.mapper.EmailVerifyMapper;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +13,6 @@ import org.springframework.stereotype.Repository;
 public class EmailVerifyRepository {
 
     private final StringRedisTemplate redisTemplate;
-    private final EmailVerifyMapper emailVerifyMapper;
     private static final String KEY_PREFIX = "EA:";
     private static final String LOCK_KEY_PREFIX = "EALOCK:";
     private static final long EMAIL_AUTH_EXPIRATION = 10L * 60L * 1000L;
@@ -62,10 +61,10 @@ public class EmailVerifyRepository {
     }
 
     private EmailVerify convertValue(String value) {
-        return emailVerifyMapper.mapToObject(value);
+        return DataSerializer.deserialize(value, EmailVerify.class);
     }
 
     private String convertValue(EmailVerify emailAuth) {
-        return emailVerifyMapper.mapToString(emailAuth);
+        return DataSerializer.serialize(emailAuth);
     }
 } 
