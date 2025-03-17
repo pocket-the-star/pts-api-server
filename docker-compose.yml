@@ -53,20 +53,54 @@ services:
     networks:
       - app_network
 
-  kafka:
+  kafka1:
     image: confluentinc/cp-kafka:latest
-    container_name: kafka_container
+    container_name: kafka1_container
     depends_on:
       - zookeeper
     environment:
-      KAFKA_BROKER_ID: "${KAFKA_BROKER_ID}"
+      KAFKA_BROKER_ID: "${KAFKA_BROKER_ID1}"
       KAFKA_ZOOKEEPER_CONNECT: "${KAFKA_ZOOKEEPER_CONNECT}"
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: "${KAFKA_LISTENER_SECURITY_PROTOCOL_MAP}"
-      KAFKA_ADVERTISED_LISTENERS: "${KAFKA_ADVERTISED_LISTENERS}"
+      KAFKA_ADVERTISED_LISTENERS: "${KAFKA_ADVERTISED_LISTENERS1}"
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: "${KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR}"
     ports:
-      - "${KAFKA_EXTERNAL_PORT}:${KAFKA_EXTERNAL_PORT}"
       - "${KAFKA_INTERNAL_PORT}:${KAFKA_INTERNAL_PORT}"
+      - "${KAFKA_EXTERNAL_PORT1}:${KAFKA_EXTERNAL_PORT1}"
+    networks:
+      - app_network
+
+  kafka2:
+    image: confluentinc/cp-kafka:latest
+    container_name: kafka2_container
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_BROKER_ID: "${KAFKA_BROKER_ID2}"
+      KAFKA_ZOOKEEPER_CONNECT: "${KAFKA_ZOOKEEPER_CONNECT}"
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: "${KAFKA_LISTENER_SECURITY_PROTOCOL_MAP}"
+      KAFKA_ADVERTISED_LISTENERS: "${KAFKA_ADVERTISED_LISTENERS2}"
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: "${KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR}"
+    ports:
+      - "${KAFKA_INTERNAL_PORT2}:${KAFKA_INTERNAL_PORT}"
+      - "${KAFKA_EXTERNAL_PORT2}:${KAFKA_EXTERNAL_PORT2}"
+    networks:
+      - app_network
+
+  kafka3:
+    image: confluentinc/cp-kafka:latest
+    container_name: kafka3_container
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_BROKER_ID: "${KAFKA_BROKER_ID3}"
+      KAFKA_ZOOKEEPER_CONNECT: "${KAFKA_ZOOKEEPER_CONNECT}"
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: "${KAFKA_LISTENER_SECURITY_PROTOCOL_MAP}"
+      KAFKA_ADVERTISED_LISTENERS: "${KAFKA_ADVERTISED_LISTENERS3}"
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: "${KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR}"
+    ports:
+      - "${KAFKA_INTERNAL_PORT3}:${KAFKA_INTERNAL_PORT}"
+      - "${KAFKA_EXTERNAL_PORT3}:${KAFKA_EXTERNAL_PORT3}"
     networks:
       - app_network
 
@@ -95,7 +129,11 @@ services:
     depends_on:
       zookeeper:
         condition: service_started
-      kafka:
+      kafka1:
+        condition: service_started
+      kafka2:
+        condition: service_started
+      kafka3:
         condition: service_started
       redis:
         condition: service_healthy

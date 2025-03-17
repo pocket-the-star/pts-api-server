@@ -1,6 +1,9 @@
 package com.pts.api.user.service;
 
+import com.pts.api.global.outbox.publisher.OutboxPublisher;
 import com.pts.api.lib.internal.shared.enums.UserRole;
+import com.pts.api.lib.internal.shared.event.EventType;
+import com.pts.api.lib.internal.shared.event.data.EmailVerifyData;
 import com.pts.api.lib.internal.shared.util.date.IDateTimeUtil;
 import com.pts.api.lib.internal.shared.util.random.IRandomUtil;
 import com.pts.api.user.dto.request.AuthCodeConfirmRequestDto;
@@ -18,7 +21,6 @@ import com.pts.api.user.model.EmailVerify;
 import com.pts.api.user.model.LocalAccount;
 import com.pts.api.user.model.User;
 import com.pts.api.user.model.UserInfo;
-import com.pts.api.user.producer.EmailVerifyProducer;
 import com.pts.api.user.repository.EmailVerifyRepository;
 import com.pts.api.user.repository.UserRepository;
 import jakarta.transaction.Transactional;
@@ -32,11 +34,11 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final EmailVerifyRepository emailVerifyRepository;
-    private final EmailVerifyProducer emailVerifyProducer;
     private final IDateTimeUtil dateTimeUtil;
     private final TokenService tokenService;
     private final IRandomUtil randomUtil;
     private final AuthenticationService authenticationService;
+    private final OutboxPublisher outboxPublisher;
 
     @Transactional
     public void signUp(SignUpRequestDto request) {
@@ -101,7 +103,10 @@ public class UserService {
     }
 
     private void publishEmailVerificationEvent(String email, String authCode) {
-        emailVerifyProducer.send(email, authCode);
+        outboxPublisher.publish(
+            EventType.EMAIL_AUTH,
+            new EmailVerifyData(email, authCode)
+        );
     }
 
     private void saveEmailVerify(String email, String authCode) {
