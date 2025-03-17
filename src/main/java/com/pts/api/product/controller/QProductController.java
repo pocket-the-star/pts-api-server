@@ -4,7 +4,7 @@ import com.pts.api.global.presentation.response.BaseResponse;
 import com.pts.api.global.presentation.response.ResponseGenerator;
 import com.pts.api.global.presentation.response.ResponseMsg;
 import com.pts.api.product.dto.response.GetProductResponseDto;
-import com.pts.api.product.service.ProductService;
+import com.pts.api.product.service.QProductService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
@@ -22,9 +22,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RequestMapping("/api/v1")
 @Slf4j
-public class ProductController {
+public class QProductController {
 
-    private final ProductService productService;
+    private final QProductService QProductService;
 
     @Operation(summary = "상품 조회", description = "상품 목록을 조회합니다.")
     @GetMapping("/products")
@@ -37,6 +37,6 @@ public class ProductController {
 
         return ResponseGenerator.ok(ResponseMsg.OK,
             HttpStatus.OK,
-            productService.getProducts(groupId, categoryId, subCategoryId, offset));
+            QProductService.getProducts(groupId, categoryId, subCategoryId, offset));
     }
 }

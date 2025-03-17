@@ -8,7 +8,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.pts.api.common.base.BaseIntegrationTest;
 import com.pts.api.product.dto.response.GetProductResponseDto;
-import com.pts.api.product.service.ProductService;
+import com.pts.api.product.service.QProductService;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
@@ -19,12 +19,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 
 @DisplayName("GetProductController 클래스")
-public class ProductControllerTest extends BaseIntegrationTest {
+public class QProductControllerTest extends BaseIntegrationTest {
 
     private static final String PRODUCTS_URL = "/api/v1/products";
 
     @Autowired
-    private ProductService productService;
+    private QProductService QProductService;
 
     @Nested
     @DisplayName("getProducts 메서드 호출 시")
@@ -46,7 +46,7 @@ public class ProductControllerTest extends BaseIntegrationTest {
                     100L, 200L, NOW, NOW
                 );
                 List<GetProductResponseDto> productList = Collections.singletonList(sampleProduct);
-                when(productService.getProducts(null, null, null, 0))
+                when(QProductService.getProducts(null, null, null, 0))
                     .thenReturn(productList);
 
                 // When & Then
@@ -75,7 +75,7 @@ public class ProductControllerTest extends BaseIntegrationTest {
                     100L, 200L, NOW, NOW
                 );
                 List<GetProductResponseDto> productList = Collections.singletonList(sampleProduct);
-                when(productService.getProducts(groupId, categoryId, subCategoryId, offset))
+                when(QProductService.getProducts(groupId, categoryId, subCategoryId, offset))
                     .thenReturn(productList);
 
                 // When & Then

@@ -15,7 +15,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 @RequiredArgsConstructor
-public class ProductRepository {
+public class QProductRepository {
 
     private final JPAQueryFactory queryFactory;
 

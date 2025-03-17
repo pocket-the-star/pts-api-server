@@ -8,7 +8,7 @@ import com.pts.api.product.dto.response.GetProductResponseDto;
 import com.pts.api.product.model.Product;
 import com.pts.api.product.model.ProductImage;
 import com.pts.api.product.model.ProductOption;
-import com.pts.api.product.repository.ProductRepository;
+import com.pts.api.product.repository.QProductRepository;
 import java.time.LocalDateTime;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,12 +21,12 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
 @DisplayName("GetProductService 클래스")
-class ProductServiceTest extends BaseUnitTest {
+class QProductServiceTest extends BaseUnitTest {
 
     @Mock
-    private ProductRepository productRepository;
+    private QProductRepository QProductRepository;
 
-    private ProductService productService;
+    private QProductService QProductService;
 
     private final Long GROUP_ID = 1L;
     private final Long CATEGORY_ID = 2L;
@@ -37,7 +37,7 @@ class ProductServiceTest extends BaseUnitTest {
     @BeforeEach
     void setUp() {
         // Given
-        productService = new ProductService(productRepository);
+        QProductService = new QProductService(QProductRepository);
     }
 
     @Nested
@@ -89,11 +89,11 @@ class ProductServiceTest extends BaseUnitTest {
                     .updatedAt(NOW)
                     .build()
             );
-            when(productRepository.findAll(GROUP_ID, CATEGORY_ID, SUBCATEGORY_ID, OFFSET))
+            when(QProductRepository.findAll(GROUP_ID, CATEGORY_ID, SUBCATEGORY_ID, OFFSET))
                 .thenReturn(products);
 
             // When
-            List<GetProductResponseDto> actualList = productService.getProducts(GROUP_ID,
+            List<GetProductResponseDto> actualList = QProductService.getProducts(GROUP_ID,
                 CATEGORY_ID, SUBCATEGORY_ID, OFFSET);
 
             // Then
@@ -104,10 +104,10 @@ class ProductServiceTest extends BaseUnitTest {
         @DisplayName("조회 결과가 없으면 빈 리스트를 반환한다")
         void itReturnsEmptyList() {
             // Given
-            when(productRepository.findAll(GROUP_ID, CATEGORY_ID, SUBCATEGORY_ID, OFFSET))
+            when(QProductRepository.findAll(GROUP_ID, CATEGORY_ID, SUBCATEGORY_ID, OFFSET))
                 .thenReturn(List.of());
             // When
-            List<GetProductResponseDto> actualList = productService.getProducts(GROUP_ID,
+            List<GetProductResponseDto> actualList = QProductService.getProducts(GROUP_ID,
                 CATEGORY_ID, SUBCATEGORY_ID, OFFSET);
             // Then
             assertEquals(0, actualList.size());
