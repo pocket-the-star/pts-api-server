@@ -24,7 +24,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "payments")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class PaymentEntity extends BaseEntity {
+public class Payment extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -53,7 +53,7 @@ public class PaymentEntity extends BaseEntity {
     private LocalDateTime paymentDate;
 
     @Builder
-    public PaymentEntity(Long paymentId, MarketOrderEntity order, Long buyerId, BigDecimal amount,
+    public Payment(Long paymentId, MarketOrderEntity order, Long buyerId, BigDecimal amount,
         String paymentMethod, String paymentStatus, String transactionId,
         LocalDateTime paymentDate,
         LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {

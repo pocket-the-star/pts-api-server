@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "idols")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class IdolEntity extends BaseEntity {
+public class Idol extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,10 +29,10 @@ public class IdolEntity extends BaseEntity {
     private String name;
 
     @OneToMany(mappedBy = "idol")
-    private List<MemberEntity> artists;
+    private List<artist> artists;
 
     @Builder
-    public IdolEntity(Long id, String name, List<MemberEntity> artists,
+    public Idol(Long id, String name, List<artist> artists,
         LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.name = name;

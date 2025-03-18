@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "members")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class MemberEntity extends BaseEntity {
+public class artist extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,13 +30,13 @@ public class MemberEntity extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idol_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
-    private IdolEntity idol;
+    private Idol idol;
 
     @Column(name = "name", nullable = false)
     private String name;
 
     @Builder
-    public MemberEntity(Long id, IdolEntity idol, String name,
+    public artist(Long id, Idol idol, String name,
         LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.idol = idol;
