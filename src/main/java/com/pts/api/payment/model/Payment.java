@@ -1,19 +1,12 @@
 package com.pts.api.payment.model;
 
 import com.pts.api.lib.external.jpa.base.model.BaseEntity;
-import com.pts.api.order.model.MarketOrderEntity;
 import jakarta.persistence.Column;
-import jakarta.persistence.ConstraintMode;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -30,15 +23,14 @@ public class Payment extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long paymentId;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "order_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
-    private MarketOrderEntity order;
+    @Column(name = "order_id", nullable = false)
+    private Long orderId;
 
     @Column(name = "buyer_id")
     private Long buyerId;
 
     @Column(name = "amount", nullable = false)
-    private BigDecimal amount;
+    private Integer amount;
 
     @Column(name = "payment_method", nullable = false)
     private String paymentMethod;
@@ -53,12 +45,12 @@ public class Payment extends BaseEntity {
     private LocalDateTime paymentDate;
 
     @Builder
-    public Payment(Long paymentId, MarketOrderEntity order, Long buyerId, BigDecimal amount,
+    public Payment(Long paymentId, Long orderId, Long buyerId, Integer amount,
         String paymentMethod, String paymentStatus, String transactionId,
         LocalDateTime paymentDate,
         LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.paymentId = paymentId;
-        this.order = order;
+        this.orderId = orderId;
         this.buyerId = buyerId;
         this.amount = amount;
         this.paymentMethod = paymentMethod;
