@@ -1,6 +1,6 @@
 package com.pts.api.global.presentation.security.filter;
 
-import com.pts.api.global.presentation.exception.UnauthorizedException;
+import com.pts.api.global.common.exception.UnauthorizedException;
 import com.pts.api.lib.external.security.model.CustomAuthenticationToken;
 import com.pts.api.user.exception.InvalidTokenException;
 import com.pts.api.user.service.TokenService;

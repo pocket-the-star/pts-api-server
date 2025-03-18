@@ -1,6 +1,6 @@
 package com.pts.api.product.exception;
 
-import com.pts.api.global.presentation.exception.CustomBusinessException;
+import com.pts.api.global.common.exception.CustomBusinessException;
 import org.springframework.http.HttpStatus;
 
 public class ProductNotFoundException extends CustomBusinessException {

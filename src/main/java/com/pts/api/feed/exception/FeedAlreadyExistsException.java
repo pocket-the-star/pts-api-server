@@ -1,11 +1,12 @@
-package com.pts.api.user.exception;
+package com.pts.api.feed.exception;
 
 import com.pts.api.global.common.exception.CustomBusinessException;
 import org.springframework.http.HttpStatus;
 
-public class AlreadyExistsException extends CustomBusinessException {
+public class FeedAlreadyExistsException extends CustomBusinessException {
 
-    public AlreadyExistsException(String message) {
+    public FeedAlreadyExistsException(String message) {
         super(message, HttpStatus.CONFLICT);
     }
+
 }

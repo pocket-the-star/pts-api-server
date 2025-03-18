@@ -1,6 +1,6 @@
 package com.pts.api.category.common.exception;
 
-import com.pts.api.global.presentation.exception.CustomBusinessException;
+import com.pts.api.global.common.exception.CustomBusinessException;
 import org.springframework.http.HttpStatus;
 
 public class CategoryNotFoundException extends CustomBusinessException {
