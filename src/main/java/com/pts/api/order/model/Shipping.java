@@ -4,13 +4,11 @@ import com.pts.api.lib.external.jpa.base.model.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.ConstraintMode;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import java.time.LocalDateTime;
 import lombok.AccessLevel;
@@ -22,18 +20,17 @@ import lombok.NoArgsConstructor;
 @Table(name = "shipping")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class ShippingEntity extends BaseEntity {
+public class Shipping extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
-    private MarketOrderEntity order;
+    private Long orderId;
 
-    @Column(name = "buyer_id", nullable = false)
-    private Long buyerId;
+    @Column(name = "recipient_name", nullable = false)
+    private String recipientName;
 
     @Column(name = "address", nullable = false)
     private String address;
@@ -60,14 +57,14 @@ public class ShippingEntity extends BaseEntity {
     private LocalDateTime expectedDate;
 
     @Builder
-    public ShippingEntity(Long id, MarketOrderEntity order, Long buyerId, String address,
+    public Shipping(Long id, Long orderId, String recipientName, String address,
         String detailAddress, String postalCode,
         String shippingMethod, String trackingNumber, String shippingStatus,
         LocalDateTime shippedDate, LocalDateTime expectedDate,
         LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
-        this.order = order;
-        this.buyerId = buyerId;
+        this.orderId = orderId;
+        this.recipientName = recipientName;
         this.address = address;
         this.detailAddress = detailAddress;
         this.postalCode = postalCode;

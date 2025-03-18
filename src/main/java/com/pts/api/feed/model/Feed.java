@@ -1,8 +1,9 @@
-package com.pts.api.order.model;
+package com.pts.api.feed.model;
 
 import com.pts.api.lib.external.jpa.base.model.BaseEntity;
-import com.pts.api.lib.internal.shared.enums.OrderStatus;
-import com.pts.api.lib.internal.shared.enums.OrderType;
+import com.pts.api.lib.internal.shared.enums.FeedStatus;
+import com.pts.api.lib.internal.shared.enums.FeedType;
+import com.pts.api.lib.internal.shared.enums.ProductGrade;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -10,19 +11,20 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "market_orders")
+@Table(name = "feeds")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class MarketOrderEntity extends BaseEntity {
+public class Feed extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,43 +33,42 @@ public class MarketOrderEntity extends BaseEntity {
     @Column(name = "user_id")
     private Long userId;
 
-    @Column(name = "product_option_id")
-    private Long productOptionId;
+    @Column(name = "product_id")
+    private Long productId;
+
+    @OneToMany(mappedBy = "feed")
+    private List<FeedImage> feedImages;
 
     @Enumerated(EnumType.STRING)
-    private OrderType orderType;
+    private FeedType feedType;
+
+    @Enumerated(EnumType.STRING)
+    private ProductGrade grade;
 
     @Column(name = "price", nullable = false)
-    private BigDecimal price;
+    private Integer price;
 
     @Column(name = "quantity", nullable = false)
     private int quantity;
 
-    @Column(name = "immediate_flag", nullable = false)
-    private boolean immediateFlag;
-
-    @Column(name = "order_date", nullable = false)
-    private LocalDateTime orderDate;
-
     @Enumerated(EnumType.STRING)
-    private OrderStatus status;
+    private FeedStatus status;
 
     @Builder
-    public MarketOrderEntity(Long id, Long userId, Long productOptionId, OrderType orderType,
-        BigDecimal price, int quantity, boolean immediateFlag, LocalDateTime orderDate,
-        OrderStatus status, LocalDateTime createdAt, LocalDateTime updatedAt,
+    public Feed(Long id, Long userId, Long productId, FeedType feedType, ProductGrade grade,
+        Integer price, Integer quantity, FeedStatus status, LocalDateTime createdAt,
+        LocalDateTime updatedAt,
         LocalDateTime deletedAt) {
         this.id = id;
         this.userId = userId;
-        this.productOptionId = productOptionId;
-        this.orderType = orderType;
+        this.productId = productId;
+        this.feedType = feedType;
+        this.grade = grade;
         this.price = price;
         this.quantity = quantity;
-        this.immediateFlag = immediateFlag;
-        this.orderDate = orderDate;
         this.status = status;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
     }
-} 
+}

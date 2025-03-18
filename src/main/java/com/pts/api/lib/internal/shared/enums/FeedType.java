@@ -1,5 +1,5 @@
 package com.pts.api.lib.internal.shared.enums;
 
-public enum OrderStatus {
-    PENDING, CANCELLED
+public enum FeedType {
+    BUY, SELL
 } 
