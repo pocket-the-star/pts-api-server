@@ -52,11 +52,11 @@ class QProductServiceTest extends BaseUnitTest {
             List<GetProductResponseDto> expectedList = List.of(
                 new GetProductResponseDto(
                     101L, "Product1", "http://image1.jpg",
-                    100L, 200L, NOW, NOW
+                    100, 200, NOW, NOW
                 ),
                 new GetProductResponseDto(
                     102L, "Product2", "http://image2.jpg",
-                    150L, 250L, NOW, NOW
+                    150, 250, NOW, NOW
                 )
             );
             List<Product> products = List.of(
@@ -69,8 +69,8 @@ class QProductServiceTest extends BaseUnitTest {
                     .images(List.of(
                         ProductImage.builder().imageUrl("http://image1.jpg").build()
                     ))
-                    .minBuyPrice(100L)
-                    .maxSellPrice(200L)
+                    .minBuyPrice(100)
+                    .maxSellPrice(200)
                     .createdAt(NOW)
                     .updatedAt(NOW)
                     .build(),
@@ -83,8 +83,8 @@ class QProductServiceTest extends BaseUnitTest {
                     .images(List.of(
                         ProductImage.builder().imageUrl("http://image2.jpg").build()
                     ))
-                    .minBuyPrice(150L)
-                    .maxSellPrice(250L)
+                    .minBuyPrice(150)
+                    .maxSellPrice(250)
                     .createdAt(NOW)
                     .updatedAt(NOW)
                     .build()

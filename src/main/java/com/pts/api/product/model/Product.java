@@ -35,10 +35,10 @@ public class Product extends BaseEntity {
     private Long artistId;
 
     @Column(name = "max_sell_price", nullable = false)
-    private Long maxSellPrice;
+    private Integer maxSellPrice;
 
     @Column(name = "min_buy_price", nullable = false)
-    private Long minBuyPrice;
+    private Integer minBuyPrice;
 
     @OneToMany(mappedBy = "product")
     private List<ProductOption> options;
@@ -47,8 +47,8 @@ public class Product extends BaseEntity {
     private List<ProductImage> images;
 
     @Builder
-    public Product(Long id, String title, Long subCategoryId, Long artistId, Long maxSellPrice,
-        Long minBuyPrice,
+    public Product(Long id, String title, Long subCategoryId, Long artistId, Integer maxSellPrice,
+        Integer minBuyPrice,
         List<ProductOption> options, List<ProductImage> images, LocalDateTime createdAt,
         LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
@@ -66,5 +66,10 @@ public class Product extends BaseEntity {
 
     public String getProductThumbnail() {
         return images.get(0).getImageUrl();
+    }
+
+    public void priceUpdate(Integer price) {
+        this.maxSellPrice = Math.max(this.maxSellPrice, price);
+        this.minBuyPrice = Math.min(this.minBuyPrice, price);
     }
 } 

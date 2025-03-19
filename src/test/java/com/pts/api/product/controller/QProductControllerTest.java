@@ -43,7 +43,7 @@ public class QProductControllerTest extends BaseIntegrationTest {
                 // Given
                 GetProductResponseDto sampleProduct = new GetProductResponseDto(
                     101L, "Product1", "http://image1.jpg",
-                    100L, 200L, NOW, NOW
+                    100, 200, NOW, NOW
                 );
                 List<GetProductResponseDto> productList = Collections.singletonList(sampleProduct);
                 when(QProductService.getProducts(null, null, null, 0))
@@ -72,7 +72,7 @@ public class QProductControllerTest extends BaseIntegrationTest {
                 int offset = 0;
                 GetProductResponseDto sampleProduct = new GetProductResponseDto(
                     101L, "Product1", "http://image1.jpg",
-                    100L, 200L, NOW, NOW
+                    100, 200, NOW, NOW
                 );
                 List<GetProductResponseDto> productList = Collections.singletonList(sampleProduct);
                 when(QProductService.getProducts(groupId, categoryId, subCategoryId, offset))

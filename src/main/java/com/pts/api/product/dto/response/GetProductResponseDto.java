@@ -6,8 +6,8 @@ public record GetProductResponseDto(
     Long id,
     String title,
     String imageUrl,
-    Long minBuyPrice,
-    Long maxSellPrice,
+    Integer minBuyPrice,
+    Integer maxSellPrice,
     LocalDateTime createdAt,
     LocalDateTime updatedAt
 ) {
