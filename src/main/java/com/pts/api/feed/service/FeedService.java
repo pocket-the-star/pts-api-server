@@ -28,20 +28,20 @@ public class FeedService {
     private final OutboxPublisher outboxPublisher;
 
     @Transactional
-    public void create(CreateFeedRequestDto dto) {
+    public void create(Long userId, CreateFeedRequestDto dto) {
         productRepository.findById(dto.productId())
             .orElseThrow(
                 () -> new NotFoundException("존재하지 않는 상품입니다. productId: " + dto.productId()));
 
         Optional<Feed> feed = feedRepository.findByUserIdAndProductIdAndFeedStatusAndFeedType(
-            dto.userId(), dto.productId(), FeedStatus.PENDING, dto.feedType());
+            userId, dto.productId(), FeedStatus.PENDING, dto.feedType());
 
         if (feed.isPresent()) {
-            throw new FeedAlreadyExistsException("이미 등록된 피드가 존재합니다. userId: " + dto.userId()
+            throw new FeedAlreadyExistsException("이미 등록된 피드가 존재합니다. userId: " + userId
                 + ", productId: " + dto.productId());
         }
 
-        Feed newFeed = feedRepository.save(mapToFeed(dto));
+        Feed newFeed = feedRepository.save(mapToFeed(userId, dto));
         outboxPublisher.publish(
             EventType.FEED_CREATE,
             new FeedCreateData(
@@ -65,9 +65,9 @@ public class FeedService {
             .toList();
     }
 
-    private Feed mapToFeed(CreateFeedRequestDto dto) {
+    private Feed mapToFeed(Long userId, CreateFeedRequestDto dto) {
         return Feed.builder()
-            .userId(dto.userId())
+            .userId(userId)
             .productId(dto.productId())
             .content(dto.content())
             .feedImages(mapToFeedImages(dto.feedImages()))
