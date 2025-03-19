@@ -29,7 +29,7 @@ public class QProductController {
     @Operation(summary = "상품 조회", description = "상품 목록을 조회합니다.")
     @GetMapping("/products")
     public ResponseEntity<BaseResponse<List<GetProductResponseDto>>> getProducts(
-        @RequestParam(value = "groupId", required = false) Long groupId,
+        @RequestParam(value = "artistId", required = false) Long artistId,
         @RequestParam(value = "categoryId", required = false) Long categoryId,
         @RequestParam(value = "subCategoryId", required = false) Long subCategoryId,
         @RequestParam(value = "offset", defaultValue = "0") int offset
@@ -37,6 +37,6 @@ public class QProductController {
 
         return ResponseGenerator.ok(ResponseMsg.OK,
             HttpStatus.OK,
-            QProductService.getProducts(groupId, categoryId, subCategoryId, offset));
+            QProductService.getProducts(artistId, categoryId, subCategoryId, offset));
     }
 }

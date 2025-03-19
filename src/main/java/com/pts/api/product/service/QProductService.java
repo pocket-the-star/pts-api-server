@@ -14,9 +14,9 @@ public class QProductService {
 
     private final QProductRepository QProductRepository;
 
-    public List<GetProductResponseDto> getProducts(Long groupId, Long categoryId,
+    public List<GetProductResponseDto> getProducts(Long artistId, Long categoryId,
         Long subCategoryId, int offset) {
-        return QProductRepository.findAll(groupId, categoryId, subCategoryId, offset).stream()
+        return QProductRepository.findAll(artistId, categoryId, subCategoryId, offset).stream()
             .map(this::toDto)
             .toList();
     }

@@ -19,20 +19,20 @@ public class QProductRepository {
 
     private final JPAQueryFactory queryFactory;
 
-    public List<Product> findAll(Long groupId, Long categoryId, Long subCategoryId,
+    public List<Product> findAll(Long artistId, Long categoryId, Long subCategoryId,
         int offset) {
         int LIMIT = 20;
         JPAQuery<Product> query = queryFactory.select(product)
             .from(product);
 
         BooleanBuilder builder = new BooleanBuilder();
-        if (groupId != null) {
-            builder.and(product.groupId.eq(groupId));
-            query.innerJoin(category).on(category.id.eq(product.categoryId));
+        if (artistId != null) {
+            builder.and(product.artistId.eq(artistId));
+            query.innerJoin(category).on(category.id.eq(product.subCategoryId));
         }
 
         if (subCategoryId != null) {
-            builder.and(product.categoryId.eq(subCategoryId));
+            builder.and(product.subCategoryId.eq(subCategoryId));
             query.innerJoin(subCategory).on(subCategory.id.eq(subCategoryId));
             if (categoryId != null) {
                 builder.and(subCategory.categoryId.eq(categoryId));
