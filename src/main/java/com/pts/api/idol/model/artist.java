@@ -19,7 +19,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "members")
+@Table(name = "artists")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class artist extends BaseEntity {
