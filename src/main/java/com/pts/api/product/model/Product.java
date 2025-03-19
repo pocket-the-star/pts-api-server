@@ -28,11 +28,11 @@ public class Product extends BaseEntity {
     @Column(name = "title", nullable = false)
     private String title;
 
-    @Column(name = "category_id", nullable = false)
-    private Long categoryId;
+    @Column(name = "sub_category_id", nullable = false)
+    private Long subCategoryId;
 
-    @Column(name = "group_id", nullable = false)
-    private Long groupId;
+    @Column(name = "artist_id", nullable = false)
+    private Long artistId;
 
     @Column(name = "max_sell_price", nullable = false)
     private Long maxSellPrice;
@@ -47,14 +47,14 @@ public class Product extends BaseEntity {
     private List<ProductImage> images;
 
     @Builder
-    public Product(Long id, String title, Long categoryId, Long groupId, Long maxSellPrice,
+    public Product(Long id, String title, Long subCategoryId, Long artistId, Long maxSellPrice,
         Long minBuyPrice,
         List<ProductOption> options, List<ProductImage> images, LocalDateTime createdAt,
         LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.title = title;
-        this.categoryId = categoryId;
-        this.groupId = groupId;
+        this.subCategoryId = subCategoryId;
+        this.artistId = artistId;
         this.maxSellPrice = maxSellPrice;
         this.minBuyPrice = minBuyPrice;
         this.options = options;

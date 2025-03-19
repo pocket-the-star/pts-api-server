@@ -36,11 +36,15 @@ public class Feed extends BaseEntity {
     @Column(name = "product_id")
     private Long productId;
 
+    @Column(name = "content", nullable = false)
+    private String content;
+
     @OneToMany(mappedBy = "feed")
     private List<FeedImage> feedImages;
 
     @Enumerated(EnumType.STRING)
-    private FeedType feedType;
+    @Column(name = "type", nullable = false)
+    private FeedType type;
 
     @Enumerated(EnumType.STRING)
     private ProductGrade grade;
@@ -49,20 +53,24 @@ public class Feed extends BaseEntity {
     private Integer price;
 
     @Column(name = "quantity", nullable = false)
-    private int quantity;
+    private Integer quantity;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = false)
     private FeedStatus status;
 
     @Builder
-    public Feed(Long id, Long userId, Long productId, FeedType feedType, ProductGrade grade,
+    public Feed(Long id, Long userId, Long productId, String content, List<FeedImage> feedImages,
+        FeedType feedType, ProductGrade grade,
         Integer price, Integer quantity, FeedStatus status, LocalDateTime createdAt,
         LocalDateTime updatedAt,
         LocalDateTime deletedAt) {
         this.id = id;
         this.userId = userId;
         this.productId = productId;
-        this.feedType = feedType;
+        this.content = content;
+        this.feedImages = feedImages;
+        this.type = feedType;
         this.grade = grade;
         this.price = price;
         this.quantity = quantity;

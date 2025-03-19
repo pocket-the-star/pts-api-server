@@ -1,6 +1,6 @@
 package com.pts.api.global.presentation.advice;
 
-import com.pts.api.global.presentation.exception.CustomBusinessException;
+import com.pts.api.global.common.exception.CustomBusinessException;
 import com.pts.api.global.presentation.response.BaseResponse;
 import com.pts.api.global.presentation.response.ResponseGenerator;
 import lombok.extern.log4j.Log4j2;

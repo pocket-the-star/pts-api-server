@@ -9,6 +9,9 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import com.pts.api.common.base.BaseUnitTest;
+import com.pts.api.global.outbox.publisher.OutboxPublisher;
+import com.pts.api.lib.internal.shared.event.EventType;
+import com.pts.api.lib.internal.shared.event.data.EmailVerifyData;
 import com.pts.api.lib.internal.shared.util.date.IDateTimeUtil;
 import com.pts.api.lib.internal.shared.util.random.IRandomUtil;
 import com.pts.api.user.dto.request.AuthCodeConfirmRequestDto;
@@ -24,7 +27,6 @@ import com.pts.api.user.exception.UserNotFoundException;
 import com.pts.api.user.model.EmailVerify;
 import com.pts.api.user.model.LocalAccount;
 import com.pts.api.user.model.User;
-import com.pts.api.user.producer.EmailVerifyProducer;
 import com.pts.api.user.repository.EmailVerifyRepository;
 import com.pts.api.user.repository.UserRepository;
 import java.time.LocalDateTime;
@@ -46,7 +48,7 @@ class UserServiceTest extends BaseUnitTest {
     @Mock
     private EmailVerifyRepository emailVerifyRepository;
     @Mock
-    private EmailVerifyProducer emailVerifyProducer;
+    private OutboxPublisher outboxPublisher;
     @Mock
     private IDateTimeUtil dateTimeUtil;
     @Mock
@@ -68,11 +70,11 @@ class UserServiceTest extends BaseUnitTest {
         userService = new UserService(
             userRepository,
             emailVerifyRepository,
-            emailVerifyProducer,
             dateTimeUtil,
             tokenService,
             randomUtil,
-            authenticationService
+            authenticationService,
+            outboxPublisher
         );
     }
 
@@ -293,7 +295,10 @@ class UserServiceTest extends BaseUnitTest {
                 userService.verifyEmail(TEST_EMAIL);
 
                 // Then
-                verify(emailVerifyProducer).send(TEST_EMAIL, TEST_AUTH_CODE);
+                verify(outboxPublisher).publish(
+                    EventType.EMAIL_AUTH,
+                    new EmailVerifyData(TEST_EMAIL, TEST_AUTH_CODE)
+                );
                 verify(emailVerifyRepository).save(any(EmailVerify.class));
                 verify(emailVerifyRepository).releaseLock(TEST_EMAIL);
             }
