@@ -1,24 +1,26 @@
 package com.pts.api.order.model;
 
 import com.pts.api.lib.external.jpa.base.model.BaseEntity;
+import com.pts.api.lib.internal.shared.enums.OrderStatus;
 import jakarta.persistence.Column;
-import jakarta.persistence.ConstraintMode;
 import jakarta.persistence.Entity;
-import jakarta.persistence.ForeignKey;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Table;
 import java.time.LocalDateTime;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "orders")
 @Getter
+@Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Order extends BaseEntity {
 
@@ -26,14 +28,11 @@ public class Order extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JoinColumn(name = "target_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
-    private Long targetId;
+    @Column(name = "feed_id", nullable = false)
+    private Long feedId;
 
     @Column(name = "buyer_id", nullable = false)
     private Long buyerId;
-
-    @Column(name = "seller_id", nullable = false)
-    private Long sellerId;
 
     @Column(name = "price", nullable = false)
     private Integer price;
@@ -41,14 +40,16 @@ public class Order extends BaseEntity {
     @Column(name = "quantity", nullable = false)
     private Integer quantity;
 
+    @Enumerated(EnumType.STRING)
+    private OrderStatus status;
+
     @Builder
-    public Order(Long id, Long targetId, Long buyerId, Long sellerId, Integer price,
+    public Order(Long id, Long feedId, Long buyerId, Integer price,
         Integer quantity, LocalDateTime createdAt, LocalDateTime updatedAt,
         LocalDateTime deletedAt) {
         this.id = id;
-        this.targetId = targetId;
+        this.feedId = feedId;
         this.buyerId = buyerId;
-        this.sellerId = sellerId;
         this.price = price;
         this.quantity = quantity;
         this.createdAt = createdAt;
