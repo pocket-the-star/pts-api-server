@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "artists")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class artist extends BaseEntity {
+public class Artist extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,7 +36,7 @@ public class artist extends BaseEntity {
     private String name;
 
     @Builder
-    public artist(Long id, Idol idol, String name,
+    public Artist(Long id, Idol idol, String name,
         LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.idol = idol;
