@@ -29,14 +29,14 @@ public class Idol extends BaseEntity {
     private String name;
 
     @OneToMany(mappedBy = "idol")
-    private List<artist> artists;
+    private List<Artist> Artists;
 
     @Builder
-    public Idol(Long id, String name, List<artist> artists,
+    public Idol(Long id, String name, List<Artist> Artists,
         LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.name = name;
-        this.artists = artists;
+        this.Artists = Artists;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
