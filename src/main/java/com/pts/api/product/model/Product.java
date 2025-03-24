@@ -65,6 +65,9 @@ public class Product extends BaseEntity {
     }
 
     public String getProductThumbnail() {
+        if (images.isEmpty()) {
+            return null;
+        }
         return images.get(0).getImageUrl();
     }
 
