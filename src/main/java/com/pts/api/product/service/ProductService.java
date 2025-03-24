@@ -28,17 +28,13 @@ public class ProductService {
 
     public void executeWithLock(Long key, Runnable action) {
         RLock lock = productLockService.getFairLock(key);
-        int ROCK_TIMEOUT = 5;
-        int LOCK_EXPIRATION = 10;
+        int LOCK_EXPIRATION = 2;
 
         try {
-            if (lock.tryLock(ROCK_TIMEOUT, LOCK_EXPIRATION, TimeUnit.SECONDS)) {
-                action.run();
-            }
+            lock.lock(LOCK_EXPIRATION, TimeUnit.SECONDS);
+
+            action.run();
         } catch (Exception e) {
-            if (e instanceof InterruptedException) {
-                Thread.currentThread().interrupt(); // 인터럽트 상태 복원
-            }
 
             throw new RuntimeException(e);
         } finally {
