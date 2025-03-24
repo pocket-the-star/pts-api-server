@@ -94,6 +94,6 @@ public class TokenProvider {
     public TokenType getTokenType(String token) {
         Claims claims = parseToken(token);
 
-        return TokenType.valueOf(claims.get("type", String.class));
+        return TokenType.valueOf(claims.get("type", Integer.class));
     }
 }

@@ -34,7 +34,7 @@ public class TokenService {
     public void parse(String bearerToken, String refreshToken) {
         String accessToken = extractToken(bearerToken);
         validateAccessToken(accessToken);
-        validateRefreshToken(tokenProvider.getUserId(bearerToken), refreshToken);
+        validateRefreshToken(tokenProvider.getUserId(extractToken(bearerToken)), refreshToken);
 
     }
 
@@ -43,10 +43,12 @@ public class TokenService {
     }
 
     public TokenType getTokenType(String bearerToken) {
+
         return tokenProvider.getTokenType(extractToken(bearerToken));
     }
 
     public Long getUserId(String bearerToken) {
+
         return tokenProvider.getUserId(extractToken(bearerToken));
     }
 
