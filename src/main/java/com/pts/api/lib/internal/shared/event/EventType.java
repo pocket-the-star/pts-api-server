@@ -2,6 +2,8 @@ package com.pts.api.lib.internal.shared.event;
 
 import com.pts.api.lib.internal.shared.event.data.EmailVerifyData;
 import com.pts.api.lib.internal.shared.event.data.FeedCreateData;
+import com.pts.api.lib.internal.shared.event.data.ProductLikeData;
+import com.pts.api.lib.internal.shared.event.data.ProductUnLikeData;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -11,7 +13,9 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 public enum EventType {
     FEED_CREATE(FeedCreateData.class, Topic.EMAIL_VERIFY),
-    EMAIL_AUTH(EmailVerifyData.class, Topic.EMAIL_VERIFY);
+    EMAIL_AUTH(EmailVerifyData.class, Topic.EMAIL_VERIFY),
+    PRODUCT_LIKE(ProductLikeData.class, Topic.PRODUCT_LIKE),
+    PRODUCT_UNLIKE(ProductUnLikeData.class, Topic.PRODUCT_UNLIKE);
 
     private final Class<? extends EventData> dataClass;
     private final String topic;
@@ -29,5 +33,7 @@ public enum EventType {
 
         public static final String EMAIL_VERIFY = "email-verify";
         public static final String FEED_CREATE = "feed-create";
+        public static final String PRODUCT_LIKE = "product-like";
+        public static final String PRODUCT_UNLIKE = "product-unlike";
     }
 }
