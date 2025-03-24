@@ -28,7 +28,7 @@ public class ProductLikeController {
     @Operation(summary = "좋아요", description = "상품을 좋아요합니다.")
     @PostMapping
     public ResponseEntity<BaseResponse<Void>> post(
-        @AuthenticationPrincipal(expression = "principal") Long userId,
+        @AuthenticationPrincipal Long userId,
         @PathVariable Long productId) {
 
         productLikeService.like(productId, userId);
@@ -39,7 +39,7 @@ public class ProductLikeController {
     @Operation(summary = "좋아요 취소", description = "상품 좋아요를 취소합니다.")
     @DeleteMapping
     public ResponseEntity<BaseResponse<Void>> delete(
-        @AuthenticationPrincipal(expression = "principal") Long userId,
+        @AuthenticationPrincipal Long userId,
         @PathVariable Long productId) {
 
         productLikeService.unlike(productId, userId);

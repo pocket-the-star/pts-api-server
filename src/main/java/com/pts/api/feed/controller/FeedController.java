@@ -32,7 +32,7 @@ public class FeedController {
     @Operation(summary = "피드 작성", description = "피드를 생성합니다.")
     @PostMapping
     public ResponseEntity<BaseResponse<Void>> post(
-        @AuthenticationPrincipal(expression = "principal") Long userId,
+        @AuthenticationPrincipal Long userId,
         @Valid @RequestBody CreateFeedRequestDto request) {
 
         feedService.create(userId, request);
@@ -43,7 +43,7 @@ public class FeedController {
     @Operation(summary = "피드 수정", description = "피드를 수정합니다.")
     @PutMapping("/{feedId}")
     public ResponseEntity<BaseResponse<Void>> put(
-        @AuthenticationPrincipal(expression = "principal") Long userId,
+        @AuthenticationPrincipal Long userId,
         @PathVariable Long feedId,
         @Valid @RequestBody UpdateFeedRequestDto request) {
 
@@ -55,7 +55,7 @@ public class FeedController {
     @Operation(summary = "피드 삭제", description = "피드를 삭제합니다.")
     @DeleteMapping("/{feedId}")
     public ResponseEntity<BaseResponse<Void>> delete(
-        @AuthenticationPrincipal(expression = "principal") Long userId,
+        @AuthenticationPrincipal Long userId,
         @PathVariable Long feedId) {
 
         feedService.delete(userId, feedId);
