@@ -1,81 +1,79 @@
--- 2세대 아이돌 그룹
 INSERT INTO idols (name, created_at, updated_at) VALUES
-    ('소녀시대', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),      -- id: 1
-    ('슈퍼주니어', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),    -- id: 2
-    ('빅뱅', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),         -- id: 3
-    ('원더걸스', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),      -- id: 4
-    ('2PM', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),         -- id: 5
-    ('샤이니', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),       -- id: 6
-    ('카라', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),         -- id: 7
-    ('2NE1', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),        -- id: 8
-    ('f(x)', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),        -- id: 9
-    ('인피니트', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),      -- id: 10
-    ('비스트', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),       -- id: 11
-    ('미쓰에이', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),      -- id: 12
-    ('애프터스쿨', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),    -- id: 13
-    ('티아라', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),       -- id: 14
-    ('시크릿', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),       -- id: 15
-    ('브라운아이드걸스', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP), -- id: 16
-    ('포미닛', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),       -- id: 17
-    ('엠블랙', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),       -- id: 18
-    ('제국의아이들', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),   -- id: 19
-    ('에이핑크', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);     -- id: 20
+    ('소녀시대', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('슈퍼주니어', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('빅뱅', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('원더걸스', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('2PM', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('샤이니', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('카라', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('2NE1', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('f(x)', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('인피니트', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('비스트', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('미쓰에이', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('애프터스쿨', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('티아라', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('시크릿', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('브라운아이드걸스', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('포미닛', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('엠블랙', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('제국의아이들', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('에이핑크', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- 3세대 아이돌 그룹
 INSERT INTO idols (name, created_at, updated_at) VALUES
-    ('엑소', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),         -- id: 21
-    ('방탄소년단', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),    -- id: 22
-    ('레드벨벳', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),      -- id: 23
-    ('트와이스', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),      -- id: 24
-    ('블랙핑크', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),      -- id: 25
-    ('세븐틴', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),       -- id: 26
-    ('NCT', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),         -- id: 27
-    ('몬스타엑스', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),    -- id: 28
-    ('(여자)아이들', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),  -- id: 29
-    ('마마무', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),       -- id: 30
-    ('GOT7', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),        -- id: 31
-    ('WINNER', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),      -- id: 32
-    ('iKON', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),        -- id: 33
-    ('에이오에이', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),    -- id: 34
-    ('여자친구', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),      -- id: 35
-    ('워너원', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),       -- id: 36
-    ('뉴이스트', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),      -- id: 37
-    ('펜타곤', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),       -- id: 38
-    ('SF9', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),         -- id: 39
-    ('구구단', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);       -- id: 40
+    ('엑소', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('방탄소년단', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('레드벨벳', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('트와이스', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('블랙핑크', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('세븐틴', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('NCT', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('몬스타엑스', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('(여자)아이들', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('마마무', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('GOT7', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('WINNER', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('iKON', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('에이오에이', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('여자친구', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('워너원', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('뉴이스트', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('펜타곤', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('SF9', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('구구단', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- 4세대 아이돌 그룹
+
 INSERT INTO idols (name, created_at, updated_at) VALUES
-    ('에스파', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),       -- id: 41
-    ('아이브', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),       -- id: 42
-    ('뉴진스', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),       -- id: 43
-    ('르세라핌', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),      -- id: 44
-    ('스테이씨', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),      -- id: 45
-    ('케플러', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),       -- id: 46
-    ('엔하이픈', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),      -- id: 47
-    ('투모로우바이투게더', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP), -- id: 48
-    ('스트레이키즈', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),   -- id: 49
-    ('에이티즈', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),      -- id: 50
-    ('있지', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),         -- id: 51
-    ('트레저', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),       -- id: 52
-    ('엔믹스', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),       -- id: 53
-    ('라이즈', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),       -- id: 54
-    ('템페스트', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),      -- id: 55
-    ('식스틴', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),       -- id: 56
-    ('보이넥스트도어', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP), -- id: 57
-    ('제로베이스원', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),  -- id: 58
-    ('엘리스', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),       -- id: 59
-    ('드림노트', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);     -- id: 60
+    ('에스파', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('아이브', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('뉴진스', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('르세라핌', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('스테이씨', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('케플러', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('엔하이픈', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('투모로우바이투게더', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('스트레이키즈', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('에이티즈', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('있지', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('트레저', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('엔믹스', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('라이즈', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('템페스트', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('식스틴', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('보이넥스트도어', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('제로베이스원', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('엘리스', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('드림노트', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- 솔로 아티스트
+
 INSERT INTO idols (name, created_at, updated_at) VALUES
-    ('보아', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),      -- id: 61
-    ('비', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),       -- id: 62
-    ('청하', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),      -- id: 63
-    ('선미', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),      -- id: 64
-    ('아이유', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);    -- id: 65
+    ('보아', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('비', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('청하', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('선미', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    ('아이유', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- 소녀시대 멤버
+
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (1, '태연', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (1, '써니', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
@@ -86,7 +84,7 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (1, '서현', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (1, '윤아', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- 슈퍼주니어 멤버
+
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (2, '이특', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (2, '희철', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
@@ -98,14 +96,14 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (2, '려욱', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (2, '규현', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- 빅뱅 멤버
+
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (3, 'G-DRAGON', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (3, '태양', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (3, '대성', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (3, 'T.O.P', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- 원더걸스 멤버
+
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (4, '선예', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (4, '예은', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
@@ -114,7 +112,7 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (4, '유빈', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (4, '현아', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- 2PM 멤버
+
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (5, '준호', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (5, '닉쿤', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
@@ -123,7 +121,7 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (5, '준케이', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (5, '찬성', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- 샤이니 멤버
+
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (6, '온유', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (6, '종현', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
@@ -131,7 +129,7 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (6, '민호', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (6, '태민', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- 카라 멤버
+
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (7, '박규리', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (7, '한승연', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
@@ -139,14 +137,14 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (7, '니콜', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (7, '강지영', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- 2NE1 멤버
+
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (8, 'CL', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (8, '박봄', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (8, '산다라박', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (8, '민지', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- f(x) 멤버
+
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (9, '빅토리아', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (9, '엠버', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
@@ -154,7 +152,7 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (9, '크리스탈', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (9, '설리', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- 인피니트 멤버
+
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (10, '성규', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (10, '동우', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
@@ -164,7 +162,7 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (10, '성종', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (10, '호야', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- 비스트/하이라이트 멤버
+
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (11, '두준', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (11, '용준형', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
@@ -173,14 +171,14 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (11, '현승', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (11, '준혁', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- 미쓰에이 멤버
+
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (12, '수지', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (12, '민', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (12, '페이', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (12, '지아', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- 애프터스쿨 멤버
+
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (13, '가희', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (13, '정아', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
@@ -192,7 +190,7 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (13, '주연', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (13, 'E-YOUNG', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- 티아라 멤버
+
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (14, '효민', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (14, '지연', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
@@ -202,28 +200,28 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (14, '소연', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (14, '큐리', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- 시크릿 멤버
+
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (15, '전효성', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (15, '한선화', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (15, '송지은', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (15, '정하나', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- 브라운아이드걸스 멤버
+
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (16, '제아', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (16, '미료', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (16, '나르샤', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (16, '가인', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- 포미닛 멤버
+
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (17, '지현', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (17, '지윤', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (17, '소현', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (17, '현아', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- 엠블랙 멤버
+
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (18, '승호', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (18, '지오', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
@@ -231,7 +229,7 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (18, '청용', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (18, '이준', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- 제국의아이들 멤버
+
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (19, '문준영', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (19, '광희', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
@@ -241,7 +239,7 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (19, '케빈', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (19, '강승환', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- 에이핑크 멤버
+
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (20, '박초롱', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (20, '윤보미', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
@@ -250,7 +248,7 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (20, '김남주', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (20, '오하영', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- 엑소 멤버
+
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (21, '수호', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (21, '찬열', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
@@ -262,7 +260,7 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (21, '레이', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (21, '첸', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- 방탄소년단 멤버
+
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (22, 'RM', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (22, '진', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
@@ -272,7 +270,7 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (22, '뷔', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (22, '정국', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- 레드벨벳 멤버
+
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (23, '아이린', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (23, '슬기', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
@@ -280,7 +278,7 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (23, '조이', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (23, '예리', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- 트와이스 멤버
+
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (24, '나연', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (24, '정연', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
@@ -292,14 +290,14 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (24, '채영', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (24, '쯔위', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- 블랙핑크 멤버
+
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (25, '지수', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (25, '제니', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (25, '로제', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (25, '리사', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- 세븐틴 멤버
+
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (26, '에스쿱스', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (26, '정한', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
@@ -315,7 +313,7 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (26, '버논', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (26, '디노', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- NCT 멤버 (전체)
+
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (27, '태일', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (27, '쟈니', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
@@ -339,7 +337,7 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (27, '성찬', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (27, '지성', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- 몬스타엑스 멤버
+
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (28, '셔누', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (28, '민혁', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
@@ -348,7 +346,7 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (28, '주헌', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (28, '아이엠', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- (여자)아이들 멤버
+
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (29, '미연', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (29, '민니', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
@@ -356,14 +354,14 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (29, '우기', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (29, '슈화', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- 마마무 멤버
+
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (30, '솔라', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (30, '문별', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (30, '휘인', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (30, '화사', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- GOT7 멤버
+
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (31, 'JB', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (31, '마크', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
@@ -373,14 +371,14 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (31, '뱀뱀', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (31, '유겸', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- WINNER 멤버
+
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (32, '윤', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (32, '진우', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (32, '승훈', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (32, '민호', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- iKON 멤버
+
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (33, '김진환', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (33, '바비', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
@@ -389,7 +387,7 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (33, '김동혁', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (33, '정찬우', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- 에이오에이(AOA) 멤버
+
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (34, '지민', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (34, '유나', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
@@ -398,7 +396,7 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (34, '민아', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (34, '찬미', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- 여자친구 멤버
+
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (35, '소원', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (35, '예린', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
@@ -407,7 +405,7 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (35, '신비', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (35, '엄지', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- 워너원 멤버
+
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (36, '윤지성', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (36, '하성운', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
@@ -421,7 +419,7 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (36, '이대휘', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (36, '라이관린', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- 뉴이스트 멤버
+
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (37, 'JR', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (37, '아론', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
@@ -429,7 +427,7 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (37, '민현', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (37, '렌', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- 펜타곤 멤버
+
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (38, '진호', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (38, '후이', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
@@ -440,7 +438,7 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (38, '유토', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (38, '키노', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- SF9 멤버
+
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (39, '영빈', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (39, '인성', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
@@ -452,7 +450,7 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (39, '휘영', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (39, '찬희', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- 구구단 멤버
+
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (40, '미나', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (40, '세정', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
@@ -463,14 +461,14 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (40, '샐리', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (40, '혜연', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- 에스파 멤버
+
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (41, '카리나', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (41, '지젤', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (41, '윈터', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (41, '닝닝', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- 아이브 멤버
+
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (42, '안유진', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (42, '가을', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
@@ -479,7 +477,7 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (42, '리즈', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (42, '이서', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- 뉴진스 멤버
+
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (43, '민지', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (43, '하니', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
@@ -487,7 +485,7 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (43, '해린', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (43, '혜인', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- 르세라핌 멤버
+
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (44, '김채원', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (44, '사쿠라', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
@@ -495,7 +493,7 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (44, '카즈하', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (44, '홍은채', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- 스테이씨 멤버
+
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (45, '수민', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (45, '시은', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
@@ -504,7 +502,7 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (45, '윤', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (45, '재이', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- 케플러 멤버
+
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (46, '김채현', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (46, '휴닝바히에', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
@@ -516,7 +514,7 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (46, '에자키 히카루', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (46, '강예서', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- 엔하이픈 멤버
+
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (47, '정원', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (47, '희승', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
@@ -526,7 +524,7 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (47, '선우', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (47, '니키', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- 투모로우바이투게더 멤버
+
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (48, '수빈', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (48, '연준', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
@@ -534,7 +532,7 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (48, '태현', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (48, '휴닝카이', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- 스트레이키즈 멤버
+
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (49, '방찬', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (49, '리노', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
@@ -545,7 +543,7 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (49, '승민', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (49, '아이엔', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- 에이티즈 멤버
+
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (50, '홍중', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (50, '성화', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
@@ -556,7 +554,7 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (50, '우영', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (50, '종호', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- 있지(ITZY) 멤버
+
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (51, '예지', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (51, '리아', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
@@ -564,7 +562,7 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (51, '채령', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (51, '유나', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- 트레저 멤버
+
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (52, '최현석', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (52, '지훈', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
@@ -577,7 +575,7 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (52, '하루토', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (52, '박정우', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- 엔믹스 멤버
+
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (53, '해원', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (53, '릴리', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
@@ -586,7 +584,7 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (53, '지우', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (53, '규진', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- 라이즈 멤버
+
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (54, '승찬', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (54, '소희', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
@@ -596,7 +594,7 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (54, '원빈', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (54, '소훈', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- 템페스트 멤버
+
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (55, '한빈', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (55, '형준', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
@@ -606,7 +604,7 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (55, '루', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (55, '화랑', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- 식스틴 멤버
+
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (56, '장원', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (56, '성준', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
@@ -617,7 +615,7 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (56, '건호', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (56, '아인', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- 보이넥스트도어 멤버
+
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (57, '리우', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (57, '은학', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
@@ -626,7 +624,7 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (57, '마리우스', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (57, '한유진', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- 제로베이스원 멤버
+
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (58, '성한빈', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (58, '김지웅', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
@@ -638,7 +636,7 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (58, '박건욱', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (58, '한유진', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- 엘리스 멤버
+
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (59, '소현', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (59, '채원', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
@@ -646,7 +644,7 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (59, '이서', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (59, '유경', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- 드림노트 멤버
+
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (60, '수민', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (60, '은조', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
@@ -655,7 +653,7 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (60, '보라', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (60, '라라', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
--- 솔로 아티스트 멤버 데이터
+
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (61, '보아', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (62, '비', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
