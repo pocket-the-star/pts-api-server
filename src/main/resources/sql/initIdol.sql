@@ -18,7 +18,10 @@ INSERT INTO idols (name, created_at, updated_at) VALUES
     ('포미닛', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     ('엠블랙', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     ('제국의아이들', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    ('에이핑크', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    ('에이핑크', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+ON DUPLICATE KEY UPDATE
+    updated_at = VALUES(updated_at);
+
 
 INSERT INTO idols (name, created_at, updated_at) VALUES
     ('엑소', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
@@ -40,7 +43,9 @@ INSERT INTO idols (name, created_at, updated_at) VALUES
     ('뉴이스트', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     ('펜타곤', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     ('SF9', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    ('구구단', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    ('구구단', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+ON DUPLICATE KEY UPDATE
+    updated_at = VALUES(updated_at);
 
 
 INSERT INTO idols (name, created_at, updated_at) VALUES
@@ -63,7 +68,9 @@ INSERT INTO idols (name, created_at, updated_at) VALUES
     ('보이넥스트도어', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     ('제로베이스원', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     ('엘리스', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    ('드림노트', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    ('드림노트', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+ON DUPLICATE KEY UPDATE
+    updated_at = VALUES(updated_at);
 
 
 INSERT INTO idols (name, created_at, updated_at) VALUES
@@ -71,7 +78,9 @@ INSERT INTO idols (name, created_at, updated_at) VALUES
     ('비', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     ('청하', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     ('선미', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    ('아이유', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    ('아이유', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+ON DUPLICATE KEY UPDATE
+    updated_at = VALUES(updated_at);
 
 
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
@@ -82,7 +91,9 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (1, '유리', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (1, '수영', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (1, '서현', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    (1, '윤아', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    (1, '윤아', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+ON DUPLICATE KEY UPDATE
+    updated_at = VALUES(updated_at);
 
 
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
@@ -94,14 +105,18 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (2, '동해', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (2, '시원', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (2, '려욱', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    (2, '규현', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    (2, '규현', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+ON DUPLICATE KEY UPDATE
+    updated_at = VALUES(updated_at);
 
 
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (3, 'G-DRAGON', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (3, '태양', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (3, '대성', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    (3, 'T.O.P', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    (3, 'T.O.P', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+ON DUPLICATE KEY UPDATE
+    updated_at = VALUES(updated_at);
 
 
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
@@ -110,7 +125,9 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (4, '선미', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (4, '소희', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (4, '유빈', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    (4, '현아', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    (4, '현아', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+ON DUPLICATE KEY UPDATE
+    updated_at = VALUES(updated_at);
 
 
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
@@ -119,7 +136,9 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (5, '택연', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (5, '우영', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (5, '준케이', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    (5, '찬성', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    (5, '찬성', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+ON DUPLICATE KEY UPDATE
+    updated_at = VALUES(updated_at);
 
 
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
@@ -127,7 +146,9 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (6, '종현', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (6, '키', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (6, '민호', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    (6, '태민', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    (6, '태민', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+ON DUPLICATE KEY UPDATE
+    updated_at = VALUES(updated_at);
 
 
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
@@ -135,14 +156,18 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (7, '한승연', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (7, '구하라', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (7, '니콜', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    (7, '강지영', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    (7, '강지영', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+ON DUPLICATE KEY UPDATE
+    updated_at = VALUES(updated_at);
 
 
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (8, 'CL', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (8, '박봄', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (8, '산다라박', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    (8, '민지', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    (8, '민지', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+ON DUPLICATE KEY UPDATE
+    updated_at = VALUES(updated_at);
 
 
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
@@ -150,7 +175,9 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (9, '엠버', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (9, '루나', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (9, '크리스탈', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    (9, '설리', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    (9, '설리', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+ON DUPLICATE KEY UPDATE
+    updated_at = VALUES(updated_at);
 
 
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
@@ -160,7 +187,9 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (10, '성열', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (10, '엘', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (10, '성종', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    (10, '호야', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    (10, '호야', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+ON DUPLICATE KEY UPDATE
+    updated_at = VALUES(updated_at);
 
 
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
@@ -169,14 +198,18 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (11, '기광', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (11, '동운', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (11, '현승', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    (11, '준혁', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    (11, '준혁', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+ON DUPLICATE KEY UPDATE
+    updated_at = VALUES(updated_at);
 
 
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (12, '수지', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (12, '민', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (12, '페이', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    (12, '지아', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    (12, '지아', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+ON DUPLICATE KEY UPDATE
+    updated_at = VALUES(updated_at);
 
 
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
@@ -188,7 +221,9 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (13, '리지', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (13, '카히', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (13, '주연', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    (13, 'E-YOUNG', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    (13, 'E-YOUNG', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+ON DUPLICATE KEY UPDATE
+    updated_at = VALUES(updated_at);
 
 
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
@@ -198,28 +233,36 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (14, '함은정', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (14, '보람', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (14, '소연', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    (14, '큐리', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    (14, '큐리', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+ON DUPLICATE KEY UPDATE
+    updated_at = VALUES(updated_at);
 
 
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (15, '전효성', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (15, '한선화', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (15, '송지은', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    (15, '정하나', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    (15, '정하나', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+ON DUPLICATE KEY UPDATE
+    updated_at = VALUES(updated_at);
 
 
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (16, '제아', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (16, '미료', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (16, '나르샤', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    (16, '가인', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    (16, '가인', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+ON DUPLICATE KEY UPDATE
+    updated_at = VALUES(updated_at);
 
 
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (17, '지현', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (17, '지윤', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (17, '소현', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    (17, '현아', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    (17, '현아', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+ON DUPLICATE KEY UPDATE
+    updated_at = VALUES(updated_at);
 
 
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
@@ -227,7 +270,9 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (18, '지오', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (18, '미르', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (18, '청용', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    (18, '이준', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    (18, '이준', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+ON DUPLICATE KEY UPDATE
+    updated_at = VALUES(updated_at);
 
 
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
@@ -237,7 +282,9 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (19, '김동준', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (19, '박형식', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (19, '케빈', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    (19, '강승환', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    (19, '강승환', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+ON DUPLICATE KEY UPDATE
+    updated_at = VALUES(updated_at);
 
 
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
@@ -246,7 +293,9 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (20, '정은지', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (20, '손나은', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (20, '김남주', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    (20, '오하영', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    (20, '오하영', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+ON DUPLICATE KEY UPDATE
+    updated_at = VALUES(updated_at);
 
 
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
@@ -258,7 +307,9 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (21, '세훈', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (21, '시우민', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (21, '레이', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    (21, '첸', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    (21, '첸', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+ON DUPLICATE KEY UPDATE
+    updated_at = VALUES(updated_at);
 
 
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
@@ -268,7 +319,9 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (22, '제이홉', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (22, '지민', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (22, '뷔', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    (22, '정국', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    (22, '정국', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+ON DUPLICATE KEY UPDATE
+    updated_at = VALUES(updated_at);
 
 
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
@@ -276,7 +329,9 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (23, '슬기', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (23, '웬디', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (23, '조이', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    (23, '예리', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    (23, '예리', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+ON DUPLICATE KEY UPDATE
+    updated_at = VALUES(updated_at);
 
 
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
@@ -288,14 +343,18 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (24, '미나', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (24, '다현', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (24, '채영', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    (24, '쯔위', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    (24, '쯔위', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+ON DUPLICATE KEY UPDATE
+    updated_at = VALUES(updated_at);
 
 
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (25, '지수', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (25, '제니', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (25, '로제', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    (25, '리사', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    (25, '리사', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+ON DUPLICATE KEY UPDATE
+    updated_at = VALUES(updated_at);
 
 
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
@@ -311,7 +370,9 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (26, '도겸', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (26, '승관', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (26, '버논', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    (26, '디노', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    (26, '디노', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+ON DUPLICATE KEY UPDATE
+    updated_at = VALUES(updated_at);
 
 
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
@@ -335,7 +396,9 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (27, '양양', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (27, '쇼타로', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (27, '성찬', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    (27, '지성', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    (27, '지성', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+ON DUPLICATE KEY UPDATE
+    updated_at = VALUES(updated_at);
 
 
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
@@ -344,7 +407,9 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (28, '기현', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (28, '형원', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (28, '주헌', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    (28, '아이엠', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    (28, '아이엠', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+ON DUPLICATE KEY UPDATE
+    updated_at = VALUES(updated_at);
 
 
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
@@ -352,14 +417,18 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (29, '민니', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (29, '소연', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (29, '우기', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    (29, '슈화', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    (29, '슈화', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+ON DUPLICATE KEY UPDATE
+    updated_at = VALUES(updated_at);
 
 
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (30, '솔라', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (30, '문별', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (30, '휘인', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    (30, '화사', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    (30, '화사', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+ON DUPLICATE KEY UPDATE
+    updated_at = VALUES(updated_at);
 
 
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
@@ -369,14 +438,18 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (31, '진영', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (31, '영재', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (31, '뱀뱀', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    (31, '유겸', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    (31, '유겸', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+ON DUPLICATE KEY UPDATE
+    updated_at = VALUES(updated_at);
 
 
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (32, '윤', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (32, '진우', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (32, '승훈', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    (32, '민호', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    (32, '민호', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+ON DUPLICATE KEY UPDATE
+    updated_at = VALUES(updated_at);
 
 
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
@@ -385,7 +458,9 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (33, '송윤형', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (33, '구준회', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (33, '김동혁', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    (33, '정찬우', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    (33, '정찬우', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+ON DUPLICATE KEY UPDATE
+    updated_at = VALUES(updated_at);
 
 
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
@@ -394,7 +469,9 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (34, '혜정', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (34, '설현', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (34, '민아', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    (34, '찬미', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    (34, '찬미', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+ON DUPLICATE KEY UPDATE
+    updated_at = VALUES(updated_at);
 
 
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
@@ -403,7 +480,9 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (35, '은하', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (35, '유주', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (35, '신비', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    (35, '엄지', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    (35, '엄지', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+ON DUPLICATE KEY UPDATE
+    updated_at = VALUES(updated_at);
 
 
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
@@ -417,7 +496,9 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (36, '박우진', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (36, '배진영', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (36, '이대휘', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    (36, '라이관린', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    (36, '라이관린', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+ON DUPLICATE KEY UPDATE
+    updated_at = VALUES(updated_at);
 
 
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
@@ -425,7 +506,9 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (37, '아론', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (37, '백호', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (37, '민현', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    (37, '렌', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    (37, '렌', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+ON DUPLICATE KEY UPDATE
+    updated_at = VALUES(updated_at);
 
 
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
@@ -436,7 +519,9 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (38, '여원', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (38, '옌안', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (38, '유토', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    (38, '키노', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    (38, '키노', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+ON DUPLICATE KEY UPDATE
+    updated_at = VALUES(updated_at);
 
 
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
@@ -448,7 +533,9 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (39, '주호', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (39, '태양', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (39, '휘영', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    (39, '찬희', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    (39, '찬희', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+ON DUPLICATE KEY UPDATE
+    updated_at = VALUES(updated_at);
 
 
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
@@ -459,14 +546,18 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (40, '미미', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (40, '소이', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (40, '샐리', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    (40, '혜연', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    (40, '혜연', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+ON DUPLICATE KEY UPDATE
+    updated_at = VALUES(updated_at);
 
 
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (41, '카리나', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (41, '지젤', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (41, '윈터', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    (41, '닝닝', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    (41, '닝닝', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+ON DUPLICATE KEY UPDATE
+    updated_at = VALUES(updated_at);
 
 
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
@@ -475,7 +566,9 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (42, '레이', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (42, '장원영', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (42, '리즈', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    (42, '이서', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    (42, '이서', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+ON DUPLICATE KEY UPDATE
+    updated_at = VALUES(updated_at);
 
 
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
@@ -483,7 +576,9 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (43, '하니', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (43, '다니엘', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (43, '해린', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    (43, '혜인', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    (43, '혜인', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+ON DUPLICATE KEY UPDATE
+    updated_at = VALUES(updated_at);
 
 
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
@@ -491,7 +586,9 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (44, '사쿠라', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (44, '허윤진', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (44, '카즈하', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    (44, '홍은채', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    (44, '홍은채', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+ON DUPLICATE KEY UPDATE
+    updated_at = VALUES(updated_at);
 
 
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
@@ -500,7 +597,9 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (45, '아이사', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (45, '세은', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (45, '윤', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    (45, '재이', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    (45, '재이', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+ON DUPLICATE KEY UPDATE
+    updated_at = VALUES(updated_at);
 
 
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
@@ -512,7 +611,9 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (46, '샤오팅', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (46, '김다연', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (46, '에자키 히카루', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    (46, '강예서', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    (46, '강예서', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+ON DUPLICATE KEY UPDATE
+    updated_at = VALUES(updated_at);
 
 
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
@@ -522,7 +623,9 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (47, '제이크', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (47, '성훈', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (47, '선우', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    (47, '니키', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    (47, '니키', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+ON DUPLICATE KEY UPDATE
+    updated_at = VALUES(updated_at);
 
 
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
@@ -530,7 +633,9 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (48, '연준', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (48, '범규', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (48, '태현', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    (48, '휴닝카이', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    (48, '휴닝카이', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+ON DUPLICATE KEY UPDATE
+    updated_at = VALUES(updated_at);
 
 
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
@@ -541,7 +646,9 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (49, '한', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (49, '필릭스', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (49, '승민', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    (49, '아이엔', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    (49, '아이엔', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+ON DUPLICATE KEY UPDATE
+    updated_at = VALUES(updated_at);
 
 
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
@@ -552,7 +659,9 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (50, '산', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (50, '민기', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (50, '우영', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    (50, '종호', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    (50, '종호', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+ON DUPLICATE KEY UPDATE
+    updated_at = VALUES(updated_at);
 
 
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
@@ -560,7 +669,9 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (51, '리아', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (51, '류진', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (51, '채령', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    (51, '유나', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    (51, '유나', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+ON DUPLICATE KEY UPDATE
+    updated_at = VALUES(updated_at);
 
 
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
@@ -573,7 +684,9 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (52, '아사히', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (52, '도영', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (52, '하루토', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    (52, '박정우', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    (52, '박정우', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+ON DUPLICATE KEY UPDATE
+    updated_at = VALUES(updated_at);
 
 
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
@@ -582,7 +695,9 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (53, '설윤', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (53, '배이', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (53, '지우', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    (53, '규진', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    (53, '규진', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+ON DUPLICATE KEY UPDATE
+    updated_at = VALUES(updated_at);
 
 
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
@@ -592,7 +707,9 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (54, '알렉스', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (54, '은석', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (54, '원빈', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    (54, '소훈', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    (54, '소훈', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+ON DUPLICATE KEY UPDATE
+    updated_at = VALUES(updated_at);
 
 
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
@@ -602,7 +719,9 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (55, '이준', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (55, '태래', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (55, '루', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    (55, '화랑', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    (55, '화랑', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+ON DUPLICATE KEY UPDATE
+    updated_at = VALUES(updated_at);
 
 
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
@@ -613,7 +732,9 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (56, '민재', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (56, '유빈', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (56, '건호', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    (56, '아인', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    (56, '아인', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+ON DUPLICATE KEY UPDATE
+    updated_at = VALUES(updated_at);
 
 
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
@@ -622,7 +743,9 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (57, '재윤', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (57, '태산', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (57, '마리우스', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    (57, '한유진', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    (57, '한유진', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+ON DUPLICATE KEY UPDATE
+    updated_at = VALUES(updated_at);
 
 
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
@@ -634,7 +757,9 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (58, '리키', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (58, '김규빈', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (58, '박건욱', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    (58, '한유진', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    (58, '한유진', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+ON DUPLICATE KEY UPDATE
+    updated_at = VALUES(updated_at);
 
 
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
@@ -642,7 +767,9 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (59, '채원', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (59, '벨라', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (59, '이서', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    (59, '유경', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    (59, '유경', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+ON DUPLICATE KEY UPDATE
+    updated_at = VALUES(updated_at);
 
 
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
@@ -651,7 +778,9 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (60, '미소', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (60, '율', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (60, '보라', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    (60, '라라', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    (60, '라라', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+ON DUPLICATE KEY UPDATE
+    updated_at = VALUES(updated_at);
 
 
 INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
@@ -659,4 +788,6 @@ INSERT INTO artists (idol_id, name, created_at, updated_at) VALUES
     (62, '비', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (63, '청하', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (64, '선미', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-    (65, '아이유', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+    (65, '아이유', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+ON DUPLICATE KEY UPDATE
+    updated_at = VALUES(updated_at);
