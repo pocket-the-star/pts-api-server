@@ -1,5 +1,7 @@
 package com.pts.api.like.service;
 
+import com.pts.api.global.common.exception.NotFoundException;
+import com.pts.api.like.model.ProductLikeCount;
 import com.pts.api.like.repository.ProductLikeCountRepository;
 import com.pts.api.like.repository.ProductLikeLockRepository;
 import jakarta.transaction.Transactional;
@@ -18,31 +20,36 @@ public class ProductLikeCountService {
     @Transactional
     public void increase(Long productId) {
         lock(productId, () -> {
-            productLikeCountRepository.increase(productId);
+            productLikeCountRepository.findOneByProductId(productId).ifPresentOrElse(
+                productLikeCount -> productLikeCountRepository.increase(productId),
+                () -> productLikeCountRepository.save(ProductLikeCount.builder()
+                    .productId(productId)
+                    .count(1L)
+                    .build()));
+
         });
     }
 
-    @Transactional
     public void decrease(Long productId) {
         lock(productId, () -> {
-            productLikeCountRepository.decrease(productId);
+            productLikeCountRepository.findOneByProductId(productId).ifPresentOrElse(
+                productLikeCount -> productLikeCountRepository.decrease(productId),
+                () -> {
+                    throw new NotFoundException("좋아요 카운트가 존재하지 않습니다.: " + productId);
+                });
         });
     }
 
 
     private void lock(Long productId, Runnable action) {
-        int ROCK_TIMEOUT = 5;
-        int LOCK_EXPIRATION = 10;
+        int LOCK_EXPIRATION = 2;
         RLock lock = productLikeLockRepository.getFairLock(productId);
-
         try {
-            if (lock.tryLock(ROCK_TIMEOUT, LOCK_EXPIRATION, TimeUnit.SECONDS)) {
-                action.run();
-            }
+            lock.lock(LOCK_EXPIRATION, TimeUnit.SECONDS);
+
+            action.run();
+
         } catch (Exception e) {
-            if (e instanceof InterruptedException) {
-                Thread.currentThread().interrupt();
-            }
 
             throw new RuntimeException(e);
         } finally {
