@@ -11,23 +11,21 @@ public interface ArtistRepository extends JpaRepository<Artist, Long> {
     @Query(
         value = """
             select *
-            from artist
-            inner join idol
-                on artist.idol_id = idol.id
-            where deleted_at is null
-            limit :limit offset :offset
-            order by id desc
+            from artists
+            where artists.idol_id = :idolId
+                and artists.deleted_at is null
+            order by artists.id desc
             """,
         nativeQuery = true
     )
-    List<Artist> findAll(Long idolId, Long offset, Integer limit);
+    List<Artist> findAll(Long idolId);
 
     @Query(
         value = """
             select *
-            from artist
-            where id = :id
-                and deleted_at is null
+            from artists
+            where artists.id = :id
+                and artists.deleted_at is null
             limit 1
             """,
         nativeQuery = true

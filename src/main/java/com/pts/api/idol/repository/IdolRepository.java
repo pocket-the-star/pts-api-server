@@ -13,10 +13,10 @@ public interface IdolRepository extends JpaRepository<Idol, Long> {
     @Query(
         value = """
             select *
-            from idol
-            where deleted_at is null
+            from idols
+            where idols.deleted_at is null
+            order by idols.id desc
             limit :limit offset :offset
-            order by id desc
             """,
         nativeQuery = true
     )
@@ -25,9 +25,9 @@ public interface IdolRepository extends JpaRepository<Idol, Long> {
     @Query(
         value = """
             select *
-            from idol
-            where id = :id
-                and deleted_at is null
+            from idols
+            where idols.id = :id
+                and idols.deleted_at is null
             limit 1
             """,
         nativeQuery = true

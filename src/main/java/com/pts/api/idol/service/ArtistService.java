@@ -13,8 +13,8 @@ public class ArtistService {
 
     private final ArtistRepository artistRepository;
 
-    public List<ReadArtistResponseDto> findAll(Long idolId, Long offset, Integer limit) {
-        return artistRepository.findAll(idolId, offset, limit)
+    public List<ReadArtistResponseDto> findAll(Long idolId) {
+        return artistRepository.findAll(idolId)
             .stream()
             .map(ReadArtistResponseDto::of)
             .toList();

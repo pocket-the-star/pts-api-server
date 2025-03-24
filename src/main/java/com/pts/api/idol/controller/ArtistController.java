@@ -14,7 +14,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @Tag(name = "아이돌", description = "아이돌 API")
@@ -28,10 +27,9 @@ public class ArtistController {
     @Operation(summary = "아이돌 아티스트 리스트 불러오기", description = "아이돌 아티스트 리스트 불러오기 API")
     @GetMapping("/{idolId}/artists")
     public ResponseEntity<BaseResponse<List<ReadArtistResponseDto>>> getList(
-        @PathVariable Long idolId, @RequestParam(value = "offset", defaultValue = "0") Long offset,
-        @RequestParam(value = "limit", defaultValue = "20") Integer limit) {
+        @PathVariable Long idolId) {
         return ResponseGenerator.ok(ResponseMsg.OK, HttpStatus.OK,
-            artistService.findAll(idolId, offset, limit));
+            artistService.findAll(idolId));
     }
 
     @Operation(summary = "아이돌 멤버 불러오기", description = "아이돌 멤버 불러오기 API")
