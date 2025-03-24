@@ -176,6 +176,8 @@ public class UserService {
                     .updatedAt(now)
                     .build()
             )
+            .createdAt(now)
+            .updatedAt(now)
             .build();
     }
 
