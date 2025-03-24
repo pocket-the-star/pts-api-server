@@ -35,7 +35,7 @@ public class OrderController {
     @Operation(summary = "주문 생성", description = "주문을 생성합니다.")
     @PostMapping
     public ResponseEntity<BaseResponse<Void>> post(
-        @AuthenticationPrincipal(expression = "principal") Long userId,
+        @AuthenticationPrincipal Long userId,
         @Valid @RequestBody CreateOrderRequestDto request) {
 
         orderFacade.create(userId, request);
@@ -46,7 +46,7 @@ public class OrderController {
     @Operation(summary = "주문 수정", description = "주문을 수정합니다.")
     @PutMapping("/{orderId}")
     public ResponseEntity<BaseResponse<Void>> put(
-        @AuthenticationPrincipal(expression = "principal") Long userId,
+        @AuthenticationPrincipal Long userId,
         @PathVariable Long orderId,
         @Valid @RequestBody UpdateOrderRequestDto request) {
 
@@ -58,7 +58,7 @@ public class OrderController {
     @Operation(summary = "주문 취소", description = "주문을 취소합니다.")
     @PatchMapping("/{orderId}")
     public ResponseEntity<BaseResponse<Void>> put(
-        @AuthenticationPrincipal(expression = "principal") Long userId,
+        @AuthenticationPrincipal Long userId,
         @PathVariable Long orderId
     ) {
 
@@ -70,7 +70,7 @@ public class OrderController {
     @Operation(summary = "주문 삭제", description = "주문을 삭제합니다.")
     @DeleteMapping("/{orderId}")
     public ResponseEntity<BaseResponse<Void>> delete(
-        @AuthenticationPrincipal(expression = "principal") Long userId,
+        @AuthenticationPrincipal Long userId,
         @PathVariable Long orderId) {
 
         orderService.delete(userId, orderId);
