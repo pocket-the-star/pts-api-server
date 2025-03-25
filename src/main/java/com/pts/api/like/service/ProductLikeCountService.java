@@ -17,6 +17,13 @@ public class ProductLikeCountService {
     private final ProductLikeCountRepository productLikeCountRepository;
     private final ProductLikeLockRepository productLikeLockRepository;
 
+    public void create(Long productId) {
+        productLikeCountRepository.save(ProductLikeCount.builder()
+            .productId(productId)
+            .count(0L)
+            .build());
+    }
+
     @Transactional
     public void increase(Long productId) {
         lock(productId, () -> {

@@ -21,7 +21,8 @@ public class ProductLikeCountConsumer {
 
     @KafkaListener(topics = {
         Topic.PRODUCT_LIKE,
-        Topic.PRODUCT_UNLIKE
+        Topic.PRODUCT_UNLIKE,
+        Topic.PRODUCT_CREATE
     }, groupId = "product-like-count")
     public void consume(String message) {
         try {
@@ -42,6 +43,9 @@ public class ProductLikeCountConsumer {
                 break;
             case PRODUCT_UNLIKE:
                 productLikeCountService.decrease(((ProductLikeData) event.getData()).productId());
+                break;
+            case PRODUCT_CREATE:
+                productLikeCountService.create(((ProductLikeData) event.getData()).productId());
                 break;
             default:
                 throw new NotFoundException("존재하지 않는 이벤트 타입입니다.: " + event.getType());
