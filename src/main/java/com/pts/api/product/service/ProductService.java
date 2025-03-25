@@ -1,6 +1,12 @@
 package com.pts.api.product.service;
 
+import com.pts.api.global.outbox.publisher.OutboxPublisher;
+import com.pts.api.lib.internal.shared.event.EventType;
 import com.pts.api.lib.internal.shared.event.data.FeedCreateData;
+import com.pts.api.lib.internal.shared.event.data.ProductCreateData;
+import com.pts.api.lib.internal.shared.util.date.DateTimeUtil;
+import com.pts.api.product.dto.request.CreateProductRequestDto;
+import com.pts.api.product.model.Product;
 import com.pts.api.product.repository.ProductLockRepository;
 import com.pts.api.product.repository.ProductRepository;
 import java.util.concurrent.TimeUnit;
@@ -15,6 +21,20 @@ public class ProductService {
 
     private final ProductRepository productRepository;
     private final ProductLockRepository productLockService;
+    private final OutboxPublisher outboxPublisher;
+    private final DateTimeUtil dateTimeUtil;
+
+    @Transactional
+    public Product create(CreateProductRequestDto dto) {
+        Product newProduct = productRepository.save(dto.toProduct(dateTimeUtil.now()));
+
+        outboxPublisher.publish(
+            EventType.PRODUCT_CREATE,
+            new ProductCreateData(newProduct.getId())
+        );
+
+        return newProduct;
+    }
 
     @Transactional
     public void priceUpdate(FeedCreateData data) {

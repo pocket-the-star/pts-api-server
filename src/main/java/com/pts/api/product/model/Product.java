@@ -14,10 +14,12 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "products")
 @Getter
+@Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Product extends BaseEntity {
 
@@ -41,15 +43,11 @@ public class Product extends BaseEntity {
     private Integer minBuyPrice;
 
     @OneToMany(mappedBy = "product")
-    private List<ProductOption> options;
-
-    @OneToMany(mappedBy = "product")
     private List<ProductImage> images;
 
     @Builder
     public Product(Long id, String title, Long subCategoryId, Long artistId, Integer maxSellPrice,
-        Integer minBuyPrice,
-        List<ProductOption> options, List<ProductImage> images, LocalDateTime createdAt,
+        Integer minBuyPrice, List<ProductImage> images, LocalDateTime createdAt,
         LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.title = title;
@@ -57,7 +55,6 @@ public class Product extends BaseEntity {
         this.artistId = artistId;
         this.maxSellPrice = maxSellPrice;
         this.minBuyPrice = minBuyPrice;
-        this.options = options;
         this.images = images;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;

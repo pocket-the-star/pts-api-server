@@ -2,6 +2,7 @@ package com.pts.api.lib.internal.shared.event;
 
 import com.pts.api.lib.internal.shared.event.data.EmailVerifyData;
 import com.pts.api.lib.internal.shared.event.data.FeedCreateData;
+import com.pts.api.lib.internal.shared.event.data.ProductCreateData;
 import com.pts.api.lib.internal.shared.event.data.ProductLikeData;
 import com.pts.api.lib.internal.shared.event.data.ProductUnLikeData;
 import lombok.Getter;
@@ -15,7 +16,8 @@ public enum EventType {
     FEED_CREATE(FeedCreateData.class, Topic.EMAIL_VERIFY),
     EMAIL_AUTH(EmailVerifyData.class, Topic.EMAIL_VERIFY),
     PRODUCT_LIKE(ProductLikeData.class, Topic.PRODUCT_LIKE),
-    PRODUCT_UNLIKE(ProductUnLikeData.class, Topic.PRODUCT_UNLIKE);
+    PRODUCT_UNLIKE(ProductUnLikeData.class, Topic.PRODUCT_UNLIKE),
+    PRODUCT_CREATE(ProductCreateData.class, Topic.PRODUCT_CREATE);
 
     private final Class<? extends EventData> dataClass;
     private final String topic;
@@ -35,5 +37,6 @@ public enum EventType {
         public static final String FEED_CREATE = "feed-create";
         public static final String PRODUCT_LIKE = "product-like";
         public static final String PRODUCT_UNLIKE = "product-unlike";
+        public static final String PRODUCT_CREATE = "product-create";
     }
 }
