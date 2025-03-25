@@ -3,6 +3,7 @@ package com.pts.api.feed.service;
 import com.pts.api.feed.dto.request.CreateFeedRequestDto;
 import com.pts.api.feed.dto.request.UpdateFeedRequestDto;
 import com.pts.api.feed.dto.response.ReadFeedResponseDto;
+import com.pts.api.feed.dto.response.ReadMyFeedResponseDto;
 import com.pts.api.feed.exception.FeedAlreadyExistsException;
 import com.pts.api.feed.model.Feed;
 import com.pts.api.feed.repository.FeedImageRepository;
@@ -82,8 +83,35 @@ public class FeedService {
     }
 
     @Transactional(readOnly = true)
-    public List<ReadFeedResponseDto> getMyFeeds(Long userId, Long offset, Integer limit) {
+    public List<ReadMyFeedResponseDto> getMyFeeds(Long userId, Long offset, Integer limit) {
         return feedRepository.findByUserIdAndDeletedAtIsNull(userId, offset, limit).stream().map(
+            ReadMyFeedResponseDto::fromFeed).toList();
+    }
+
+    @Transactional(readOnly = true)
+    public List<ReadFeedResponseDto> getFeeds(Long idolId, Long offset, Integer limit) {
+        return feedRepository.findByDeletedAtIsNull(idolId, offset, limit).stream().map(
+            ReadFeedResponseDto::fromFeed).toList();
+    }
+
+    @Transactional(readOnly = true)
+    public List<ReadFeedResponseDto> getFeeds(Long idolId, Long categoryId, Long offset,
+        Integer limit) {
+        return feedRepository.findByDeletedAtIsNull(idolId, categoryId, offset, limit).stream().map(
+            ReadFeedResponseDto::fromFeed).toList();
+    }
+
+    @Transactional(readOnly = true)
+    public List<ReadFeedResponseDto> getFeeds(Long idolId, Long categoryId, Long subCategoryId,
+        Long offset, Integer limit) {
+        return feedRepository.findByDeletedAtIsNull(idolId, categoryId, subCategoryId, offset,
+            limit).stream().map(
+            ReadFeedResponseDto::fromFeed).toList();
+    }
+
+    @Transactional(readOnly = true)
+    public List<ReadFeedResponseDto> getFeeds(Long offset, Integer limit) {
+        return feedRepository.findByDeletedAtIsNull(offset, limit).stream().map(
             ReadFeedResponseDto::fromFeed).toList();
     }
 }
