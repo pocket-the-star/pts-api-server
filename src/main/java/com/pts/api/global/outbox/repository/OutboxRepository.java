@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface OutboxRepository extends JpaRepository<Outbox, Long> {
 
-    @Query("SELECT o FROM Outbox o WHERE o.createdAt >= :from")
+    @Query("SELECT o FROM Outbox o WHERE o.createdAt <= :from")
     List<Outbox> findAllByCreatedAt(
         LocalDateTime from,
         Pageable pageable);
