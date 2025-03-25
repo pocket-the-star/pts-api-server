@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.event.TransactionPhase;
@@ -18,6 +19,7 @@ import org.springframework.transaction.event.TransactionalEventListener;
 @Slf4j
 @Component
 @RequiredArgsConstructor
+@EnableScheduling
 public class MessageRelay {
 
     private final OutboxRepository outboxRepository;
@@ -39,7 +41,6 @@ public class MessageRelay {
             ).get(1, TimeUnit.SECONDS);
         } catch (Exception e) {
             log.error("Outbox After Commit={}", outbox, e);
-            throw new RuntimeException(e);
         }
         outboxRepository.delete(outbox);
     }
@@ -50,13 +51,18 @@ public class MessageRelay {
         timeUnit = TimeUnit.SECONDS
     )
     public void publishPendingEvent() {
+        log.info("Publish Pending Event Start: {}", LocalDateTime.now());
         List<Outbox> outboxes = outboxRepository.findAllByCreatedAt(
             LocalDateTime.now().minusSeconds(10),
             Pageable.ofSize(100)
         );
 
         for (Outbox outbox : outboxes) {
+            log.info("Publish Pending Event: {}", outbox);
+
             publishEvent(outbox);
         }
+
+        log.info("Publish Pending Event End: {}", LocalDateTime.now());
     }
 }
