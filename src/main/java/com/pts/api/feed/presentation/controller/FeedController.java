@@ -2,13 +2,13 @@ package com.pts.api.feed.presentation.controller;
 
 import com.pts.api.feed.application.dto.request.CreateFeedRequest;
 import com.pts.api.feed.application.dto.request.UpdateFeedRequest;
+import com.pts.api.feed.application.dto.response.FeedResponse;
 import com.pts.api.feed.application.dto.response.MyFeedResponse;
 import com.pts.api.feed.application.port.in.CreateFeedUseCase;
 import com.pts.api.feed.application.port.in.DeleteFeedUseCase;
 import com.pts.api.feed.application.port.in.ReadFeedListUseCase;
 import com.pts.api.feed.application.port.in.ReadMyFeedUseCase;
 import com.pts.api.feed.application.port.in.UpdateFeedUseCase;
-import com.pts.api.feed.domain.model.Feed;
 import com.pts.api.global.presentation.response.BaseResponse;
 import com.pts.api.global.presentation.response.ResponseGenerator;
 import com.pts.api.global.presentation.response.ResponseMsg;
@@ -44,28 +44,31 @@ public class FeedController {
 
     @Operation(summary = "피드 생성", description = "피드를 생성합니다.")
     @PostMapping
-    public ResponseEntity<BaseResponse<MyFeedResponse>> create(
+    public ResponseEntity<BaseResponse<Void>> create(
         @AuthenticationPrincipal Long userId,
         @Valid @RequestBody CreateFeedRequest request) {
-        Feed feed = createFeedUseCase.create(userId, request);
-        return ResponseGenerator.ok(ResponseMsg.OK, HttpStatus.OK, MyFeedResponse.from(feed));
+        createFeedUseCase.create(userId, request);
+
+        return ResponseGenerator.ok(ResponseMsg.OK, HttpStatus.OK);
     }
 
     @Operation(summary = "피드 조회", description = "피드를 조회합니다.")
-    @GetMapping("/{id}")
-    public ResponseEntity<BaseResponse<MyFeedResponse>> findById(@PathVariable Long id) {
-        Feed feed = readFeedListUseCase.findById(id);
-        return ResponseGenerator.ok(ResponseMsg.OK, HttpStatus.OK, MyFeedResponse.from(feed));
+    @GetMapping
+    public ResponseEntity<BaseResponse<List<FeedResponse>>> findById(@RequestParam Long lastFeedId,
+        @RequestParam Integer limit) {
+        return ResponseGenerator.ok(ResponseMsg.OK, HttpStatus.OK,
+            readFeedListUseCase.findAll(lastFeedId, limit));
     }
 
     @Operation(summary = "피드 수정", description = "피드를 수정합니다.")
     @PutMapping("/{id}")
-    public ResponseEntity<BaseResponse<MyFeedResponse>> update(
+    public ResponseEntity<BaseResponse<Void>> update(
         @AuthenticationPrincipal Long userId,
         @PathVariable Long id,
         @Valid @RequestBody UpdateFeedRequest request) {
-        Feed feed = updateFeedUseCase.update(userId, id, request);
-        return ResponseGenerator.ok(ResponseMsg.OK, HttpStatus.OK, MyFeedResponse.from(feed));
+        updateFeedUseCase.update(userId, id, request);
+
+        return ResponseGenerator.ok(ResponseMsg.OK, HttpStatus.OK);
     }
 
     @Operation(summary = "피드 삭제", description = "피드를 삭제합니다.")
@@ -81,8 +84,8 @@ public class FeedController {
     public ResponseEntity<BaseResponse<List<MyFeedResponse>>> findByUserId(
         @AuthenticationPrincipal Long userId, @RequestParam(required = false) Long lastFeedId,
         @RequestParam(required = false) Integer limit) {
-        List<Feed> feeds = readMyFeedUseCase.findByUserId(userId, lastFeedId, limit);
+
         return ResponseGenerator.ok(ResponseMsg.OK, HttpStatus.OK,
-            feeds.stream().map(MyFeedResponse::from).toList());
+            readMyFeedUseCase.findByUserId(userId, lastFeedId, limit));
     }
 } 

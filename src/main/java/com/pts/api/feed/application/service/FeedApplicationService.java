@@ -2,6 +2,8 @@ package com.pts.api.feed.application.service;
 
 import com.pts.api.feed.application.dto.request.CreateFeedRequest;
 import com.pts.api.feed.application.dto.request.UpdateFeedRequest;
+import com.pts.api.feed.application.dto.response.FeedResponse;
+import com.pts.api.feed.application.dto.response.MyFeedResponse;
 import com.pts.api.feed.application.port.in.CreateFeedUseCase;
 import com.pts.api.feed.application.port.in.DecreaseStockUseCase;
 import com.pts.api.feed.application.port.in.DeleteFeedUseCase;
@@ -39,7 +41,7 @@ public class FeedApplicationService implements CreateFeedUseCase, ReadFeedListUs
 
     @Override
     @Transactional
-    public Feed create(Long userId, CreateFeedRequest request) {
+    public void create(Long userId, CreateFeedRequest request) {
         getFeed(request.productId());
         Optional<Feed> feed = feedRepository.findByUserIdAndProductIdAndFeedStatusAndFeedType(
             userId, request.productId(), FeedStatus.PENDING);
@@ -72,14 +74,13 @@ public class FeedApplicationService implements CreateFeedUseCase, ReadFeedListUs
             new FeedCreateData(
                 savedFeed.getUserId(),
                 savedFeed.getProductId(),
-                savedFeed.getFeedImages().get(0).getUrl(),
+                savedFeed.getFeedImages().isEmpty() ? null
+                    : savedFeed.getFeedImages().get(0).getUrl(),
                 savedFeed.getGrade(),
                 savedFeed.getPrice(),
                 savedFeed.getQuantity()
             )
         );
-
-        return savedFeed;
     }
 
     private Feed getFeed(Long id) {
@@ -89,7 +90,7 @@ public class FeedApplicationService implements CreateFeedUseCase, ReadFeedListUs
 
     @Override
     @Transactional
-    public Feed update(Long userId, Long id, UpdateFeedRequest request) {
+    public void update(Long userId, Long id, UpdateFeedRequest request) {
         Feed feed = getFeed(id);
 
         if (!feed.getUserId().equals(userId)) {
@@ -111,8 +112,6 @@ public class FeedApplicationService implements CreateFeedUseCase, ReadFeedListUs
             request.quantity(),
             dateTimeUtil.now()
         );
-
-        return feedRepository.save(feed);
     }
 
     @Override
@@ -130,14 +129,18 @@ public class FeedApplicationService implements CreateFeedUseCase, ReadFeedListUs
 
     @Override
     @Transactional(readOnly = true)
-    public List<Feed> findByUserId(Long userId, Long lastFeedId, Integer limit) {
-        return feedRepository.findByUserIdAndDeletedAtIsNull(userId, lastFeedId, limit);
+    public List<MyFeedResponse> findByUserId(Long userId, Long lastFeedId, Integer limit) {
+        return feedRepository.findByUserIdAndDeletedAtIsNull(userId, lastFeedId, limit).stream()
+            .map(MyFeedResponse::from)
+            .collect(Collectors.toList());
     }
 
     @Override
     @Transactional(readOnly = true)
-    public List<Feed> findAll(Long lastId, Integer limit) {
-        return feedRepository.findByDeletedAtIsNull(lastId, limit);
+    public List<FeedResponse> findAll(Long lastId, Integer limit) {
+        return feedRepository.findByDeletedAtIsNull(lastId, limit).stream()
+            .map(FeedResponse::from)
+            .collect(Collectors.toList());
     }
 
     @Override
