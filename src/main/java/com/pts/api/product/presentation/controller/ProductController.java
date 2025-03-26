@@ -36,6 +36,8 @@ public class ProductController {
     @Operation(summary = "상품 생성")
     @PostMapping
     public ResponseEntity<BaseResponse<Void>> create(@RequestBody CreateProductRequest request) {
+        createProductUseCase.create(request);
+        
         return ResponseGenerator.ok(ResponseMsg.OK, HttpStatus.OK);
     }
 
