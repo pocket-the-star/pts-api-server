@@ -45,13 +45,14 @@ public class Order extends BaseEntity {
 
     @Builder
     public Order(Long id, Long feedId, Long buyerId, Integer price,
-        Integer quantity, LocalDateTime createdAt, LocalDateTime updatedAt,
+        Integer quantity, OrderStatus status, LocalDateTime createdAt, LocalDateTime updatedAt,
         LocalDateTime deletedAt) {
         this.id = id;
         this.feedId = feedId;
         this.buyerId = buyerId;
         this.price = price;
         this.quantity = quantity;
+        this.status = status;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
