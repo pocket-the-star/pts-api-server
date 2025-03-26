@@ -30,14 +30,13 @@ public class ProductImage extends BaseModel {
         this.deletedAt = deletedAt;
     }
 
-    public void delete() {
-        this.deletedAt = LocalDateTime.now();
-        this.updatedAt = LocalDateTime.now();
+    public void delete(LocalDateTime deletedAt) {
+        markDeleted(deletedAt);
     }
 
-    public void update(String imageUrl, int sortOrder) {
+    public void update(String imageUrl, int sortOrder, LocalDateTime updatedAt) {
         this.imageUrl = imageUrl;
         this.sortOrder = sortOrder;
-        this.updatedAt = LocalDateTime.now();
+        markUpdated(updatedAt);
     }
 } 
