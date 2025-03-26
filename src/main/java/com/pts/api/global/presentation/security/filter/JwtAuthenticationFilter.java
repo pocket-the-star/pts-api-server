@@ -4,7 +4,7 @@ import com.pts.api.global.common.exception.UnauthorizedException;
 import com.pts.api.global.presentation.response.ResponseGenerator;
 import com.pts.api.lib.external.security.model.CustomAuthenticationToken;
 import com.pts.api.lib.internal.shared.util.serializer.DataSerializer;
-import com.pts.api.user.service.TokenService;
+import com.pts.api.user.application.service.TokenService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;

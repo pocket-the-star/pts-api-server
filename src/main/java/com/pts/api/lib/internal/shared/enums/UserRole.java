@@ -3,7 +3,7 @@ package com.pts.api.lib.internal.shared.enums;
 public enum UserRole {
     ADMIN("ADMIN"),
     SELLER("SELLER"),
-    NORMAL("NORMAL");
+    USER("USER");
 
     private final String role;
 

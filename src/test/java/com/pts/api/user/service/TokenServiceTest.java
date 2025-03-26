@@ -11,10 +11,11 @@ import static org.mockito.Mockito.when;
 import com.pts.api.common.base.BaseUnitTest;
 import com.pts.api.lib.internal.shared.enums.TokenType;
 import com.pts.api.lib.internal.shared.enums.UserRole;
-import com.pts.api.user.dto.response.TokenResponseDto;
-import com.pts.api.user.exception.InvalidTokenException;
-import com.pts.api.user.repository.RefreshTokenRepository;
-import com.pts.api.user.security.TokenProvider;
+import com.pts.api.user.application.dto.response.TokenResponse;
+import com.pts.api.user.application.service.TokenService;
+import com.pts.api.user.common.exception.InvalidTokenException;
+import com.pts.api.user.infrastructure.cache.adapter.RefreshTokenRepositoryAdapter;
+import com.pts.api.user.infrastructure.security.adapter.TokenProviderAdapter;
 import java.util.Optional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -30,9 +31,9 @@ class TokenServiceTest extends BaseUnitTest {
 
     // Data
     @Mock
-    private TokenProvider tokenProvider;
+    private TokenProviderAdapter tokenProviderAdapter;
     @Mock
-    private RefreshTokenRepository refreshTokenRepository;
+    private RefreshTokenRepositoryAdapter refreshTokenRepositoryAdapter;
     private TokenService tokenService;
 
     private static final Long TEST_USER_ID = 1L;
@@ -43,7 +44,7 @@ class TokenServiceTest extends BaseUnitTest {
 
     @BeforeEach
     void setUp() {
-        tokenService = new TokenService(tokenProvider, refreshTokenRepository);
+        tokenService = new TokenService(tokenProviderAdapter, refreshTokenRepositoryAdapter);
     }
 
     @Nested
@@ -54,15 +55,17 @@ class TokenServiceTest extends BaseUnitTest {
         @DisplayName("액세스 토큰과 리프레시 토큰을 생성한다")
         void generatesAccessAndRefreshTokens() {
             // Given
-            when(tokenProvider.create(eq(TEST_USER_ID), eq(TEST_USER_ROLE), eq(TokenType.ACCESS),
+            when(tokenProviderAdapter.create(eq(TEST_USER_ID), eq(TEST_USER_ROLE),
+                eq(TokenType.ACCESS),
                 anyLong()))
                 .thenReturn(TEST_ACCESS_TOKEN);
-            when(tokenProvider.create(eq(TEST_USER_ID), eq(TEST_USER_ROLE), eq(TokenType.REFRESH),
+            when(tokenProviderAdapter.create(eq(TEST_USER_ID), eq(TEST_USER_ROLE),
+                eq(TokenType.REFRESH),
                 anyLong()))
                 .thenReturn(TEST_REFRESH_TOKEN);
 
             // When
-            TokenResponseDto result = tokenService.generate(TEST_USER_ID, TEST_USER_ROLE);
+            TokenResponse result = tokenService.generate(TEST_USER_ID, TEST_USER_ROLE);
 
             // Then
             assertThat(result.accessToken()).isEqualTo(TEST_ACCESS_TOKEN);
@@ -99,7 +102,8 @@ class TokenServiceTest extends BaseUnitTest {
             @DisplayName("유효하지 않은 토큰 예외가 발생한다")
             void throwsInvalidTokenException() {
                 // Given
-                when(tokenProvider.getTokenType(TEST_ACCESS_TOKEN)).thenReturn(TokenType.REFRESH);
+                when(tokenProviderAdapter.getTokenType(TEST_ACCESS_TOKEN)).thenReturn(
+                    TokenType.REFRESH);
 
                 // When & Then
                 assertThatThrownBy(() -> tokenService.parse(TEST_BEARER_TOKEN, TEST_REFRESH_TOKEN))
@@ -116,9 +120,11 @@ class TokenServiceTest extends BaseUnitTest {
             @DisplayName("유효하지 않은 토큰 예외가 발생한다")
             void throwsInvalidTokenException() {
                 // Given
-                when(tokenProvider.getTokenType(TEST_ACCESS_TOKEN)).thenReturn(TokenType.ACCESS);
-                when(tokenProvider.getUserId(TEST_BEARER_TOKEN)).thenReturn(TEST_USER_ID);
-                when(refreshTokenRepository.findOneById(TEST_USER_ID)).thenReturn(Optional.empty());
+                when(tokenProviderAdapter.getTokenType(TEST_ACCESS_TOKEN)).thenReturn(
+                    TokenType.ACCESS);
+                when(tokenProviderAdapter.getUserId(TEST_BEARER_TOKEN)).thenReturn(TEST_USER_ID);
+                when(refreshTokenRepositoryAdapter.findOneById(TEST_USER_ID)).thenReturn(
+                    Optional.empty());
 
                 // When & Then
                 assertThatThrownBy(() -> tokenService.parse(TEST_BEARER_TOKEN, TEST_REFRESH_TOKEN))
@@ -135,16 +141,17 @@ class TokenServiceTest extends BaseUnitTest {
             @DisplayName("토큰을 삭제하고 유효하지 않은 토큰 예외가 발생한다")
             void deletesTokenAndThrowsInvalidTokenException() {
                 // Given
-                when(tokenProvider.getTokenType(TEST_ACCESS_TOKEN)).thenReturn(TokenType.ACCESS);
-                when(tokenProvider.getUserId(TEST_BEARER_TOKEN)).thenReturn(TEST_USER_ID);
-                when(refreshTokenRepository.findOneById(TEST_USER_ID))
+                when(tokenProviderAdapter.getTokenType(TEST_ACCESS_TOKEN)).thenReturn(
+                    TokenType.ACCESS);
+                when(tokenProviderAdapter.getUserId(TEST_BEARER_TOKEN)).thenReturn(TEST_USER_ID);
+                when(refreshTokenRepositoryAdapter.findOneById(TEST_USER_ID))
                     .thenReturn(Optional.of("different.refresh.token"));
 
                 // When & Then
                 assertThatThrownBy(() -> tokenService.parse(TEST_BEARER_TOKEN, TEST_REFRESH_TOKEN))
                     .isInstanceOf(InvalidTokenException.class)
                     .hasMessage("Refresh Token이 일치하지 않습니다");
-                verify(refreshTokenRepository).deleteById(TEST_USER_ID);
+                verify(refreshTokenRepositoryAdapter).deleteById(TEST_USER_ID);
             }
         }
 
@@ -156,9 +163,10 @@ class TokenServiceTest extends BaseUnitTest {
             @DisplayName("정상적으로 파싱된다")
             void parsesSuccessfully() {
                 // Given
-                when(tokenProvider.getTokenType(TEST_ACCESS_TOKEN)).thenReturn(TokenType.ACCESS);
-                when(tokenProvider.getUserId(TEST_BEARER_TOKEN)).thenReturn(TEST_USER_ID);
-                when(refreshTokenRepository.findOneById(TEST_USER_ID))
+                when(tokenProviderAdapter.getTokenType(TEST_ACCESS_TOKEN)).thenReturn(
+                    TokenType.ACCESS);
+                when(tokenProviderAdapter.getUserId(TEST_BEARER_TOKEN)).thenReturn(TEST_USER_ID);
+                when(refreshTokenRepositoryAdapter.findOneById(TEST_USER_ID))
                     .thenReturn(Optional.of(TEST_REFRESH_TOKEN));
 
                 // When & Then
@@ -183,7 +191,7 @@ class TokenServiceTest extends BaseUnitTest {
             tokenService.saveRefreshToken(userId, refreshToken);
 
             // Then
-            verify(refreshTokenRepository).save(userId, refreshToken);
+            verify(refreshTokenRepositoryAdapter).save(userId, refreshToken);
         }
     }
 
@@ -195,7 +203,7 @@ class TokenServiceTest extends BaseUnitTest {
         @DisplayName("토큰 타입을 반환한다")
         void returnsTokenType() {
             // Given
-            when(tokenProvider.getTokenType(TEST_ACCESS_TOKEN)).thenReturn(TokenType.ACCESS);
+            when(tokenProviderAdapter.getTokenType(TEST_ACCESS_TOKEN)).thenReturn(TokenType.ACCESS);
 
             // When
             TokenType result = tokenService.getTokenType(TEST_BEARER_TOKEN);
@@ -208,7 +216,7 @@ class TokenServiceTest extends BaseUnitTest {
         @DisplayName("사용자 ID를 반환한다")
         void returnsUserId() {
             // Given
-            when(tokenProvider.getUserId(TEST_ACCESS_TOKEN)).thenReturn(TEST_USER_ID);
+            when(tokenProviderAdapter.getUserId(TEST_ACCESS_TOKEN)).thenReturn(TEST_USER_ID);
 
             // When
             Long result = tokenService.getUserId(TEST_BEARER_TOKEN);
@@ -221,7 +229,7 @@ class TokenServiceTest extends BaseUnitTest {
         @DisplayName("사용자 역할을 반환한다")
         void returnsUserRole() {
             // Given
-            when(tokenProvider.getUserRole(TEST_ACCESS_TOKEN)).thenReturn(TEST_USER_ROLE);
+            when(tokenProviderAdapter.getUserRole(TEST_ACCESS_TOKEN)).thenReturn(TEST_USER_ROLE);
 
             // When
             UserRole result = tokenService.getUserRole(TEST_BEARER_TOKEN);

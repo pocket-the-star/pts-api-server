@@ -1,7 +1,7 @@
 package com.pts.api.global.presentation.security.config;
 
 import com.pts.api.global.presentation.security.filter.JwtAuthenticationFilter;
-import com.pts.api.user.service.TokenService;
+import com.pts.api.user.application.service.TokenService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
