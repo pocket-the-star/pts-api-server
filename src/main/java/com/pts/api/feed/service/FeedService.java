@@ -89,27 +89,6 @@ public class FeedService {
     }
 
     @Transactional(readOnly = true)
-    public List<ReadFeedResponseDto> getFeeds(Long idolId, Long offset, Integer limit) {
-        return feedRepository.findByDeletedAtIsNull(idolId, offset, limit).stream().map(
-            ReadFeedResponseDto::fromFeed).toList();
-    }
-
-    @Transactional(readOnly = true)
-    public List<ReadFeedResponseDto> getFeeds(Long idolId, Long categoryId, Long offset,
-        Integer limit) {
-        return feedRepository.findByDeletedAtIsNull(idolId, categoryId, offset, limit).stream().map(
-            ReadFeedResponseDto::fromFeed).toList();
-    }
-
-    @Transactional(readOnly = true)
-    public List<ReadFeedResponseDto> getFeeds(Long idolId, Long categoryId, Long subCategoryId,
-        Long offset, Integer limit) {
-        return feedRepository.findByDeletedAtIsNull(idolId, categoryId, subCategoryId, offset,
-            limit).stream().map(
-            ReadFeedResponseDto::fromFeed).toList();
-    }
-
-    @Transactional(readOnly = true)
     public List<ReadFeedResponseDto> getFeeds(Long offset, Integer limit) {
         return feedRepository.findByDeletedAtIsNull(offset, limit).stream().map(
             ReadFeedResponseDto::fromFeed).toList();

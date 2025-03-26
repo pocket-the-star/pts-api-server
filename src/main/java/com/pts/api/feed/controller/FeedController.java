@@ -86,35 +86,4 @@ public class FeedController {
         return ResponseGenerator.ok(ResponseMsg.OK, HttpStatus.OK,
             feedService.getFeeds(offset, limit));
     }
-
-    @Operation(summary = "아이돌 피드 조회", description = "아이돌의 피드를 조회합니다.")
-    @GetMapping
-    public ResponseEntity<BaseResponse<List<ReadFeedResponseDto>>> getFeed(
-        @RequestParam Long idolId, @RequestParam Long offset, @RequestParam Integer limit) {
-
-        return ResponseGenerator.ok(ResponseMsg.OK, HttpStatus.OK,
-            feedService.getFeeds(idolId, offset, limit));
-    }
-
-    @Operation(summary = "아이돌 카테고리 피드 조회", description = "아이돌의 카테고리 피드를 조회합니다.")
-    @GetMapping
-    public ResponseEntity<BaseResponse<List<ReadFeedResponseDto>>> getFeed(
-        @RequestParam Long idolId, @RequestParam Long categoryId, @RequestParam Long offset,
-        @RequestParam Integer limit) {
-
-        return ResponseGenerator.ok(ResponseMsg.OK, HttpStatus.OK,
-            feedService.getFeeds(idolId, categoryId, offset, limit));
-    }
-
-    @Operation(
-        summary = "아이돌 카테고리 서브 카테고리 피드 조회",
-        description = "아이돌의 카테고리 서브 카테고리 피드를 조회합니다.")
-    @GetMapping
-    public ResponseEntity<BaseResponse<List<ReadFeedResponseDto>>> getFeed(
-        @RequestParam Long idolId, @RequestParam Long categoryId, @RequestParam Long subCategoryId,
-        @RequestParam Long offset, @RequestParam Integer limit) {
-
-        return ResponseGenerator.ok(ResponseMsg.OK, HttpStatus.OK,
-            feedService.getFeeds(idolId, categoryId, subCategoryId, offset, limit));
-    }
 }
