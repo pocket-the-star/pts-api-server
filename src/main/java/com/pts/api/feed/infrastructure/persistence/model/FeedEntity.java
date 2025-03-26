@@ -78,6 +78,9 @@ public class FeedEntity extends BaseEntity {
         this.price = price;
         this.quantity = quantity;
         this.status = status;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.deletedAt = deletedAt;
     }
 
     public static FeedEntity from(Feed feed) {
@@ -95,6 +98,9 @@ public class FeedEntity extends BaseEntity {
             .price(feed.getPrice())
             .quantity(feed.getQuantity())
             .status(feed.getStatus())
+            .createdAt(feed.getCreatedAt())
+            .updatedAt(feed.getUpdatedAt())
+            .deletedAt(feed.getDeletedAt())
             .build();
 
         feedImageEntities.forEach(feedImageEntity -> feedImageEntity.setFeed(feedEntity));
@@ -117,6 +123,9 @@ public class FeedEntity extends BaseEntity {
             .price(this.price)
             .quantity(this.quantity)
             .status(this.status)
+            .createdAt(this.createdAt)
+            .updatedAt(this.updatedAt)
+            .deletedAt(this.deletedAt)
             .build();
     }
 } 

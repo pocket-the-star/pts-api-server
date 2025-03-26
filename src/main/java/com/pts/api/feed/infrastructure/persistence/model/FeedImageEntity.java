@@ -12,6 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import java.time.LocalDateTime;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -37,16 +38,23 @@ public class FeedImageEntity extends BaseEntity {
     private FeedEntity feed;
 
     @Builder
-    public FeedImageEntity(Long id, String url, FeedEntity feed) {
+    public FeedImageEntity(Long id, String url, FeedEntity feed, LocalDateTime createdAt,
+        LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.url = url;
         this.feed = feed;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.deletedAt = deletedAt;
     }
 
     public static FeedImageEntity from(FeedImage feedImage) {
         return FeedImageEntity.builder()
             .id(feedImage.getId())
             .url(feedImage.getUrl())
+            .createdAt(feedImage.getCreatedAt())
+            .updatedAt(feedImage.getUpdatedAt())
+            .deletedAt(feedImage.getDeletedAt())
             .build();
     }
 
@@ -54,6 +62,9 @@ public class FeedImageEntity extends BaseEntity {
         return FeedImage.builder()
             .id(this.id)
             .url(this.url)
+            .createdAt(this.createdAt)
+            .updatedAt(this.updatedAt)
+            .deletedAt(this.deletedAt)
             .build();
     }
 }

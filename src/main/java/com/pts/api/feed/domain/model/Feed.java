@@ -9,7 +9,6 @@ import lombok.Builder;
 import lombok.Getter;
 
 @Getter
-@Builder
 public class Feed extends BaseModel {
 
     private Long id;
@@ -21,6 +20,25 @@ public class Feed extends BaseModel {
     private Integer price;
     private Integer quantity;
     private FeedStatus status;
+
+    @Builder
+    public Feed(Long id, Long userId, Long productId, String content, List<FeedImage> feedImages,
+        ProductGrade grade, Integer price, Integer quantity, FeedStatus status,
+        LocalDateTime createdAt,
+        LocalDateTime updatedAt, LocalDateTime deletedAt) {
+        this.id = id;
+        this.userId = userId;
+        this.productId = productId;
+        this.content = content;
+        this.feedImages = feedImages;
+        this.grade = grade;
+        this.price = price;
+        this.quantity = quantity;
+        this.status = status;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.deletedAt = deletedAt;
+    }
 
     public void update(String content, List<FeedImage> feedImages, ProductGrade grade,
         Integer price, Integer quantity, LocalDateTime updatedAt) {
