@@ -1,9 +1,11 @@
 package com.pts.api.lib.internal.shared.base.model;
 
+import jakarta.persistence.MappedSuperclass;
 import java.time.LocalDateTime;
 import lombok.Getter;
 
 @Getter
+@MappedSuperclass
 public abstract class BaseModel {
 
     protected LocalDateTime createdAt;
@@ -17,4 +19,5 @@ public abstract class BaseModel {
     protected void markDeleted(LocalDateTime deletedAt) {
         this.deletedAt = deletedAt;
     }
+
 }

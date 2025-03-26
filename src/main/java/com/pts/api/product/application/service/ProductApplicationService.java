@@ -1,6 +1,7 @@
 package com.pts.api.product.application.service;
 
 import com.pts.api.global.lock.repository.LockRepository;
+import com.pts.api.global.outbox.publisher.EventPublisherPort;
 import com.pts.api.lib.internal.shared.event.EventType;
 import com.pts.api.lib.internal.shared.event.data.ProductCreateData;
 import com.pts.api.lib.internal.shared.util.date.DateTimeUtil;
@@ -10,7 +11,6 @@ import com.pts.api.product.application.port.in.CreateProductUseCase;
 import com.pts.api.product.application.port.in.PriceUpdateUseCase;
 import com.pts.api.product.application.port.in.ReadProductListUseCase;
 import com.pts.api.product.application.port.in.ReadProductUseCase;
-import com.pts.api.product.application.port.out.EventPublisherPort;
 import com.pts.api.product.application.port.out.ProductRepositoryPort;
 import com.pts.api.product.common.exception.ProductNotFoundException;
 import com.pts.api.product.domain.model.Product;

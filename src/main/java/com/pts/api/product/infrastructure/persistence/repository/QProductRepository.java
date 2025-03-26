@@ -3,7 +3,6 @@ package com.pts.api.product.infrastructure.persistence.repository;
 import static com.pts.api.category.model.QCategory.category;
 import static com.pts.api.category.model.QSubCategory.subCategory;
 import static com.pts.api.product.infrastructure.persistence.model.QProductEntity.productEntity;
-import static com.pts.api.product.model.QProduct.product;
 
 import com.pts.api.product.domain.model.Product;
 import com.pts.api.product.infrastructure.persistence.model.ProductEntity;
@@ -25,26 +24,26 @@ public class QProductRepository {
         int offset) {
         int LIMIT = 20;
         JPAQuery<ProductEntity> query = queryFactory.select(productEntity)
-            .from(product);
+            .from(productEntity);
 
         BooleanBuilder builder = new BooleanBuilder();
         if (artistId != null) {
-            builder.and(product.artistId.eq(artistId));
-            query.innerJoin(category).on(category.id.eq(product.subCategoryId));
+            builder.and(productEntity.artistId.eq(artistId));
+            query.innerJoin(category).on(category.id.eq(productEntity.subCategoryId));
         }
 
         if (subCategoryId != null) {
-            builder.and(product.subCategoryId.eq(subCategoryId));
+            builder.and(productEntity.subCategoryId.eq(subCategoryId));
             query.innerJoin(subCategory).on(subCategory.id.eq(subCategoryId));
             if (categoryId != null) {
                 builder.and(subCategory.categoryId.eq(categoryId));
             }
         }
 
-        builder.and(product.deletedAt.isNull());
+        builder.and(productEntity.deletedAt.isNull());
 
         return query.where(builder).limit(LIMIT)
-            .offset(offset).orderBy(product.updatedAt.desc())
+            .offset(offset).orderBy(productEntity.updatedAt.desc())
             .fetch()
             .stream()
             .map(ProductEntity::toDomain)

@@ -4,7 +4,7 @@ import com.pts.api.global.lock.repository.AbstractLockRepository;
 import org.redisson.api.RedissonClient;
 import org.springframework.stereotype.Repository;
 
-@Repository
+@Repository("productLockRepository")
 public class ProductLockRepositoryAdapter extends AbstractLockRepository {
 
     public ProductLockRepositoryAdapter(RedissonClient redisson) {
