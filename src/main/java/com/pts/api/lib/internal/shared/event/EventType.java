@@ -44,5 +44,6 @@ public enum EventType {
         public static final String PRODUCT_CREATE = "product-create";
         public static final String ORDER_CREATED = "order-created";
         public static final String ORDER_CANCELLED = "order-cancelled";
+        public static final String FEED_CREATED = "feed-created";
     }
 }

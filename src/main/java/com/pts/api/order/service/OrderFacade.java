@@ -1,7 +1,7 @@
 package com.pts.api.order.service;
 
+import com.pts.api.feed.infrastructure.persistence.repository.FeedRepository;
 import com.pts.api.feed.model.Feed;
-import com.pts.api.feed.repository.FeedRepository;
 import com.pts.api.global.common.exception.NotFoundException;
 import com.pts.api.order.dto.request.CreateOrderRequestDto;
 import com.pts.api.order.model.Order;
