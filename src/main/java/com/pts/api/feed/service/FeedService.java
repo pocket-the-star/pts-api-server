@@ -93,4 +93,28 @@ public class FeedService {
         return feedRepository.findByDeletedAtIsNull(offset, limit).stream().map(
             ReadFeedResponseDto::fromFeed).toList();
     }
+
+    @Transactional
+    public void decreaseStock(Long feedId, Integer quantity) {
+        Feed feed = feedRepository.findById(feedId)
+            .orElseThrow(() -> new NotFoundException("존재하지 않는 피드입니다. feedId=" + feedId));
+
+        if (feed.getQuantity() < quantity) {
+            throw new IllegalStateException("재고가 부족합니다. feedId=" + feedId);
+        }
+
+        feed.setQuantity(feed.getQuantity() - quantity);
+        feed.setUpdatedAt(dateTimeUtil.now());
+        feedRepository.save(feed);
+    }
+
+    @Transactional
+    public void restoreStock(Long feedId, Integer quantity) {
+        Feed feed = feedRepository.findById(feedId)
+            .orElseThrow(() -> new NotFoundException("존재하지 않는 피드입니다. feedId=" + feedId));
+
+        feed.setQuantity(feed.getQuantity() + quantity);
+        feed.setUpdatedAt(dateTimeUtil.now());
+        feedRepository.save(feed);
+    }
 }
