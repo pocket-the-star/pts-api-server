@@ -1,9 +1,9 @@
-package com.pts.api.order.dto.request;
+package com.pts.api.order.application.dto.request;
 
-import com.pts.api.order.model.Shipping;
+import com.pts.api.order.domain.model.Shipping;
 import lombok.NonNull;
 
-public record CreateShippingRequestDto(
+public record CreateShippingRequest(
     @NonNull
     String recipientName,
     @NonNull
@@ -25,4 +25,4 @@ public record CreateShippingRequestDto(
             .shippingMethod(shippingMethod)
             .build();
     }
-}
+} 

@@ -1,15 +1,15 @@
-package com.pts.api.order.dto.request;
+package com.pts.api.order.application.dto.request;
 
-import com.pts.api.order.model.Order;
+import com.pts.api.order.domain.model.Order;
 import lombok.NonNull;
 
-public record CreateOrderRequestDto(
+public record CreateOrderRequest(
     @NonNull
     Long feedId,
     @NonNull
     Integer quantity,
     @NonNull
-    CreateShippingRequestDto shipping
+    CreateShippingRequest shipping
 ) {
 
     public Order toOrder() {
@@ -18,4 +18,4 @@ public record CreateOrderRequestDto(
             .quantity(quantity)
             .build();
     }
-}
+} 

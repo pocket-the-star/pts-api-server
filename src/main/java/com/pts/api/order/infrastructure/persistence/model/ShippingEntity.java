@@ -1,6 +1,7 @@
-package com.pts.api.order.model;
+package com.pts.api.order.infrastructure.persistence.model;
 
 import com.pts.api.lib.external.jpa.base.model.BaseEntity;
+import com.pts.api.order.domain.model.Shipping;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -19,7 +20,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Shipping extends BaseEntity {
+public class ShippingEntity extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -56,7 +57,7 @@ public class Shipping extends BaseEntity {
     private LocalDateTime expectedDate;
 
     @Builder
-    public Shipping(Long id, Long orderId, String recipientName, String address,
+    public ShippingEntity(Long id, Long orderId, String recipientName, String address,
         String detailAddress, String postalCode,
         String shippingMethod, String trackingNumber, String shippingStatus,
         LocalDateTime shippedDate, LocalDateTime expectedDate,
@@ -75,5 +76,43 @@ public class Shipping extends BaseEntity {
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
+    }
+
+    public Shipping toDomain() {
+        return Shipping.builder()
+            .id(id)
+            .orderId(orderId)
+            .recipientName(recipientName)
+            .address(address)
+            .detailAddress(detailAddress)
+            .postalCode(postalCode)
+            .shippingMethod(shippingMethod)
+            .trackingNumber(trackingNumber)
+            .shippingStatus(shippingStatus)
+            .shippedDate(shippedDate)
+            .expectedDate(expectedDate)
+            .createdAt(createdAt)
+            .updatedAt(updatedAt)
+            .deletedAt(deletedAt)
+            .build();
+    }
+
+    public static ShippingEntity from(Shipping shipping) {
+        return ShippingEntity.builder()
+            .id(shipping.getId())
+            .orderId(shipping.getOrderId())
+            .recipientName(shipping.getRecipientName())
+            .address(shipping.getAddress())
+            .detailAddress(shipping.getDetailAddress())
+            .postalCode(shipping.getPostalCode())
+            .shippingMethod(shipping.getShippingMethod())
+            .trackingNumber(shipping.getTrackingNumber())
+            .shippingStatus(shipping.getShippingStatus())
+            .shippedDate(shipping.getShippedDate())
+            .expectedDate(shipping.getExpectedDate())
+            .createdAt(shipping.getCreatedAt())
+            .updatedAt(shipping.getUpdatedAt())
+            .deletedAt(shipping.getDeletedAt())
+            .build();
     }
 } 

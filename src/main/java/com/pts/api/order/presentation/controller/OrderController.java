@@ -1,13 +1,14 @@
-package com.pts.api.order.controller;
+package com.pts.api.order.presentation.controller;
 
 import com.pts.api.global.presentation.response.BaseResponse;
 import com.pts.api.global.presentation.response.ResponseGenerator;
 import com.pts.api.global.presentation.response.ResponseMsg;
-import com.pts.api.order.dto.request.CreateOrderRequestDto;
-import com.pts.api.order.dto.request.UpdateOrderRequestDto;
-import com.pts.api.order.service.OrderFacade;
-import com.pts.api.order.service.OrderService;
+import com.pts.api.order.application.dto.request.CreateOrderRequest;
+import com.pts.api.order.application.dto.request.UpdateOrderRequest;
+import com.pts.api.order.application.port.in.CreateOrderUseCase;
+import com.pts.api.order.application.port.in.UpdateOrderUseCase;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -23,58 +24,49 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@Tag(name = "주문", description = "주문 API")
+@Tag(name = "Order", description = "주문 API")
 @RestController
-@RequiredArgsConstructor
 @RequestMapping("/api/v1/orders")
+@RequiredArgsConstructor
 public class OrderController {
 
-    private final OrderFacade orderFacade;
-    private final OrderService orderService;
+    private final CreateOrderUseCase createOrderUseCase;
+    private final UpdateOrderUseCase updateOrderUseCase;
 
-    @Operation(summary = "주문 생성", description = "주문을 생성합니다.")
+    @Operation(summary = "주문 생성")
     @PostMapping
-    public ResponseEntity<BaseResponse<Void>> post(
+    public ResponseEntity<BaseResponse<Void>> create(
         @AuthenticationPrincipal Long userId,
-        @Valid @RequestBody CreateOrderRequestDto request) {
-
-        orderFacade.create(userId, request);
-
+        @Valid @RequestBody CreateOrderRequest request) {
+        createOrderUseCase.create(userId, request);
         return ResponseGenerator.ok(ResponseMsg.OK, HttpStatus.OK);
     }
 
-    @Operation(summary = "주문 수정", description = "주문을 수정합니다.")
+    @Operation(summary = "주문 상태 수정")
     @PutMapping("/{orderId}")
-    public ResponseEntity<BaseResponse<Void>> put(
+    public ResponseEntity<BaseResponse<Void>> updateStatus(
         @AuthenticationPrincipal Long userId,
-        @PathVariable Long orderId,
-        @Valid @RequestBody UpdateOrderRequestDto request) {
-
-        orderService.updateStatus(userId, orderId, request.orderStatus());
-
+        @Parameter(description = "주문 ID") @PathVariable Long orderId,
+        @Valid @RequestBody UpdateOrderRequest request) {
+        updateOrderUseCase.updateStatus(userId, orderId, request);
         return ResponseGenerator.ok(ResponseMsg.OK, HttpStatus.OK);
     }
 
-    @Operation(summary = "주문 취소", description = "주문을 취소합니다.")
+    @Operation(summary = "주문 취소")
     @PatchMapping("/{orderId}")
-    public ResponseEntity<BaseResponse<Void>> put(
+    public ResponseEntity<BaseResponse<Void>> cancel(
         @AuthenticationPrincipal Long userId,
-        @PathVariable Long orderId
-    ) {
-
-        orderService.cancel(userId, orderId);
-
+        @Parameter(description = "주문 ID") @PathVariable Long orderId) {
+        updateOrderUseCase.cancel(userId, orderId);
         return ResponseGenerator.ok(ResponseMsg.OK, HttpStatus.OK);
     }
 
-    @Operation(summary = "주문 삭제", description = "주문을 삭제합니다.")
+    @Operation(summary = "주문 삭제")
     @DeleteMapping("/{orderId}")
     public ResponseEntity<BaseResponse<Void>> delete(
         @AuthenticationPrincipal Long userId,
-        @PathVariable Long orderId) {
-
-        orderService.delete(userId, orderId);
-
+        @Parameter(description = "주문 ID") @PathVariable Long orderId) {
+        updateOrderUseCase.delete(userId, orderId);
         return ResponseGenerator.ok(ResponseMsg.OK, HttpStatus.OK);
     }
-}
+} 
