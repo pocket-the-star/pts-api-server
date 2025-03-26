@@ -1,11 +1,11 @@
-package com.pts.api.product.consumer;
+package com.pts.api.product.presentation.consumer;
 
 import com.pts.api.global.common.exception.NotFoundException;
 import com.pts.api.lib.internal.shared.event.Event;
 import com.pts.api.lib.internal.shared.event.EventData;
 import com.pts.api.lib.internal.shared.event.EventType.Topic;
 import com.pts.api.lib.internal.shared.event.data.FeedCreateData;
-import com.pts.api.product.service.ProductService;
+import com.pts.api.product.application.port.in.PriceUpdateUseCase;
 import java.util.Objects;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class ProductConsumer {
 
-    private final ProductService productService;
+    private final PriceUpdateUseCase priceUpdateUseCase;
 
     @KafkaListener(topics = {
         Topic.FEED_CREATE
@@ -38,7 +38,7 @@ public class ProductConsumer {
         switch (event.getType()) {
             case FEED_CREATE:
                 FeedCreateData feedCreateData = (FeedCreateData) event.getData();
-                productService.priceUpdate(feedCreateData);
+                priceUpdateUseCase.updatePrice(feedCreateData.productId(), feedCreateData.price());
                 break;
             default:
                 throw new NotFoundException("존재하지 않는 이벤트 타입입니다.: " + event.getType());

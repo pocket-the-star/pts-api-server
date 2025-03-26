@@ -1,10 +1,12 @@
-package com.pts.api.product.repository;
+package com.pts.api.product.infrastructure.persistence.repository;
 
 import static com.pts.api.category.model.QCategory.category;
 import static com.pts.api.category.model.QSubCategory.subCategory;
+import static com.pts.api.product.infrastructure.persistence.model.QProductEntity.productEntity;
 import static com.pts.api.product.model.QProduct.product;
 
-import com.pts.api.product.model.Product;
+import com.pts.api.product.domain.model.Product;
+import com.pts.api.product.infrastructure.persistence.model.ProductEntity;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -22,7 +24,7 @@ public class QProductRepository {
     public List<Product> findAll(Long artistId, Long categoryId, Long subCategoryId,
         int offset) {
         int LIMIT = 20;
-        JPAQuery<Product> query = queryFactory.select(product)
+        JPAQuery<ProductEntity> query = queryFactory.select(productEntity)
             .from(product);
 
         BooleanBuilder builder = new BooleanBuilder();
@@ -42,15 +44,21 @@ public class QProductRepository {
         builder.and(product.deletedAt.isNull());
 
         return query.where(builder).limit(LIMIT)
-            .offset(offset).orderBy(product.updatedAt.desc()).fetch();
+            .offset(offset).orderBy(product.updatedAt.desc())
+            .fetch()
+            .stream()
+            .map(ProductEntity::toDomain)
+            .toList();
     }
 
     public Optional<Product> findOneById(Long id) {
         return Optional.ofNullable(
             queryFactory
-                .selectFrom(product)
-                .where(product.id.eq(id).and(product.deletedAt.isNull()))
+                .selectFrom(productEntity)
+                .where(productEntity.id.eq(id)
+//                    .and(productEntity.deletedAt().isNull())
+                )
                 .fetchOne()
-        );
+        ).map(ProductEntity::toDomain);
     }
 }

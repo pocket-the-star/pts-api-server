@@ -1,4 +1,4 @@
-package com.pts.api.product.exception;
+package com.pts.api.product.common.exception;
 
 import com.pts.api.global.common.exception.CustomBusinessException;
 import org.springframework.http.HttpStatus;

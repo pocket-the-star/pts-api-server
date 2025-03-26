@@ -5,10 +5,10 @@ import static org.mockito.Mockito.when;
 
 import com.pts.api.common.base.BaseUnitTest;
 import com.pts.api.product.dto.response.GetProductResponseDto;
+import com.pts.api.product.infrastructure.persistence.repository.QProductRepository;
 import com.pts.api.product.model.Product;
 import com.pts.api.product.model.ProductImage;
 import com.pts.api.product.model.ProductOption;
-import com.pts.api.product.repository.QProductRepository;
 import java.time.LocalDateTime;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;

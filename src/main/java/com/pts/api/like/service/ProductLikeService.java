@@ -8,7 +8,7 @@ import com.pts.api.lib.internal.shared.event.data.ProductLikeData;
 import com.pts.api.lib.internal.shared.event.data.ProductUnLikeData;
 import com.pts.api.like.model.ProductLike;
 import com.pts.api.like.repository.ProductLikeRepository;
-import com.pts.api.product.repository.ProductRepository;
+import com.pts.api.product.infrastructure.persistence.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
