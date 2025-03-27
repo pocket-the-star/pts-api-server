@@ -1,10 +1,10 @@
-package com.pts.api.idol.controller;
+package com.pts.api.idol.presentation.controller;
 
 import com.pts.api.global.presentation.response.BaseResponse;
 import com.pts.api.global.presentation.response.ResponseGenerator;
 import com.pts.api.global.presentation.response.ResponseMsg;
-import com.pts.api.idol.dto.response.ReadIdolResponseDto;
-import com.pts.api.idol.service.IdolService;
+import com.pts.api.idol.application.dto.response.ReadIdolResponse;
+import com.pts.api.idol.application.port.in.ReadIdolUseCase;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
@@ -23,25 +23,25 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class IdolController {
 
-    private final IdolService idolService;
+    private final ReadIdolUseCase readIdolUseCase;
 
     @Operation(summary = "아이돌 리스트 불러오기", description = "아이돌 리스트 불러오기 API")
     @GetMapping()
-    public ResponseEntity<BaseResponse<List<ReadIdolResponseDto>>> getList(
+    public ResponseEntity<BaseResponse<List<ReadIdolResponse>>> getList(
         @RequestParam(value = "offset", defaultValue = "0") Long offset,
         @RequestParam(value = "limit", defaultValue = "20") Integer limit
     ) {
         return ResponseGenerator.ok(ResponseMsg.OK, HttpStatus.OK,
-            idolService.findAll(offset, limit));
+            readIdolUseCase.getIdols(offset, limit));
     }
 
     @Operation(summary = "아이돌 불러오기", description = "아이돌 불러오기 API")
     @GetMapping("/{id}")
-    public ResponseEntity<BaseResponse<ReadIdolResponseDto>> getOne(
+    public ResponseEntity<BaseResponse<ReadIdolResponse>> getOne(
         @PathVariable Long id
     ) {
         return ResponseGenerator.ok(ResponseMsg.OK, HttpStatus.OK,
-            idolService.findOneById(id));
+            readIdolUseCase.getIdol(id));
     }
 
 

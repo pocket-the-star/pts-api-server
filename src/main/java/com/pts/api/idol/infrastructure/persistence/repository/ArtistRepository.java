@@ -1,12 +1,12 @@
-package com.pts.api.idol.repository;
+package com.pts.api.idol.infrastructure.persistence.repository;
 
-import com.pts.api.idol.model.Artist;
+import com.pts.api.idol.infrastructure.persistence.entity.ArtistEntity;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-public interface ArtistRepository extends JpaRepository<Artist, Long> {
+public interface ArtistRepository extends JpaRepository<ArtistEntity, Long> {
 
     @Query(
         value = """
@@ -18,7 +18,7 @@ public interface ArtistRepository extends JpaRepository<Artist, Long> {
             """,
         nativeQuery = true
     )
-    List<Artist> findAll(Long idolId);
+    List<ArtistEntity> findAll(Long idolId);
 
     @Query(
         value = """
@@ -30,6 +30,6 @@ public interface ArtistRepository extends JpaRepository<Artist, Long> {
             """,
         nativeQuery = true
     )
-    Optional<Artist> findOneById(Long id);
+    Optional<ArtistEntity> findOneById(Long id);
 
 }

@@ -1,7 +1,6 @@
 package com.pts.api.product.infrastructure.persistence.repository;
 
-import static com.pts.api.category.model.QCategory.category;
-import static com.pts.api.category.model.QSubCategory.subCategory;
+
 import static com.pts.api.product.infrastructure.persistence.model.QProductEntity.productEntity;
 
 import com.pts.api.product.domain.model.Product;
@@ -27,18 +26,18 @@ public class QProductRepository {
             .from(productEntity);
 
         BooleanBuilder builder = new BooleanBuilder();
-        if (artistId != null) {
-            builder.and(productEntity.artistId.eq(artistId));
-            query.innerJoin(category).on(category.id.eq(productEntity.subCategoryId));
-        }
+//        if (artistId != null) {
+//            builder.and(productEntity.artistId.eq(artistId));
+//            query.innerJoin(category).on(category.id.eq(productEntity.subCategoryId));
+//        }
 
-        if (subCategoryId != null) {
-            builder.and(productEntity.subCategoryId.eq(subCategoryId));
-            query.innerJoin(subCategory).on(subCategory.id.eq(subCategoryId));
-            if (categoryId != null) {
-                builder.and(subCategory.categoryId.eq(categoryId));
-            }
-        }
+//        if (subCategoryId != null) {
+//            builder.and(productEntity.subCategoryId.eq(subCategoryId));
+//            query.innerJoin(subCategory).on(subCategory.id.eq(subCategoryId));
+//            if (categoryId != null) {
+//                builder.and(subCategory.categoryId.eq(categoryId));
+//            }
+//        }
 
         builder.and(productEntity.deletedAt.isNull());
 

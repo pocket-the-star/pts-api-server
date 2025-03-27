@@ -1,6 +1,6 @@
-package com.pts.api.idol.repository;
+package com.pts.api.idol.infrastructure.persistence.repository;
 
-import com.pts.api.idol.model.Idol;
+import com.pts.api.idol.infrastructure.persistence.entity.IdolEntity;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface IdolRepository extends JpaRepository<Idol, Long> {
+public interface IdolRepository extends JpaRepository<IdolEntity, Long> {
 
     @Query(
         value = """
@@ -20,7 +20,7 @@ public interface IdolRepository extends JpaRepository<Idol, Long> {
             """,
         nativeQuery = true
     )
-    List<Idol> findAll(Long offset, Integer limit);
+    List<IdolEntity> findAll(Long offset, Integer limit);
 
     @Query(
         value = """
@@ -32,5 +32,5 @@ public interface IdolRepository extends JpaRepository<Idol, Long> {
             """,
         nativeQuery = true
     )
-    Optional<Idol> findOneById(Long id);
+    Optional<IdolEntity> findOneById(Long id);
 }

@@ -10,9 +10,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface SubCategoryRepository extends JpaRepository<SubCategoryEntity, Long> {
 
-    @Query("SELECT s FROM SubCategory s WHERE s.categoryId = :categoryId")
+    @Query("SELECT s FROM SubCategoryEntity s WHERE s.categoryId = :categoryId")
     List<SubCategoryEntity> findAllByCategoryId(Long categoryId);
 
-    @Query("SELECT s FROM SubCategory s WHERE s.id = :id AND s.categoryId = :categoryId")
+    @Query("SELECT s FROM SubCategoryEntity s WHERE s.id = :id AND s.categoryId = :categoryId")
     Optional<SubCategoryEntity> findOneByIdAndCategoryId(Long categoryId, Long id);
 }

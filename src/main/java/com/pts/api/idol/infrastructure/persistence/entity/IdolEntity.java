@@ -1,5 +1,6 @@
-package com.pts.api.idol.model;
+package com.pts.api.idol.infrastructure.persistence.entity;
 
+import com.pts.api.idol.domain.model.Idol;
 import com.pts.api.lib.external.jpa.base.model.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -22,7 +23,7 @@ import lombok.NoArgsConstructor;
 })
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Idol extends BaseEntity {
+public class IdolEntity extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,17 +32,39 @@ public class Idol extends BaseEntity {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "idol")
-    private List<Artist> Artists;
+    @OneToMany(mappedBy = "idolEntity")
+    private List<ArtistEntity> artistEntities;
 
     @Builder
-    public Idol(Long id, String name, List<Artist> Artists,
+    public IdolEntity(Long id, String name, List<ArtistEntity> artistEntities,
         LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
         this.name = name;
-        this.Artists = Artists;
+        this.artistEntities = artistEntities;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
+    }
+
+    public Idol toDomain() {
+        return Idol.builder()
+            .id(id)
+            .name(name)
+            .artists(artistEntities.stream().map(ArtistEntity::toDomain).toList())
+            .createdAt(createdAt)
+            .updatedAt(updatedAt)
+            .deletedAt(deletedAt)
+            .build();
+    }
+
+    public static IdolEntity fromDomain(Idol idol) {
+        return IdolEntity.builder()
+            .id(idol.getId())
+            .name(idol.getName())
+            .artistEntities(idol.getArtists().stream().map(ArtistEntity::fromDomain).toList())
+            .createdAt(idol.getCreatedAt())
+            .updatedAt(idol.getUpdatedAt())
+            .deletedAt(idol.getDeletedAt())
+            .build();
     }
 } 

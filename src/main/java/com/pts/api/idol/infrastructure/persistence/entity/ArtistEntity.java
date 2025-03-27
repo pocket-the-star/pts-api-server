@@ -1,5 +1,6 @@
-package com.pts.api.idol.model;
+package com.pts.api.idol.infrastructure.persistence.entity;
 
+import com.pts.api.idol.domain.model.Artist;
 import com.pts.api.lib.external.jpa.base.model.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.ConstraintMode;
@@ -25,7 +26,7 @@ import lombok.NoArgsConstructor;
 })
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Artist extends BaseEntity {
+public class ArtistEntity extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,19 +34,41 @@ public class Artist extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idol_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
-    private Idol idol;
+    private IdolEntity idolEntity;
 
     @Column(name = "name", nullable = false)
     private String name;
 
     @Builder
-    public Artist(Long id, Idol idol, String name,
+    public ArtistEntity(Long id, IdolEntity idolEntity, String name,
         LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.id = id;
-        this.idol = idol;
+        this.idolEntity = idolEntity;
         this.name = name;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
+    }
+
+    public Artist toDomain() {
+        return Artist.builder()
+            .id(id)
+            .name(name)
+            .idol(idolEntity.toDomain())
+            .createdAt(createdAt)
+            .updatedAt(updatedAt)
+            .deletedAt(deletedAt)
+            .build();
+    }
+
+    public static ArtistEntity fromDomain(Artist artist) {
+        return ArtistEntity.builder()
+            .id(artist.getId())
+            .idolEntity(IdolEntity.fromDomain(artist.getIdol()))
+            .name(artist.getName())
+            .createdAt(artist.getCreatedAt())
+            .updatedAt(artist.getUpdatedAt())
+            .deletedAt(artist.getDeletedAt())
+            .build();
     }
 } 
