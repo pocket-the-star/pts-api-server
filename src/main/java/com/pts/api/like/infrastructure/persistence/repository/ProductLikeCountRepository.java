@@ -1,13 +1,13 @@
-package com.pts.api.like.repository;
+package com.pts.api.like.infrastructure.persistence.repository;
 
-import com.pts.api.like.model.ProductLikeCount;
+import com.pts.api.like.infrastructure.persistence.entity.ProductLikeCountEntity;
 import io.lettuce.core.dynamic.annotation.Param;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
-public interface ProductLikeCountRepository extends JpaRepository<ProductLikeCount, Long> {
+public interface ProductLikeCountRepository extends JpaRepository<ProductLikeCountEntity, Long> {
 
     @Query(
         value = """
@@ -39,5 +39,5 @@ public interface ProductLikeCountRepository extends JpaRepository<ProductLikeCou
             """,
         nativeQuery = true
     )
-    Optional<ProductLikeCount> findOneByProductId(@Param("productId") Long productId);
+    Optional<ProductLikeCountEntity> findOneByProductId(@Param("productId") Long productId);
 }

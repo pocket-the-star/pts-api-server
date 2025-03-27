@@ -1,11 +1,11 @@
-package com.pts.api.like.consumer;
+package com.pts.api.like.presentation.consumer;
 
 import com.pts.api.global.common.exception.NotFoundException;
 import com.pts.api.lib.internal.shared.event.Event;
 import com.pts.api.lib.internal.shared.event.EventData;
 import com.pts.api.lib.internal.shared.event.EventType.Topic;
 import com.pts.api.lib.internal.shared.event.data.ProductLikeData;
-import com.pts.api.like.service.ProductLikeCountService;
+import com.pts.api.like.application.port.in.ProductLikeCountUseCase;
 import java.util.Objects;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,7 +17,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class ProductLikeCountConsumer {
 
-    private final ProductLikeCountService productLikeCountService;
+    private final ProductLikeCountUseCase productLikeCountUseCase;
 
     @KafkaListener(topics = {
         Topic.PRODUCT_LIKE,
@@ -39,13 +39,13 @@ public class ProductLikeCountConsumer {
     private void handleEvent(Event<EventData> event) {
         switch (event.getType()) {
             case PRODUCT_LIKE:
-                productLikeCountService.increase(((ProductLikeData) event.getData()).productId());
+                productLikeCountUseCase.increase(((ProductLikeData) event.getData()).productId());
                 break;
             case PRODUCT_UNLIKE:
-                productLikeCountService.decrease(((ProductLikeData) event.getData()).productId());
+                productLikeCountUseCase.decrease(((ProductLikeData) event.getData()).productId());
                 break;
             case PRODUCT_CREATE:
-                productLikeCountService.create(((ProductLikeData) event.getData()).productId());
+                productLikeCountUseCase.create(((ProductLikeData) event.getData()).productId());
                 break;
             default:
                 throw new NotFoundException("존재하지 않는 이벤트 타입입니다.: " + event.getType());

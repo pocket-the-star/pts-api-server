@@ -1,6 +1,7 @@
-package com.pts.api.like.model;
+package com.pts.api.like.infrastructure.persistence.entity;
 
 import com.pts.api.lib.external.jpa.base.model.BaseEntity;
+import com.pts.api.like.domain.model.ProductLike;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,7 +25,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class ProductLike extends BaseEntity {
+public class ProductLikeEntity extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,12 +38,33 @@ public class ProductLike extends BaseEntity {
     private Long userId;
 
     @Builder
-    public ProductLike(Long productId, Long userId, LocalDateTime createdAt,
+    public ProductLikeEntity(Long productId, Long userId, LocalDateTime createdAt,
         LocalDateTime updatedAt, LocalDateTime deletedAt) {
         this.productId = productId;
         this.userId = userId;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
+    }
+
+    public static ProductLikeEntity fromDomain(ProductLike productLike) {
+        return ProductLikeEntity.builder()
+            .productId(productLike.getProductId())
+            .userId(productLike.getUserId())
+            .createdAt(productLike.getCreatedAt())
+            .updatedAt(productLike.getUpdatedAt())
+            .deletedAt(productLike.getDeletedAt())
+            .build();
+    }
+
+    public ProductLike toDomain() {
+        return ProductLike.builder()
+            .id(id)
+            .productId(productId)
+            .userId(userId)
+            .createdAt(createdAt)
+            .updatedAt(updatedAt)
+            .deletedAt(deletedAt)
+            .build();
     }
 }

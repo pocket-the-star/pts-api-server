@@ -1,10 +1,10 @@
-package com.pts.api.like.controller;
+package com.pts.api.like.presentation.controller;
 
 
 import com.pts.api.global.presentation.response.BaseResponse;
 import com.pts.api.global.presentation.response.ResponseGenerator;
 import com.pts.api.global.presentation.response.ResponseMsg;
-import com.pts.api.like.service.ProductLikeService;
+import com.pts.api.like.application.port.in.ProductLikeUseCase;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/products/{productId}/likes")
 public class ProductLikeController {
 
-    private final ProductLikeService productLikeService;
+    private final ProductLikeUseCase productLikeUseCase;
 
     @Operation(summary = "좋아요", description = "상품을 좋아요합니다.")
     @PostMapping
@@ -31,7 +31,7 @@ public class ProductLikeController {
         @AuthenticationPrincipal Long userId,
         @PathVariable Long productId) {
 
-        productLikeService.like(productId, userId);
+        productLikeUseCase.like(productId, userId);
 
         return ResponseGenerator.ok(ResponseMsg.OK, HttpStatus.OK);
     }
@@ -42,7 +42,7 @@ public class ProductLikeController {
         @AuthenticationPrincipal Long userId,
         @PathVariable Long productId) {
 
-        productLikeService.unlike(productId, userId);
+        productLikeUseCase.unlike(productId, userId);
 
         return ResponseGenerator.ok(ResponseMsg.OK, HttpStatus.OK);
     }
