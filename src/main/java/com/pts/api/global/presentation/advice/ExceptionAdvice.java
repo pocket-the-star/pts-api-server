@@ -33,11 +33,14 @@ public class ExceptionAdvice {
 
     private void log(Exception e) {
         StackTraceElement element = e.getStackTrace()[0];
-        log.error("클래스: {}, 메서드: {}, 라인: {}, 예외: {}, 메시지: {}",
+        log.error("클래스: {}, 메시지: {}",
             element.getClassName(),
-            element.getMethodName(),
-            element.getLineNumber(),
-            e.getClass(),
-            e.getMessage());
+            e.toString());
+//        log.error("클래스: {}, 메서드: {}, 라인: {}, 예외: {}, 메시지: {}",
+//            element.getClassName(),
+//            element.getMethodName(),
+//            element.getLineNumber(),
+//            e.getClass(),
+//            e.getMessage());
     }
 }

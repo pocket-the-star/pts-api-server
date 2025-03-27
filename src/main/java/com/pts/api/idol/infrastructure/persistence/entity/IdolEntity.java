@@ -1,6 +1,7 @@
 package com.pts.api.idol.infrastructure.persistence.entity;
 
 import com.pts.api.idol.domain.model.Idol;
+import com.pts.api.idol.domain.model.Artist;
 import com.pts.api.lib.external.jpa.base.model.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -61,7 +62,22 @@ public class IdolEntity extends BaseEntity {
         return Idol.builder()
             .id(id)
             .name(name)
-            .artists(artistEntities.stream().map(ArtistEntity::toDomain).toList())
+            .artists(artistEntities.stream()
+                .map(artist -> Artist.builder()
+                    .id(artist.getId())
+                    .name(artist.getName())
+                    .idol(Idol.builder()
+                        .id(id)
+                        .name(name)
+                        .createdAt(createdAt)
+                        .updatedAt(updatedAt)
+                        .deletedAt(deletedAt)
+                        .build())
+                    .createdAt(artist.getCreatedAt())
+                    .updatedAt(artist.getUpdatedAt())
+                    .deletedAt(artist.getDeletedAt())
+                    .build())
+                .toList())
             .createdAt(createdAt)
             .updatedAt(updatedAt)
             .deletedAt(deletedAt)

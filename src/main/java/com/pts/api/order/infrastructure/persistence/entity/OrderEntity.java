@@ -59,7 +59,7 @@ public class OrderEntity extends BaseEntity {
         this.deletedAt = deletedAt;
     }
 
-    public Order toDomain() {
+    public Order toModel() {
         return Order.builder()
             .id(id)
             .feedId(feedId)
@@ -84,20 +84,6 @@ public class OrderEntity extends BaseEntity {
             .createdAt(order.getCreatedAt())
             .updatedAt(order.getUpdatedAt())
             .deletedAt(order.getDeletedAt())
-            .build();
-    }
-
-    public Order toModel() {
-        return Order.builder()
-            .id(id)
-            .feedId(feedId)
-            .userId(buyerId)
-            .price(price)
-            .quantity(quantity)
-            .orderStatus(status)
-            .createdAt(createdAt)
-            .updatedAt(updatedAt)
-            .deletedAt(deletedAt)
             .build();
     }
 } 

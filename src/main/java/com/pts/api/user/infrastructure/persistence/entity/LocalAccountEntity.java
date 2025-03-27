@@ -2,6 +2,7 @@ package com.pts.api.user.infrastructure.persistence.entity;
 
 import com.pts.api.lib.external.jpa.base.model.BaseEntity;
 import com.pts.api.user.domain.model.LocalAccount;
+import com.pts.api.user.domain.model.User;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -49,24 +50,31 @@ public class LocalAccountEntity extends BaseEntity {
         this.deletedAt = deletedAt;
     }
 
-    public LocalAccount toDomain() {
+    public LocalAccount toModel() {
         return LocalAccount.builder()
             .id(id)
             .email(email)
             .password(password)
-            .user(userEntity.toDomain())
+            .user(User.builder()
+                .id(userEntity.getId())
+                .nickname(userEntity.getNickname())
+                .role(userEntity.getRole())
+                .createdAt(userEntity.getCreatedAt())
+                .updatedAt(userEntity.getUpdatedAt())
+                .deletedAt(userEntity.getDeletedAt())
+                .build())
             .createdAt(createdAt)
             .updatedAt(updatedAt)
             .deletedAt(deletedAt)
             .build();
     }
 
-    public static LocalAccountEntity fromDomain(LocalAccount localAccount) {
+    public static LocalAccountEntity fromModel(LocalAccount localAccount) {
         return LocalAccountEntity.builder()
             .id(localAccount.getId())
             .email(localAccount.getEmail())
             .password(localAccount.getPassword())
-            .userEntity(UserEntity.from(localAccount.getUser()))
+            .userEntity(UserEntity.fromModel(localAccount.getUser()))
             .createdAt(localAccount.getCreatedAt())
             .updatedAt(localAccount.getUpdatedAt())
             .deletedAt(localAccount.getDeletedAt())

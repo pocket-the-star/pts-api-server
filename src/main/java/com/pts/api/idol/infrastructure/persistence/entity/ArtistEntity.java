@@ -1,6 +1,7 @@
 package com.pts.api.idol.infrastructure.persistence.entity;
 
 import com.pts.api.idol.domain.model.Artist;
+import com.pts.api.idol.domain.model.Idol;
 import com.pts.api.lib.external.jpa.base.model.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.ConstraintMode;
@@ -50,11 +51,17 @@ public class ArtistEntity extends BaseEntity {
         this.deletedAt = deletedAt;
     }
 
-    public Artist toDomain() {
+    public Artist toModel() {
         return Artist.builder()
             .id(id)
             .name(name)
-            .idol(idolEntity.toModel())
+            .idol(Idol.builder()
+                .id(idolEntity.getId())
+                .name(idolEntity.getName())
+                .createdAt(idolEntity.getCreatedAt())
+                .updatedAt(idolEntity.getUpdatedAt())
+                .deletedAt(idolEntity.getDeletedAt())
+                .build())
             .createdAt(createdAt)
             .updatedAt(updatedAt)
             .deletedAt(deletedAt)
@@ -69,17 +76,6 @@ public class ArtistEntity extends BaseEntity {
             .createdAt(artist.getCreatedAt())
             .updatedAt(artist.getUpdatedAt())
             .deletedAt(artist.getDeletedAt())
-            .build();
-    }
-
-    public Artist toModel() {
-        return Artist.builder()
-            .id(id)
-            .name(name)
-            .idol(idolEntity.toModel())
-            .createdAt(createdAt)
-            .updatedAt(updatedAt)
-            .deletedAt(deletedAt)
             .build();
     }
 } 

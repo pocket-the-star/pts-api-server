@@ -83,17 +83,17 @@ public class FeedEntity extends BaseEntity {
         this.deletedAt = deletedAt;
     }
 
-    public static FeedEntity fromModel(Feed feed) {
-        List<FeedImageEntity> feedImageEntities = feed.getFeedImages().stream()
-            .map(FeedImageEntity::fromModel)
-            .collect(Collectors.toList());
+    public void addFeedImage(FeedImageEntity feedImage) {
+        feedImages.add(feedImage);
+        feedImage.setFeed(this);
+    }
 
+    public static FeedEntity fromModel(Feed feed) {
         FeedEntity feedEntity = FeedEntity.builder()
             .id(feed.getId())
             .userId(feed.getUserId())
             .productId(feed.getProductId())
             .content(feed.getContent())
-            .feedImages(feedImageEntities)
             .grade(feed.getGrade())
             .price(feed.getPrice())
             .quantity(feed.getQuantity())
@@ -103,29 +103,30 @@ public class FeedEntity extends BaseEntity {
             .deletedAt(feed.getDeletedAt())
             .build();
 
-        feedImageEntities.forEach(feedImageEntity -> feedImageEntity.setFeed(feedEntity));
+        feed.getFeedImages().forEach(feedImage -> {
+            FeedImageEntity feedImageEntity = FeedImageEntity.fromModel(feedImage);
+            feedEntity.addFeedImage(feedImageEntity);
+        });
 
         return feedEntity;
     }
 
     public Feed toModel() {
-        List<FeedImage> feedImages = this.feedImages.stream()
-            .map(FeedImageEntity::toModel)
-            .toList();
-
         return Feed.builder()
-            .id(this.id)
-            .userId(this.userId)
-            .productId(this.productId)
-            .content(this.content)
-            .feedImages(feedImages)
-            .grade(this.grade)
-            .price(this.price)
-            .quantity(this.quantity)
-            .status(this.status)
-            .createdAt(this.createdAt)
-            .updatedAt(this.updatedAt)
-            .deletedAt(this.deletedAt)
+            .id(id)
+            .userId(userId)
+            .productId(productId)
+            .content(content)
+            .feedImages(feedImages.stream()
+                .map(FeedImageEntity::toModel)
+                .collect(Collectors.toList()))
+            .grade(grade)
+            .price(price)
+            .quantity(quantity)
+            .status(status)
+            .createdAt(createdAt)
+            .updatedAt(updatedAt)
+            .deletedAt(deletedAt)
             .build();
     }
 } 

@@ -16,20 +16,17 @@ public class OrderRepositoryAdapter implements OrderRepositoryPort {
 
     @Override
     public Order save(Order order) {
-        OrderEntity entity = OrderEntity.fromModel(order);
-        OrderEntity savedEntity = orderRepository.save(entity);
-        return savedEntity.toDomain();
+        return orderRepository.save(OrderEntity.fromModel(order)).toModel();
     }
 
     @Override
     public Optional<Order> findById(Long id) {
         return orderRepository.findById(id)
-            .map(OrderEntity::toDomain);
+            .map(OrderEntity::toModel);
     }
 
     @Override
     public void delete(Order order) {
-        OrderEntity entity = OrderEntity.fromModel(order);
-        orderRepository.delete(entity);
+        orderRepository.delete(OrderEntity.fromModel(order));
     }
 } 

@@ -5,6 +5,7 @@ import com.pts.api.lib.external.jpa.base.model.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.ConstraintMode;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -33,7 +34,7 @@ public class FeedImageEntity extends BaseEntity {
     @Column(name = "url", nullable = false)
     private String url;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "feed_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private FeedEntity feed;
 
@@ -60,11 +61,11 @@ public class FeedImageEntity extends BaseEntity {
 
     public FeedImage toModel() {
         return FeedImage.builder()
-            .id(this.id)
-            .url(this.url)
-            .createdAt(this.createdAt)
-            .updatedAt(this.updatedAt)
-            .deletedAt(this.deletedAt)
+            .id(id)
+            .url(url)
+            .createdAt(createdAt)
+            .updatedAt(updatedAt)
+            .deletedAt(deletedAt)
             .build();
     }
 }

@@ -63,12 +63,11 @@ public class UserInfoEntity {
         this.deletedAt = deletedAt;
     }
 
-    public UserInfo toDomain() {
+    public UserInfo toModel() {
         return UserInfo.builder()
             .name(fullName)
             .phone(phone)
             .address(address)
-            .user(userEntity.toDomain())
             .extraInfo(extraInfo)
             .createdAt(createdAt)
             .updatedAt(updatedAt)
@@ -76,7 +75,7 @@ public class UserInfoEntity {
             .build();
     }
 
-    public static UserInfoEntity from(UserInfo userInfo) {
+    public static UserInfoEntity fromModel(UserInfo userInfo) {
         return UserInfoEntity.builder()
             .fullName(userInfo.getName())
             .phone(userInfo.getPhone())

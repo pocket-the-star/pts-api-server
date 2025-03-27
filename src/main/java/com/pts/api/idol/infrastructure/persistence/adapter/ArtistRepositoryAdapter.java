@@ -18,11 +18,11 @@ public class ArtistRepositoryAdapter implements ArtistRepositoryPort {
 
     @Override
     public List<Artist> findAll(Long idolId) {
-        return artistRepository.findAll(idolId).stream().map(ArtistEntity::toDomain).toList();
+        return artistRepository.findAll(idolId).stream().map(ArtistEntity::toModel).toList();
     }
 
     @Override
     public Optional<Artist> findOneById(Long id) {
-        return artistRepository.findOneById(id).map(ArtistEntity::toDomain);
+        return artistRepository.findOneById(id).map(ArtistEntity::toModel);
     }
 }

@@ -16,19 +16,19 @@ public class UserRepositoryAdapter implements UserRepositoryPort {
 
     @Override
     public User save(User user) {
-        return userRepository.save(UserEntity.from(user)).toDomain();
+        return userRepository.save(UserEntity.fromModel(user)).toModel();
     }
 
     @Override
     public Optional<User> findById(Long id) {
         return userRepository.findById(id)
-            .map(UserEntity::toDomain);
+            .map(UserEntity::toModel);
     }
 
     @Override
     public Optional<User> findByEmail(String email) {
         return userRepository.findOneByEmail(email)
-            .map(UserEntity::toDomain);
+            .map(UserEntity::toModel);
     }
 
     @Override

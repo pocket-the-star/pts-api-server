@@ -67,26 +67,26 @@ public class UserEntity extends BaseEntity {
         return localAccountEntity.getEmail();
     }
 
-    public User toDomain() {
+    public User toModel() {
         return User.builder()
             .id(id)
             .nickname(nickname)
             .role(role)
-            .userInfo(userInfoEntity.toDomain())
-            .localAccount(localAccountEntity.toDomain())
+            .userInfo(userInfoEntity.toModel())
+            .localAccount(localAccountEntity.toModel())
             .createdAt(createdAt)
             .updatedAt(updatedAt)
             .deletedAt(deletedAt)
             .build();
     }
 
-    public static UserEntity from(User user) {
+    public static UserEntity fromModel(User user) {
         return UserEntity.builder()
             .id(user.getId())
             .nickname(user.getNickname())
             .role(user.getRole())
-            .localAccountEntity(LocalAccountEntity.fromDomain(user.getLocalAccount()))
-            .userInfoEntity(UserInfoEntity.from(user.getUserInfo()))
+            .localAccountEntity(LocalAccountEntity.fromModel(user.getLocalAccount()))
+            .userInfoEntity(UserInfoEntity.fromModel(user.getUserInfo()))
             .createdAt(user.getCreatedAt())
             .updatedAt(user.getUpdatedAt())
             .deletedAt(user.getDeletedAt())
