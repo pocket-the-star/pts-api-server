@@ -6,9 +6,10 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import com.pts.api.category.dto.response.GetSubCategoryResponseDto;
-import com.pts.api.category.model.SubCategory;
-import com.pts.api.category.repository.SubCategoryRepository;
+import com.pts.api.category.application.port.dto.response.ReadSubCategoryResponse;
+import com.pts.api.category.application.service.SubCategoryService;
+import com.pts.api.category.infrastructure.persistence.entity.SubCategoryEntity;
+import com.pts.api.category.infrastructure.persistence.repository.SubCategoryRepository;
 import com.pts.api.common.base.BaseUnitTest;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -23,7 +24,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
 @DisplayName("GetSubCategoryService 클래스")
-class SubCategoryServiceTest extends BaseUnitTest {
+class SubCategoryEntityEntityServiceTest extends BaseUnitTest {
 
     @Mock
     private SubCategoryRepository subCategoryRepository;
@@ -42,21 +43,22 @@ class SubCategoryServiceTest extends BaseUnitTest {
 
     @Nested
     @DisplayName("getSubCategory 메서드 호출 시")
-    class DescribeGetSubCategory {
+    class DescribeGetSubCategoryEntityEntity {
 
         @Test
         @DisplayName("유효한 categoryId와 id로 조회 시 DTO 반환")
         void itReturnsSubCategory() {
             // Given
-            GetSubCategoryResponseDto expected = new GetSubCategoryResponseDto(SUBCATEGORY_ID,
+            ReadSubCategoryResponse expected = new ReadSubCategoryResponse(SUBCATEGORY_ID,
                 "SubCategoryName", CATEGORY_ID, TEST_DATE, TEST_DATE);
-            SubCategory subCategory = new SubCategory(SUBCATEGORY_ID, SUBCATEGORY_NAME, CATEGORY_ID,
+            SubCategoryEntity subCategoryEntity = new SubCategoryEntity(SUBCATEGORY_ID,
+                SUBCATEGORY_NAME, CATEGORY_ID,
                 TEST_DATE, TEST_DATE, null);
             when(subCategoryRepository.findOneById(CATEGORY_ID, SUBCATEGORY_ID)).thenReturn(
-                Optional.of(subCategory));
+                Optional.of(subCategoryEntity));
 
             // When
-            GetSubCategoryResponseDto actual = subCategoryService.getSubCategory(CATEGORY_ID,
+            ReadSubCategoryResponse actual = subCategoryService.getSubCategory(CATEGORY_ID,
                 SUBCATEGORY_ID);
 
             // Then
@@ -86,18 +88,20 @@ class SubCategoryServiceTest extends BaseUnitTest {
         @DisplayName("해당 categoryId의 전체 SubCategory 리스트 반환")
         void itReturnsSubCategoryList() {
             // Given
-            List<GetSubCategoryResponseDto> expectedList = List.of(
-                new GetSubCategoryResponseDto(1L, "SubCategoryName", CATEGORY_ID, TEST_DATE,
+            List<ReadSubCategoryResponse> expectedList = List.of(
+                new ReadSubCategoryResponse(1L, "SubCategoryName", CATEGORY_ID, TEST_DATE,
                     TEST_DATE),
-                new GetSubCategoryResponseDto(2L, "SubCategoryName", CATEGORY_ID, TEST_DATE,
+                new ReadSubCategoryResponse(2L, "SubCategoryName", CATEGORY_ID, TEST_DATE,
                     TEST_DATE));
-            List<SubCategory> subCategories = List.of(
-                new SubCategory(1L, "SubCategoryName", CATEGORY_ID, TEST_DATE, TEST_DATE, null),
-                new SubCategory(2L, "SubCategoryName", CATEGORY_ID, TEST_DATE, TEST_DATE, null));
+            List<SubCategoryEntity> subCategories = List.of(
+                new SubCategoryEntity(1L, "SubCategoryName", CATEGORY_ID, TEST_DATE, TEST_DATE,
+                    null),
+                new SubCategoryEntity(2L, "SubCategoryName", CATEGORY_ID, TEST_DATE, TEST_DATE,
+                    null));
             when(subCategoryRepository.findAllByCategoryId(CATEGORY_ID)).thenReturn(subCategories);
 
             // When
-            List<GetSubCategoryResponseDto> actualList = subCategoryService.getSubCategories(
+            List<ReadSubCategoryResponse> actualList = subCategoryService.getSubCategories(
                 CATEGORY_ID);
 
             // Then

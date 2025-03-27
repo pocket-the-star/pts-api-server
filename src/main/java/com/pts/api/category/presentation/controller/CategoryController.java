@@ -1,7 +1,7 @@
-package com.pts.api.category.controller;
+package com.pts.api.category.presentation.controller;
 
-import com.pts.api.category.dto.response.GetCategoryResponseDto;
-import com.pts.api.category.service.CategoryService;
+import com.pts.api.category.application.port.dto.response.ReadCategoryResponse;
+import com.pts.api.category.application.service.CategoryService;
 import com.pts.api.global.presentation.response.BaseResponse;
 import com.pts.api.global.presentation.response.ResponseGenerator;
 import com.pts.api.global.presentation.response.ResponseMsg;
@@ -26,16 +26,16 @@ public class CategoryController {
 
     @Operation(summary = "카테고리 조회", description = "카테고리 목록을 조회합니다.")
     @GetMapping
-    public ResponseEntity<BaseResponse<List<GetCategoryResponseDto>>> getCategories() {
-        List<GetCategoryResponseDto> categories = categoryService.getCategories();
+    public ResponseEntity<BaseResponse<List<ReadCategoryResponse>>> getCategories() {
+        List<ReadCategoryResponse> categories = categoryService.getCategories();
 
         return ResponseGenerator.ok(ResponseMsg.OK, HttpStatus.OK, categories);
     }
 
     @Operation(summary = "카테고리 상세 조회", description = "카테고리 상세 정보를 조회합니다.")
     @GetMapping("/{id}")
-    public ResponseEntity<BaseResponse<GetCategoryResponseDto>> getCategory(@PathVariable Long id) {
-        GetCategoryResponseDto category = categoryService.getCategory(id);
+    public ResponseEntity<BaseResponse<ReadCategoryResponse>> getCategory(@PathVariable Long id) {
+        ReadCategoryResponse category = categoryService.getCategory(id);
 
         return ResponseGenerator.ok(ResponseMsg.OK, HttpStatus.OK, category);
     }

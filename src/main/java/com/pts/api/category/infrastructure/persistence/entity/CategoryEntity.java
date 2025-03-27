@@ -1,5 +1,6 @@
-package com.pts.api.category.model;
+package com.pts.api.category.infrastructure.persistence.entity;
 
+import com.pts.api.category.domain.model.Category;
 import com.pts.api.lib.external.jpa.base.model.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -17,7 +18,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "categories")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Category extends BaseEntity {
+public class CategoryEntity extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,12 +29,32 @@ public class Category extends BaseEntity {
     private String name;
 
     @Builder
-    public Category(Long id, String name, LocalDateTime createdAt, LocalDateTime updatedAt,
+    public CategoryEntity(Long id, String name, LocalDateTime createdAt, LocalDateTime updatedAt,
         LocalDateTime deletedAt) {
         this.id = id;
         this.name = name;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deletedAt = deletedAt;
+    }
+
+    public Category toModel() {
+        return Category.builder()
+            .id(this.id)
+            .name(this.name)
+            .createdAt(this.createdAt)
+            .updatedAt(this.updatedAt)
+            .deletedAt(this.deletedAt)
+            .build();
+    }
+
+    public static CategoryEntity fromModel(Category category) {
+        return CategoryEntity.builder()
+            .id(category.getId())
+            .name(category.getName())
+            .createdAt(category.getCreatedAt())
+            .updatedAt(category.getUpdatedAt())
+            .deletedAt(category.getDeletedAt())
+            .build();
     }
 } 

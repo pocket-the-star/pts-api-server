@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 
 @DisplayName("GetSubCategoryController 클래스")
-public class SubCategoryControllerTest extends BaseIntegrationTest {
+public class SubCategoryEntityEntityControllerTest extends BaseIntegrationTest {
 
     private static final String SUB_CATEGORIES_URL = "/api/v1/categories/{categoryId}/sub-categories";
 
@@ -39,7 +39,7 @@ public class SubCategoryControllerTest extends BaseIntegrationTest {
 
     @Nested
     @DisplayName("getSubCategory 메서드 호출 시")
-    class DescribeGetSubCategory {
+    class DescribeGetSubCategoryEntityEntity {
 
         @Nested
         @DisplayName("정상 요청이 주어지면")

@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 
 @DisplayName("GetCategoryController 클래스")
-public class CategoryControllerTest extends BaseIntegrationTest {
+public class CategoryEntityControllerTest extends BaseIntegrationTest {
 
     private static final String CATEGORIES_URL = "/api/v1/categories";
 
@@ -38,7 +38,7 @@ public class CategoryControllerTest extends BaseIntegrationTest {
 
     @Nested
     @DisplayName("getCategory 메서드 호출 시")
-    class DescribeGetCategory {
+    class DescribeGetCategoryEntity {
 
         @Nested
         @DisplayName("정상 요청이 주어지면")

@@ -6,10 +6,11 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import com.pts.api.category.application.port.dto.response.ReadCategoryResponse;
+import com.pts.api.category.application.service.CategoryService;
 import com.pts.api.category.common.exception.CategoryNotFoundException;
-import com.pts.api.category.dto.response.GetCategoryResponseDto;
-import com.pts.api.category.model.Category;
-import com.pts.api.category.repository.CategoryRepository;
+import com.pts.api.category.infrastructure.persistence.entity.CategoryEntity;
+import com.pts.api.category.infrastructure.persistence.repository.CategoryRepository;
 import com.pts.api.common.base.BaseUnitTest;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -24,7 +25,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
 @DisplayName("GetCategoryService 클래스")
-class CategoryServiceTest extends BaseUnitTest {
+class CategoryEntityServiceTest extends BaseUnitTest {
 
     @Mock
     private CategoryRepository categoryRepository;
@@ -42,19 +43,20 @@ class CategoryServiceTest extends BaseUnitTest {
 
     @Nested
     @DisplayName("getCategory 메서드 호출 시")
-    class DescribeGetCategory {
+    class DescribeGetCategoryEntity {
 
         @Test
         @DisplayName("유효한 ID 조회 시 카테고리 DTO 반환")
         void itReturnsCategory() {
             // Given
-            GetCategoryResponseDto expected = new GetCategoryResponseDto(TEST_ID, TEST_NAME,
+            ReadCategoryResponse expected = new ReadCategoryResponse(TEST_ID, TEST_NAME,
                 TEST_DATE, TEST_DATE);
-            Category category = new Category(TEST_ID, TEST_NAME, TEST_DATE, TEST_DATE, null);
-            when(categoryRepository.findOneById(TEST_ID)).thenReturn(Optional.of(category));
+            CategoryEntity categoryEntity = new CategoryEntity(TEST_ID, TEST_NAME, TEST_DATE,
+                TEST_DATE, null);
+            when(categoryRepository.findOneById(TEST_ID)).thenReturn(Optional.of(categoryEntity));
 
             // When
-            GetCategoryResponseDto actual = categoryService.getCategory(TEST_ID);
+            ReadCategoryResponse actual = categoryService.getCategory(TEST_ID);
 
             // Then
             assertEquals(expected, actual);
@@ -82,17 +84,17 @@ class CategoryServiceTest extends BaseUnitTest {
         @DisplayName("전체 카테고리 리스트 반환")
         void itReturnsCategoriesList() {
             // Given
-            List<GetCategoryResponseDto> expectedList = List.of(
-                new GetCategoryResponseDto(TEST_ID, TEST_NAME, TEST_DATE, TEST_DATE),
-                new GetCategoryResponseDto(TEST_ID + 1, TEST_NAME + "1", TEST_DATE, TEST_DATE)
+            List<ReadCategoryResponse> expectedList = List.of(
+                new ReadCategoryResponse(TEST_ID, TEST_NAME, TEST_DATE, TEST_DATE),
+                new ReadCategoryResponse(TEST_ID + 1, TEST_NAME + "1", TEST_DATE, TEST_DATE)
             );
-            List<Category> categories = List.of(
-                new Category(TEST_ID, TEST_NAME, TEST_DATE, TEST_DATE, null),
-                new Category(TEST_ID + 1, TEST_NAME + "1", TEST_DATE, TEST_DATE, null)
+            List<CategoryEntity> categories = List.of(
+                new CategoryEntity(TEST_ID, TEST_NAME, TEST_DATE, TEST_DATE, null),
+                new CategoryEntity(TEST_ID + 1, TEST_NAME + "1", TEST_DATE, TEST_DATE, null)
             );
             when(categoryRepository.findAll()).thenReturn(categories);
             // When
-            List<GetCategoryResponseDto> actualList = categoryService.getCategories();
+            List<ReadCategoryResponse> actualList = categoryService.getCategories();
             // Then
             assertEquals(expectedList, actualList);
             verify(categoryRepository, times(1)).findAll();

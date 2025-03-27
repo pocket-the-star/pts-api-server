@@ -1,8 +1,8 @@
-package com.pts.api.category.controller;
+package com.pts.api.category.presentation.controller;
 
 
-import com.pts.api.category.dto.response.GetSubCategoryResponseDto;
-import com.pts.api.category.service.SubCategoryService;
+import com.pts.api.category.application.port.dto.response.ReadSubCategoryResponse;
+import com.pts.api.category.application.service.SubCategoryService;
 import com.pts.api.global.presentation.response.BaseResponse;
 import com.pts.api.global.presentation.response.ResponseGenerator;
 import com.pts.api.global.presentation.response.ResponseMsg;
@@ -27,9 +27,9 @@ public class SubCategoryController {
 
     @Operation(summary = "서브 카테고리 조회", description = "서브 카테고리 목록을 조회합니다.")
     @GetMapping("/sub-categories")
-    public ResponseEntity<BaseResponse<List<GetSubCategoryResponseDto>>> getSubCategories(
+    public ResponseEntity<BaseResponse<List<ReadSubCategoryResponse>>> getSubCategories(
         @PathVariable Long categoryId) {
-        List<GetSubCategoryResponseDto> subCategories = subCategoryService.getSubCategories(
+        List<ReadSubCategoryResponse> subCategories = subCategoryService.getSubCategories(
             categoryId);
 
         return ResponseGenerator.ok(ResponseMsg.OK, HttpStatus.OK, subCategories);
@@ -37,10 +37,10 @@ public class SubCategoryController {
 
     @Operation(summary = "서브 카테고리 상세 조회", description = "서브 카테고리 상세 정보를 조회합니다.")
     @GetMapping("/sub-categories/{id}")
-    public ResponseEntity<BaseResponse<GetSubCategoryResponseDto>> getSubCategory(
+    public ResponseEntity<BaseResponse<ReadSubCategoryResponse>> getSubCategory(
         @PathVariable Long categoryId,
         @PathVariable Long id) {
-        GetSubCategoryResponseDto subCategory = subCategoryService.getSubCategory(categoryId,
+        ReadSubCategoryResponse subCategory = subCategoryService.getSubCategory(categoryId,
             id);
 
         return ResponseGenerator.ok(ResponseMsg.OK, HttpStatus.OK, subCategory);
