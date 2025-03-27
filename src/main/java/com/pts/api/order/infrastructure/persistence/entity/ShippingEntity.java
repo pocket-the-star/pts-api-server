@@ -1,4 +1,4 @@
-package com.pts.api.order.infrastructure.persistence.model;
+package com.pts.api.order.infrastructure.persistence.entity;
 
 import com.pts.api.lib.external.jpa.base.model.BaseEntity;
 import com.pts.api.order.domain.model.Shipping;
@@ -78,7 +78,7 @@ public class ShippingEntity extends BaseEntity {
         this.deletedAt = deletedAt;
     }
 
-    public Shipping toDomain() {
+    public Shipping toModel() {
         return Shipping.builder()
             .id(id)
             .orderId(orderId)
@@ -97,7 +97,7 @@ public class ShippingEntity extends BaseEntity {
             .build();
     }
 
-    public static ShippingEntity from(Shipping shipping) {
+    public static ShippingEntity fromModel(Shipping shipping) {
         return ShippingEntity.builder()
             .id(shipping.getId())
             .orderId(shipping.getOrderId())

@@ -1,4 +1,4 @@
-package com.pts.api.product.infrastructure.persistence.model;
+package com.pts.api.product.infrastructure.persistence.entity;
 
 import com.pts.api.lib.internal.shared.base.model.BaseModel;
 import com.pts.api.product.domain.model.ProductImage;
@@ -46,7 +46,7 @@ public class ProductImageEntity extends BaseModel {
         this.deletedAt = deletedAt;
     }
 
-    public static ProductImageEntity from(ProductImage productImage) {
+    public static ProductImageEntity fromModel(ProductImage productImage) {
         return ProductImageEntity.builder()
             .id(productImage.getId())
             .imageUrl(productImage.getImageUrl())
@@ -57,7 +57,7 @@ public class ProductImageEntity extends BaseModel {
             .build();
     }
 
-    public ProductImage toDomain() {
+    public ProductImage toModel() {
         return ProductImage.builder()
             .id(id)
             .imageUrl(imageUrl)

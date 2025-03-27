@@ -1,4 +1,4 @@
-package com.pts.api.user.infrastructure.persistence.model;
+package com.pts.api.user.infrastructure.persistence.entity;
 
 import com.pts.api.lib.external.jpa.base.model.BaseEntity;
 import com.pts.api.lib.internal.shared.enums.UserRole;

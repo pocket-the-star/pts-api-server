@@ -1,4 +1,4 @@
-package com.pts.api.product.infrastructure.persistence.model;
+package com.pts.api.product.infrastructure.persistence.entity;
 
 import com.pts.api.lib.internal.shared.base.model.BaseModel;
 import com.pts.api.product.domain.model.Product;
@@ -53,9 +53,9 @@ public class ProductEntity extends BaseModel {
         this.deletedAt = deletedAt;
     }
 
-    public static ProductEntity from(Product product) {
+    public static ProductEntity fromModel(Product product) {
         List<ProductImageEntity> imageEntities = product.getImages().stream()
-            .map(ProductImageEntity::from)
+            .map(ProductImageEntity::fromModel)
             .collect(Collectors.toList());
 
         ProductEntity entity = ProductEntity.builder()
@@ -75,9 +75,9 @@ public class ProductEntity extends BaseModel {
         return entity;
     }
 
-    public Product toDomain() {
+    public Product toModel() {
         List<ProductImage> domainImages = images.stream()
-            .map(ProductImageEntity::toDomain)
+            .map(ProductImageEntity::toModel)
             .collect(Collectors.toList());
 
         return Product.builder()

@@ -1,4 +1,4 @@
-package com.pts.api.feed.infrastructure.persistence.model;
+package com.pts.api.feed.infrastructure.persistence.entity;
 
 import com.pts.api.feed.domain.model.FeedImage;
 import com.pts.api.lib.external.jpa.base.model.BaseEntity;
@@ -48,7 +48,7 @@ public class FeedImageEntity extends BaseEntity {
         this.deletedAt = deletedAt;
     }
 
-    public static FeedImageEntity from(FeedImage feedImage) {
+    public static FeedImageEntity fromModel(FeedImage feedImage) {
         return FeedImageEntity.builder()
             .id(feedImage.getId())
             .url(feedImage.getUrl())
@@ -58,7 +58,7 @@ public class FeedImageEntity extends BaseEntity {
             .build();
     }
 
-    public FeedImage toDomain() {
+    public FeedImage toModel() {
         return FeedImage.builder()
             .id(this.id)
             .url(this.url)

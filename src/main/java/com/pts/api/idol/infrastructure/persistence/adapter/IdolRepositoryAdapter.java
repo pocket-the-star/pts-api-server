@@ -17,11 +17,11 @@ public class IdolRepositoryAdapter implements IdolRepositoryPort {
 
     @Override
     public List<Idol> findAll(Long offset, Integer limit) {
-        return idolRepository.findAll(offset, limit).stream().map(IdolEntity::toDomain).toList();
+        return idolRepository.findAll(offset, limit).stream().map(IdolEntity::toModel).toList();
     }
 
     @Override
     public Optional<Idol> findOneById(Long id) {
-        return idolRepository.findById(id).map(IdolEntity::toDomain);
+        return idolRepository.findById(id).map(IdolEntity::toModel);
     }
 }

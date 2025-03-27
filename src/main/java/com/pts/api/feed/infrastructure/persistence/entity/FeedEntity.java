@@ -1,4 +1,4 @@
-package com.pts.api.feed.infrastructure.persistence.model;
+package com.pts.api.feed.infrastructure.persistence.entity;
 
 import com.pts.api.feed.domain.model.Feed;
 import com.pts.api.feed.domain.model.FeedImage;
@@ -83,9 +83,9 @@ public class FeedEntity extends BaseEntity {
         this.deletedAt = deletedAt;
     }
 
-    public static FeedEntity from(Feed feed) {
+    public static FeedEntity fromModel(Feed feed) {
         List<FeedImageEntity> feedImageEntities = feed.getFeedImages().stream()
-            .map(FeedImageEntity::from)
+            .map(FeedImageEntity::fromModel)
             .collect(Collectors.toList());
 
         FeedEntity feedEntity = FeedEntity.builder()
@@ -108,9 +108,9 @@ public class FeedEntity extends BaseEntity {
         return feedEntity;
     }
 
-    public Feed toDomain() {
+    public Feed toModel() {
         List<FeedImage> feedImages = this.feedImages.stream()
-            .map(FeedImageEntity::toDomain)
+            .map(FeedImageEntity::toModel)
             .toList();
 
         return Feed.builder()

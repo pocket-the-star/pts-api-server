@@ -1,10 +1,12 @@
 package com.pts.api.product.infrastructure.persistence.repository;
 
 
-import static com.pts.api.product.infrastructure.persistence.model.QProductEntity.productEntity;
+import static com.pts.api.category.infrastructure.persistence.entity.QCategoryEntity.categoryEntity;
+import static com.pts.api.category.infrastructure.persistence.entity.QSubCategoryEntity.subCategoryEntity;
+import static com.pts.api.product.infrastructure.persistence.entity.QProductEntity.productEntity;
 
 import com.pts.api.product.domain.model.Product;
-import com.pts.api.product.infrastructure.persistence.model.ProductEntity;
+import com.pts.api.product.infrastructure.persistence.entity.ProductEntity;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -26,18 +28,18 @@ public class QProductRepository {
             .from(productEntity);
 
         BooleanBuilder builder = new BooleanBuilder();
-//        if (artistId != null) {
-//            builder.and(productEntity.artistId.eq(artistId));
-//            query.innerJoin(category).on(category.id.eq(productEntity.subCategoryId));
-//        }
+        if (artistId != null) {
+            builder.and(productEntity.artistId.eq(artistId));
+            query.innerJoin(categoryEntity).on(categoryEntity.id.eq(productEntity.subCategoryId));
+        }
 
-//        if (subCategoryId != null) {
-//            builder.and(productEntity.subCategoryId.eq(subCategoryId));
-//            query.innerJoin(subCategory).on(subCategory.id.eq(subCategoryId));
-//            if (categoryId != null) {
-//                builder.and(subCategory.categoryId.eq(categoryId));
-//            }
-//        }
+        if (subCategoryId != null) {
+            builder.and(productEntity.subCategoryId.eq(subCategoryId));
+            query.innerJoin(subCategoryEntity).on(subCategoryEntity.id.eq(subCategoryId));
+            if (categoryId != null) {
+                builder.and(subCategoryEntity.categoryId.eq(categoryId));
+            }
+        }
 
         builder.and(productEntity.deletedAt.isNull());
 
@@ -45,7 +47,7 @@ public class QProductRepository {
             .offset(offset).orderBy(productEntity.updatedAt.desc())
             .fetch()
             .stream()
-            .map(ProductEntity::toDomain)
+            .map(ProductEntity::toModel)
             .toList();
     }
 
@@ -54,9 +56,9 @@ public class QProductRepository {
             queryFactory
                 .selectFrom(productEntity)
                 .where(productEntity.id.eq(id)
-//                    .and(productEntity.deletedAt().isNull())
+                    .and(productEntity.deletedAt.isNull())
                 )
                 .fetchOne()
-        ).map(ProductEntity::toDomain);
+        ).map(ProductEntity::toModel);
     }
 }

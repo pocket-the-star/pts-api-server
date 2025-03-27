@@ -1,4 +1,4 @@
-package com.pts.api.user.infrastructure.persistence.model;
+package com.pts.api.user.infrastructure.persistence.entity;
 
 import com.pts.api.user.domain.model.UserInfo;
 import jakarta.persistence.Column;

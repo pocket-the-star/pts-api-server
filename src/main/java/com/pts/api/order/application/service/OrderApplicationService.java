@@ -1,7 +1,6 @@
 package com.pts.api.order.application.service;
 
 import com.pts.api.feed.application.port.out.FeedRepositoryPort;
-import com.pts.api.feed.domain.model.Feed;
 import com.pts.api.global.common.exception.NotFoundException;
 import com.pts.api.global.common.exception.UnauthorizedException;
 import com.pts.api.lib.internal.shared.enums.OrderStatus;
@@ -32,7 +31,7 @@ public class OrderApplicationService implements CreateOrderUseCase, UpdateOrderU
     @Override
     @Transactional
     public void create(Long userId, CreateOrderRequest request) {
-        Feed feed = feedRepository.findOneById(request.feedId())
+        feedRepository.findOneById(request.feedId())
             .orElseThrow(() -> new NotFoundException(
                 "존재하지 않는 피드입니다. feedId=" + request.feedId()));
 

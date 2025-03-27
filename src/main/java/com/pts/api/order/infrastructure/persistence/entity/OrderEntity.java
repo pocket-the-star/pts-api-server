@@ -1,4 +1,4 @@
-package com.pts.api.order.infrastructure.persistence.model;
+package com.pts.api.order.infrastructure.persistence.entity;
 
 import com.pts.api.lib.external.jpa.base.model.BaseEntity;
 import com.pts.api.lib.internal.shared.enums.OrderStatus;
@@ -73,7 +73,7 @@ public class OrderEntity extends BaseEntity {
             .build();
     }
 
-    public static OrderEntity from(Order order) {
+    public static OrderEntity fromModel(Order order) {
         return OrderEntity.builder()
             .id(order.getId())
             .feedId(order.getFeedId())
@@ -84,6 +84,20 @@ public class OrderEntity extends BaseEntity {
             .createdAt(order.getCreatedAt())
             .updatedAt(order.getUpdatedAt())
             .deletedAt(order.getDeletedAt())
+            .build();
+    }
+
+    public Order toModel() {
+        return Order.builder()
+            .id(id)
+            .feedId(feedId)
+            .userId(buyerId)
+            .price(price)
+            .quantity(quantity)
+            .orderStatus(status)
+            .createdAt(createdAt)
+            .updatedAt(updatedAt)
+            .deletedAt(deletedAt)
             .build();
     }
 } 

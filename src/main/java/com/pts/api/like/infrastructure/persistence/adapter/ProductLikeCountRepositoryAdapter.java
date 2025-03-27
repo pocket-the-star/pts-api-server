@@ -17,7 +17,7 @@ public class ProductLikeCountRepositoryAdapter implements ProductLikeCountReposi
     @Override
     public ProductLikeCount save(ProductLikeCount productLikeCount) {
 
-        return productLikeCountRepository.save(ProductLikeCountEntity.fromDomain(productLikeCount))
+        return productLikeCountRepository.save(ProductLikeCountEntity.fromModel(productLikeCount))
             .toDomain();
     }
 

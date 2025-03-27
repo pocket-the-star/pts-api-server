@@ -54,21 +54,32 @@ public class ArtistEntity extends BaseEntity {
         return Artist.builder()
             .id(id)
             .name(name)
-            .idol(idolEntity.toDomain())
+            .idol(idolEntity.toModel())
             .createdAt(createdAt)
             .updatedAt(updatedAt)
             .deletedAt(deletedAt)
             .build();
     }
 
-    public static ArtistEntity fromDomain(Artist artist) {
+    public static ArtistEntity fromModel(Artist artist) {
         return ArtistEntity.builder()
             .id(artist.getId())
-            .idolEntity(IdolEntity.fromDomain(artist.getIdol()))
+            .idolEntity(IdolEntity.fromModel(artist.getIdol()))
             .name(artist.getName())
             .createdAt(artist.getCreatedAt())
             .updatedAt(artist.getUpdatedAt())
             .deletedAt(artist.getDeletedAt())
+            .build();
+    }
+
+    public Artist toModel() {
+        return Artist.builder()
+            .id(id)
+            .name(name)
+            .idol(idolEntity.toModel())
+            .createdAt(createdAt)
+            .updatedAt(updatedAt)
+            .deletedAt(deletedAt)
             .build();
     }
 } 

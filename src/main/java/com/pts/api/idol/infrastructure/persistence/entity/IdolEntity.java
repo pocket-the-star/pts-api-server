@@ -46,7 +46,18 @@ public class IdolEntity extends BaseEntity {
         this.deletedAt = deletedAt;
     }
 
-    public Idol toDomain() {
+    public static IdolEntity fromModel(Idol idol) {
+        return IdolEntity.builder()
+            .id(idol.getId())
+            .name(idol.getName())
+            .artistEntities(idol.getArtists().stream().map(ArtistEntity::fromModel).toList())
+            .createdAt(idol.getCreatedAt())
+            .updatedAt(idol.getUpdatedAt())
+            .deletedAt(idol.getDeletedAt())
+            .build();
+    }
+
+    public Idol toModel() {
         return Idol.builder()
             .id(id)
             .name(name)
@@ -54,17 +65,6 @@ public class IdolEntity extends BaseEntity {
             .createdAt(createdAt)
             .updatedAt(updatedAt)
             .deletedAt(deletedAt)
-            .build();
-    }
-
-    public static IdolEntity fromDomain(Idol idol) {
-        return IdolEntity.builder()
-            .id(idol.getId())
-            .name(idol.getName())
-            .artistEntities(idol.getArtists().stream().map(ArtistEntity::fromDomain).toList())
-            .createdAt(idol.getCreatedAt())
-            .updatedAt(idol.getUpdatedAt())
-            .deletedAt(idol.getDeletedAt())
             .build();
     }
 } 

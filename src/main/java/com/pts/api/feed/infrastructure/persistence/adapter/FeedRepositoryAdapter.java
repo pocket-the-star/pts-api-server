@@ -2,7 +2,7 @@ package com.pts.api.feed.infrastructure.persistence;
 
 import com.pts.api.feed.application.port.out.FeedRepositoryPort;
 import com.pts.api.feed.domain.model.Feed;
-import com.pts.api.feed.infrastructure.persistence.model.FeedEntity;
+import com.pts.api.feed.infrastructure.persistence.entity.FeedEntity;
 import com.pts.api.feed.infrastructure.persistence.repository.FeedRepository;
 import com.pts.api.lib.internal.shared.enums.FeedStatus;
 import java.util.List;
@@ -18,7 +18,7 @@ public class FeedRepositoryAdapter implements FeedRepositoryPort {
 
     @Override
     public Feed save(Feed feed) {
-        return feedRepository.save(FeedEntity.from(feed)).toDomain();
+        return feedRepository.save(FeedEntity.fromModel(feed)).toModel();
     }
 
     @Override
@@ -26,25 +26,25 @@ public class FeedRepositoryAdapter implements FeedRepositoryPort {
         Long ProductId, FeedStatus status) {
         return feedRepository.findByUserIdAndProductIdAndFeedStatusAndFeedType(userId, ProductId,
                 status)
-            .map(FeedEntity::toDomain);
+            .map(FeedEntity::toModel);
     }
 
     @Override
     public List<Feed> findByUserIdAndDeletedAtIsNull(Long userId, Long offset, Integer limit) {
         return feedRepository.findByUserIdAndDeletedAtIsNull(userId, offset, limit).stream()
-            .map(FeedEntity::toDomain)
+            .map(FeedEntity::toModel)
             .toList();
     }
 
     @Override
     public List<Feed> findByDeletedAtIsNull(Long offset, Integer limit) {
         return feedRepository.findByDeletedAtIsNull(offset, limit).stream()
-            .map(FeedEntity::toDomain)
+            .map(FeedEntity::toModel)
             .toList();
     }
 
     @Override
     public Optional<Feed> findOneById(Long id) {
-        return feedRepository.findOneById(id).map(FeedEntity::toDomain);
+        return feedRepository.findOneById(id).map(FeedEntity::toModel);
     }
 }

@@ -47,7 +47,7 @@ public class ProductLikeEntity extends BaseEntity {
         this.deletedAt = deletedAt;
     }
 
-    public static ProductLikeEntity fromDomain(ProductLike productLike) {
+    public static ProductLikeEntity fromModel(ProductLike productLike) {
         return ProductLikeEntity.builder()
             .productId(productLike.getProductId())
             .userId(productLike.getUserId())
@@ -57,7 +57,7 @@ public class ProductLikeEntity extends BaseEntity {
             .build();
     }
 
-    public ProductLike toDomain() {
+    public ProductLike toModel() {
         return ProductLike.builder()
             .id(id)
             .productId(productId)

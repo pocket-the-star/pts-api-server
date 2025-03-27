@@ -17,13 +17,13 @@ public class ProductLikeRepositoryAdapter implements ProductLikeRepositoryPort {
     @Override
     public ProductLike save(ProductLike productLike) {
 
-        return productLikeRepository.save(ProductLikeEntity.fromDomain(productLike)).toDomain();
+        return productLikeRepository.save(ProductLikeEntity.fromModel(productLike)).toModel();
     }
 
     @Override
     public Optional<ProductLike> findByProductIdAndUserId(Long productId, Long userId) {
         return productLikeRepository.findOneByProductIdAndUserId(productId, userId)
-            .map(ProductLikeEntity::toDomain);
+            .map(ProductLikeEntity::toModel);
     }
 
     @Override

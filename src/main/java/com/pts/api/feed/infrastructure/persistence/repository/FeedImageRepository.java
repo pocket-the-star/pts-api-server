@@ -1,6 +1,6 @@
 package com.pts.api.feed.infrastructure.persistence.repository;
 
-import com.pts.api.feed.infrastructure.persistence.model.FeedImageEntity;
+import com.pts.api.feed.infrastructure.persistence.entity.FeedImageEntity;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;

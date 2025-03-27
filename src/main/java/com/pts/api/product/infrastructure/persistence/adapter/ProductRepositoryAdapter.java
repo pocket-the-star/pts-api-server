@@ -2,7 +2,7 @@ package com.pts.api.product.infrastructure.persistence.adapter;
 
 import com.pts.api.product.application.port.out.ProductRepositoryPort;
 import com.pts.api.product.domain.model.Product;
-import com.pts.api.product.infrastructure.persistence.model.ProductEntity;
+import com.pts.api.product.infrastructure.persistence.entity.ProductEntity;
 import com.pts.api.product.infrastructure.persistence.repository.ProductRepository;
 import com.pts.api.product.infrastructure.persistence.repository.QProductRepository;
 import java.util.List;
@@ -19,20 +19,20 @@ public class ProductRepositoryAdapter implements ProductRepositoryPort {
 
     @Override
     public Product save(Product product) {
-        ProductEntity entity = ProductEntity.from(product);
+        ProductEntity entity = ProductEntity.fromModel(product);
         ProductEntity savedEntity = productRepository.save(entity);
-        return savedEntity.toDomain();
+        return savedEntity.toModel();
     }
 
     @Override
     public Optional<Product> findById(Long id) {
         return productRepository.findById(id)
-            .map(ProductEntity::toDomain);
+            .map(ProductEntity::toModel);
     }
 
     @Override
     public void delete(Product product) {
-        ProductEntity entity = ProductEntity.from(product);
+        ProductEntity entity = ProductEntity.fromModel(product);
         productRepository.delete(entity);
     }
 

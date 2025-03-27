@@ -1,6 +1,6 @@
 package com.pts.api.feed.infrastructure.persistence.repository;
 
-import com.pts.api.feed.infrastructure.persistence.model.FeedEntity;
+import com.pts.api.feed.infrastructure.persistence.entity.FeedEntity;
 import com.pts.api.lib.internal.shared.enums.FeedStatus;
 import java.util.List;
 import java.util.Optional;

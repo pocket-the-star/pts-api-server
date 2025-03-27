@@ -51,13 +51,23 @@ public class ProductLikeCountEntity extends BaseEntity {
             .build();
     }
 
-    public static ProductLikeCountEntity fromDomain(ProductLikeCount productLikeCount) {
+    public static ProductLikeCountEntity fromModel(ProductLikeCount productLikeCount) {
         return ProductLikeCountEntity.builder()
             .productId(productLikeCount.getProductId())
             .count(productLikeCount.getCount())
             .createdAt(productLikeCount.getCreatedAt())
             .updatedAt(productLikeCount.getUpdatedAt())
             .deletedAt(productLikeCount.getDeletedAt())
+            .build();
+    }
+
+    public ProductLikeCount toModel() {
+        return ProductLikeCount.builder()
+            .productId(productId)
+            .count(count)
+            .createdAt(createdAt)
+            .updatedAt(updatedAt)
+            .deletedAt(deletedAt)
             .build();
     }
 }
