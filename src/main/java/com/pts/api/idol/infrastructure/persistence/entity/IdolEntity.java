@@ -1,7 +1,7 @@
 package com.pts.api.idol.infrastructure.persistence.entity;
 
-import com.pts.api.idol.domain.model.Idol;
 import com.pts.api.idol.domain.model.Artist;
+import com.pts.api.idol.domain.model.Idol;
 import com.pts.api.lib.external.jpa.base.model.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "idols", uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"id", "name"})
+    @UniqueConstraint(columnNames = {"name"})
 })
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
