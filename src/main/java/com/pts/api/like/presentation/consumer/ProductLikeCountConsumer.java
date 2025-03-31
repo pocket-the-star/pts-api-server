@@ -4,7 +4,9 @@ import com.pts.api.global.common.exception.NotFoundException;
 import com.pts.api.lib.internal.shared.event.Event;
 import com.pts.api.lib.internal.shared.event.EventData;
 import com.pts.api.lib.internal.shared.event.EventType.Topic;
+import com.pts.api.lib.internal.shared.event.data.ProductCreateData;
 import com.pts.api.lib.internal.shared.event.data.ProductLikeData;
+import com.pts.api.lib.internal.shared.event.data.ProductUnLikeData;
 import com.pts.api.like.application.port.in.ProductLikeCountUseCase;
 import java.util.Objects;
 import lombok.RequiredArgsConstructor;
@@ -42,10 +44,10 @@ public class ProductLikeCountConsumer {
                 productLikeCountUseCase.increase(((ProductLikeData) event.getData()).productId());
                 break;
             case PRODUCT_UNLIKE:
-                productLikeCountUseCase.decrease(((ProductLikeData) event.getData()).productId());
+                productLikeCountUseCase.decrease(((ProductUnLikeData) event.getData()).productId());
                 break;
             case PRODUCT_CREATE:
-                productLikeCountUseCase.create(((ProductLikeData) event.getData()).productId());
+                productLikeCountUseCase.create(((ProductCreateData) event.getData()).productId());
                 break;
             default:
                 throw new NotFoundException("존재하지 않는 이벤트 타입입니다.: " + event.getType());
