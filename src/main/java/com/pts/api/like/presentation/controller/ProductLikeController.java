@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +25,16 @@ import org.springframework.web.bind.annotation.RestController;
 public class ProductLikeController {
 
     private final ProductLikeUseCase productLikeUseCase;
+
+    @Operation(summary = "좋아요 상태 조회", description = "상품의 좋아요 상태를 조회합니다.")
+    @GetMapping
+    public ResponseEntity<BaseResponse<Boolean>> getLikeStatus(
+        @AuthenticationPrincipal Long userId,
+        @PathVariable Long productId) {
+
+        return ResponseGenerator.ok(ResponseMsg.OK, HttpStatus.OK,
+            productLikeUseCase.isLiked(productId, userId));
+    }
 
     @Operation(summary = "좋아요", description = "상품을 좋아요합니다.")
     @PostMapping
