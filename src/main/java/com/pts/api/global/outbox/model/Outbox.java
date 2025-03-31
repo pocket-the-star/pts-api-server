@@ -2,6 +2,7 @@ package com.pts.api.global.outbox.model;
 
 import com.pts.api.lib.external.jpa.base.model.BaseEntity;
 import com.pts.api.lib.internal.shared.event.EventType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -27,6 +28,7 @@ public class Outbox extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Enumerated(EnumType.STRING)
+    @Column(length = 20)
     private EventType eventType;
     private String data;
 
