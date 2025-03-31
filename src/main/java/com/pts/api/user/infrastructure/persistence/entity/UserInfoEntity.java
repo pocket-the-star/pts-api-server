@@ -2,7 +2,9 @@ package com.pts.api.user.infrastructure.persistence.entity;
 
 import com.pts.api.user.domain.model.UserInfo;
 import jakarta.persistence.Column;
+import jakarta.persistence.ConstraintMode;
 import jakarta.persistence.Entity;
+import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -37,7 +39,7 @@ public class UserInfoEntity {
     private String extraInfo;
 
     @OneToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private UserEntity userEntity;
 
     @Column(nullable = false)

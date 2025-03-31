@@ -2,9 +2,10 @@ package com.pts.api.user.infrastructure.persistence.entity;
 
 import com.pts.api.lib.external.jpa.base.model.BaseEntity;
 import com.pts.api.user.domain.model.LocalAccount;
-import com.pts.api.user.domain.model.User;
 import jakarta.persistence.Column;
+import jakarta.persistence.ConstraintMode;
 import jakarta.persistence.Entity;
+import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -35,7 +36,7 @@ public class LocalAccountEntity extends BaseEntity {
     private String password;
 
     @OneToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false, foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private UserEntity userEntity;
 
     @Builder
@@ -55,14 +56,6 @@ public class LocalAccountEntity extends BaseEntity {
             .id(id)
             .email(email)
             .password(password)
-            .user(User.builder()
-                .id(userEntity.getId())
-                .nickname(userEntity.getNickname())
-                .role(userEntity.getRole())
-                .createdAt(userEntity.getCreatedAt())
-                .updatedAt(userEntity.getUpdatedAt())
-                .deletedAt(userEntity.getDeletedAt())
-                .build())
             .createdAt(createdAt)
             .updatedAt(updatedAt)
             .deletedAt(deletedAt)
@@ -74,7 +67,6 @@ public class LocalAccountEntity extends BaseEntity {
             .id(localAccount.getId())
             .email(localAccount.getEmail())
             .password(localAccount.getPassword())
-            .userEntity(UserEntity.fromModel(localAccount.getUser()))
             .createdAt(localAccount.getCreatedAt())
             .updatedAt(localAccount.getUpdatedAt())
             .deletedAt(localAccount.getDeletedAt())
