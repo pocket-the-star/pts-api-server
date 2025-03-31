@@ -22,8 +22,7 @@ public class QProductRepository {
     private final JPAQueryFactory queryFactory;
 
     public List<Product> findAll(Long artistId, Long categoryId, Long subCategoryId,
-        int offset) {
-        int LIMIT = 20;
+        Long offset, int limit) {
         JPAQuery<ProductEntity> query = queryFactory.select(productEntity)
             .from(productEntity);
 
@@ -43,7 +42,7 @@ public class QProductRepository {
 
         builder.and(productEntity.deletedAt.isNull());
 
-        return query.where(builder).limit(LIMIT)
+        return query.where(builder).limit(limit)
             .offset(offset).orderBy(productEntity.updatedAt.desc())
             .fetch()
             .stream()

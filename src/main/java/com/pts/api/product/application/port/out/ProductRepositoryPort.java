@@ -5,8 +5,13 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ProductRepositoryPort {
+
     Product save(Product product);
+
     Optional<Product> findById(Long id);
+
     void delete(Product product);
-    List<Product> findAll(Long artistId, Long categoryId, Long subCategoryId, int offset);
+
+    List<Product> findAll(Long artistId, Long categoryId, Long subCategoryId, Long offset,
+        int limit);
 } 
