@@ -22,6 +22,8 @@ import com.pts.api.lib.internal.shared.enums.FeedStatus;
 import com.pts.api.lib.internal.shared.event.EventType;
 import com.pts.api.lib.internal.shared.event.data.FeedCreateData;
 import com.pts.api.lib.internal.shared.util.date.DateTimeUtil;
+import com.pts.api.product.application.port.out.ProductRepositoryPort;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -36,13 +38,16 @@ public class FeedApplicationService implements CreateFeedUseCase, ReadFeedListUs
     RestoreStockUseCase {
 
     private final FeedRepositoryPort feedRepository;
+    private final ProductRepositoryPort productRepository;
     private final EventPublisherPort eventPublisher;
     private final DateTimeUtil dateTimeUtil;
 
     @Override
     @Transactional
     public void create(Long userId, CreateFeedRequest request) {
-        getFeed(request.productId());
+        productRepository.findById(request.productId())
+            .orElseThrow(
+                () -> new NotFoundException("존재하지 않는 상품입니다. productId: " + request.productId()));
         Optional<Feed> feed = feedRepository.findByUserIdAndProductIdAndFeedStatusAndFeedType(
             userId, request.productId(), FeedStatus.PENDING);
 
@@ -56,6 +61,7 @@ public class FeedApplicationService implements CreateFeedUseCase, ReadFeedListUs
                 .url(url)
                 .build())
             .toList();
+        LocalDateTime now = dateTimeUtil.now();
 
         Feed newFeed = Feed.builder()
             .userId(userId)
@@ -65,6 +71,10 @@ public class FeedApplicationService implements CreateFeedUseCase, ReadFeedListUs
             .grade(request.grade())
             .price(request.price())
             .quantity(request.quantity())
+            .createdAt(now)
+            .updatedAt(now)
+            .status(FeedStatus.PENDING)
+            .deletedAt(null)
             .build();
 
         Feed savedFeed = feedRepository.save(newFeed);

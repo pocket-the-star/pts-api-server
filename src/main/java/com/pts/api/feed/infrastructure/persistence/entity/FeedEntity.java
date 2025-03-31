@@ -101,6 +101,7 @@ public class FeedEntity extends BaseEntity {
             .createdAt(feed.getCreatedAt())
             .updatedAt(feed.getUpdatedAt())
             .deletedAt(feed.getDeletedAt())
+            .feedImages(new ArrayList<>())
             .build();
 
         feed.getFeedImages().forEach(feedImage -> {

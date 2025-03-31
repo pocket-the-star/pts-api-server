@@ -41,10 +41,12 @@ public class MessageRelay {
                 outbox.getEventType().getTopic(),
                 outbox.getData()
             ).get(1, TimeUnit.SECONDS);
+
+            outboxRepository.delete(outbox);
         } catch (Exception e) {
             log.error("Outbox After Commit={}", outbox, e);
         }
-        outboxRepository.delete(outbox);
+
     }
 
     private void scheduledPublishEvent(Outbox outbox) {

@@ -16,7 +16,7 @@ public interface FeedRepository extends JpaRepository<FeedEntity, Long> {
             AND f.productId = :productId
             AND f.status = :status""")
     Optional<FeedEntity> findByUserIdAndProductIdAndFeedStatusAndFeedType(Long userId,
-        Long ProductId,
+        Long productId,
         FeedStatus status);
 
 

@@ -1,4 +1,4 @@
-package com.pts.api.feed.infrastructure.persistence;
+package com.pts.api.feed.infrastructure.persistence.adapter;
 
 import com.pts.api.feed.application.port.out.FeedRepositoryPort;
 import com.pts.api.feed.domain.model.Feed;

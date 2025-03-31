@@ -2,6 +2,7 @@ package com.pts.api.lib.external.kafka.config;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,9 +21,6 @@ public class KafkaProducerConfig {
     @Value("${spring.kafka.producer.enable-idempotence}")
     private boolean enableIdempotence;
 
-    @Value("${spring.kafka.producer.transactional-id}")
-    private String transactionalId;
-
     @Bean
     public Map<String, Object> producerConfigs() {
         Map<String, Object> props = new HashMap<>();
@@ -30,7 +28,7 @@ public class KafkaProducerConfig {
         props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
         props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
         props.put(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, enableIdempotence);
-        props.put(ProducerConfig.TRANSACTIONAL_ID_CONFIG, transactionalId);
+        props.put(ProducerConfig.TRANSACTIONAL_ID_CONFIG, "transactional-id-" + UUID.randomUUID());
         props.put(ProducerConfig.ACKS_CONFIG, "all");
 
         return props;
