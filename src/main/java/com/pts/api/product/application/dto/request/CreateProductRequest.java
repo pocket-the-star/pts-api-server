@@ -24,11 +24,14 @@ public record CreateProductRequest(
                 .build())
             .toList();
 
+        int DEFAULT_PRICE = 0;
         Product newProduct = Product.builder()
             .id(id)
             .title(title)
             .subCategoryId(subCategoryId)
             .artistId(artistId)
+            .maxSellPrice(DEFAULT_PRICE)
+            .minBuyPrice(DEFAULT_PRICE)
             .images(productImages)
             .createdAt(now)
             .updatedAt(now)
