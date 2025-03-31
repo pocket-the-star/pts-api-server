@@ -4,7 +4,9 @@ import com.pts.api.global.outbox.model.Outbox;
 import com.pts.api.global.outbox.repository.OutboxRepository;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
@@ -45,6 +47,26 @@ public class MessageRelay {
         outboxRepository.delete(outbox);
     }
 
+    private void scheduledPublishEvent(Outbox outbox) {
+        try {
+            kafkaTemplate.executeInTransaction(operations -> {
+                try {
+                    operations.send(
+                        outbox.getEventType().getTopic(),
+                        outbox.getData()
+                    ).get(1, TimeUnit.SECONDS);
+                    outboxRepository.delete(outbox);
+                    return true;
+                } catch (InterruptedException | ExecutionException | TimeoutException e) {
+                    log.error("Failed to send message to Kafka: {}", e.getMessage());
+                    return false;
+                }
+            });
+        } catch (Exception e) {
+            log.error("Outbox After Commit={}", outbox, e);
+        }
+    }
+
     @Scheduled(
         fixedDelay = 10,
         initialDelay = 5,
@@ -60,7 +82,7 @@ public class MessageRelay {
         for (Outbox outbox : outboxes) {
             log.info("Publish Pending Event: {}", outbox);
 
-            publishEvent(outbox);
+            scheduledPublishEvent(outbox);
         }
 
         log.info("Publish Pending Event End: {}", LocalDateTime.now());
