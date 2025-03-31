@@ -2,7 +2,9 @@ package com.pts.api.product.infrastructure.persistence.entity;
 
 import com.pts.api.lib.internal.shared.base.model.BaseModel;
 import com.pts.api.product.domain.model.ProductImage;
+import jakarta.persistence.ConstraintMode;
 import jakarta.persistence.Entity;
+import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -30,8 +32,8 @@ public class ProductImageEntity extends BaseModel {
     private String imageUrl;
     private int sortOrder;
 
-    @ManyToOne
-    @JoinColumn(name = "product_id")
+    @ManyToOne()
+    @JoinColumn(name = "product_id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
     private ProductEntity product;
 
     @Builder
