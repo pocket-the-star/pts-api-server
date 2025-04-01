@@ -1,3 +1,5 @@
+version: "2.4"
+
 networks:
   app_network:
     driver: bridge
@@ -16,6 +18,8 @@ services:
       MYSQL_DATABASE: ${MYSQL_DATABASE}
     ports:
       - "${MYSQL_PORT}:${MYSQL_PORT}"
+    mem_limit: 2g
+    cpu_shares: 2048
     volumes:
       - mysql_data:/var/lib/mysql
     healthcheck:
@@ -39,6 +43,8 @@ services:
       interval: 3s
       timeout: 2s
       retries: 5
+    mem_limit: 1g
+    cpu_shares: 1024
     networks:
       - app_network
 
@@ -126,6 +132,8 @@ services:
     container_name: api_container
     ports:
       - "${API_PORT}:${API_PORT}"
+    mem_limit: 2g
+    cpu_shares: 2048
     depends_on:
       zookeeper:
         condition: service_started

@@ -13,4 +13,4 @@ CMD ["./gradlew", "test", "--no-daemon", "-Dspring.profiles.active=test"]
 FROM openjdk:17-jdk-slim AS runner
 WORKDIR /app
 COPY --from=builder /app/build/libs/api-0.0.1-SNAPSHOT.jar app.jar
-CMD ["java", "-jar", "app.jar"]
+CMD ["java", "-Dspring.profiles.active=dev", "-jar", "app.jar"]

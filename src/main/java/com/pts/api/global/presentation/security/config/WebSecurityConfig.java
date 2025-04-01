@@ -33,11 +33,14 @@ public class WebSecurityConfig {
                 authz -> authz.requestMatchers("/v3/api-docs/**", "/swagger-ui/**",
                         "/swagger-ui.html", "/swagger-resources/**", "/api-docs/**",           // 추가
                         "/api-docs/swagger-config", // 추가
-                        "/webjars/**").permitAll().requestMatchers("/api/v1/users/auth-code/confirm")
-                    .permitAll().requestMatchers("/api/v1/users/sign-in").permitAll()
+                        "/webjars/**").permitAll()
+                    .requestMatchers("/actuator/**").permitAll()
+                    .requestMatchers("/api/v1/users/auth-code/confirm").permitAll()
+                    .requestMatchers("/api/v1/users/sign-in").permitAll()
                     .requestMatchers("/api/v1/users/sign-up").permitAll()
-                    .requestMatchers("/api/v1/users/email/verify").permitAll().anyRequest()
-                    .authenticated())
+                    .requestMatchers("/api/v1/users/email/verify").permitAll()
+
+                    .anyRequest().authenticated())
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
