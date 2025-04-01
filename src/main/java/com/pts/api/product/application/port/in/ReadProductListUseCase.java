@@ -5,6 +5,6 @@ import java.util.List;
 
 public interface ReadProductListUseCase {
 
-    List<ProductResponse> findAll(Long artistId, Long categoryId, Long subCategoryId, Long offset,
+    List<ProductResponse> findAll(Long idolId, Long categoryId, Long subCategoryId, Long offset,
         int limit);
 } 

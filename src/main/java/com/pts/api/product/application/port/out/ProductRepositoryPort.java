@@ -12,6 +12,6 @@ public interface ProductRepositoryPort {
 
     void delete(Product product);
 
-    List<Product> findAll(Long artistId, Long categoryId, Long subCategoryId, Long offset,
+    List<Product> findAll(Long idolId, Long categoryId, Long subCategoryId, Long offset,
         int limit);
 } 

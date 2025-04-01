@@ -81,9 +81,9 @@ public class ProductApplicationService implements CreateProductUseCase, ReadProd
     }
 
     @Override
-    public List<ProductResponse> findAll(Long artistId, Long categoryId, Long subCategoryId,
+    public List<ProductResponse> findAll(Long idolId, Long categoryId, Long subCategoryId,
         Long offset, int limit) {
-        return productRepository.findAll(artistId, categoryId, subCategoryId, offset, limit)
+        return productRepository.findAll(idolId, categoryId, subCategoryId, offset, limit)
             .stream()
             .map(ProductResponse::from)
             .toList();

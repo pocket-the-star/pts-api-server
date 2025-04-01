@@ -37,8 +37,8 @@ public class ProductRepositoryAdapter implements ProductRepositoryPort {
     }
 
     @Override
-    public List<Product> findAll(Long artistId, Long categoryId, Long subCategoryId, Long offset,
+    public List<Product> findAll(Long idolId, Long categoryId, Long subCategoryId, Long offset,
         int limit) {
-        return qProductRepository.findAll(artistId, categoryId, subCategoryId, offset, limit);
+        return qProductRepository.findAll(idolId, categoryId, subCategoryId, offset, limit);
     }
 } 
