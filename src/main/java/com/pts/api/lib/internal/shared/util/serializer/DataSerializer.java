@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import java.lang.reflect.Type;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -38,6 +39,15 @@ public final class DataSerializer {
             return objectMapper.writeValueAsString(object);
         } catch (JsonProcessingException e) {
             log.error("JsonProcessingException object={}", object, e);
+            return null;
+        }
+    }
+
+    public static <T> T deserialize(String data, Type type) {
+        try {
+            return objectMapper.readValue(data, objectMapper.getTypeFactory().constructType(type));
+        } catch (JsonProcessingException e) {
+            log.error("JsonProcessingException data={}, typeReference", data, e);
             return null;
         }
     }
