@@ -2,8 +2,8 @@ package com.pts.api.category.application.service;
 
 import com.pts.api.category.application.port.dto.response.ReadSubCategoryResponse;
 import com.pts.api.category.application.port.in.ReadSubCategoryUseCase;
-import com.pts.api.category.infrastructure.persistence.entity.SubCategoryEntity;
-import com.pts.api.category.infrastructure.persistence.repository.SubCategoryRepository;
+import com.pts.api.category.application.port.out.SubCategoryRepositoryPort;
+import com.pts.api.category.domain.model.SubCategory;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,12 +13,12 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class SubCategoryService implements ReadSubCategoryUseCase {
 
-    private final SubCategoryRepository subCategoryRepositoryPort;
+    private final SubCategoryRepositoryPort subCategoryRepositoryPort;
 
     @Override
     @Transactional(readOnly = true)
     public ReadSubCategoryResponse getSubCategory(Long categoryId, Long id) {
-        return mapToDto(subCategoryRepositoryPort.findOneByIdAndCategoryId(categoryId, id)
+        return mapToDto(subCategoryRepositoryPort.findOneById(categoryId, id)
             .orElseThrow(() -> new RuntimeException("SubCategory not found with id: " + id)));
     }
 
@@ -30,13 +30,13 @@ public class SubCategoryService implements ReadSubCategoryUseCase {
             .toList();
     }
 
-    private ReadSubCategoryResponse mapToDto(SubCategoryEntity subCategoryEntity) {
+    private ReadSubCategoryResponse mapToDto(SubCategory subCategory) {
         return new ReadSubCategoryResponse(
-            subCategoryEntity.getId(),
-            subCategoryEntity.getName(),
-            subCategoryEntity.getCategoryId(),
-            subCategoryEntity.getCreatedAt(),
-            subCategoryEntity.getUpdatedAt()
+            subCategory.getId(),
+            subCategory.getName(),
+            subCategory.getCategoryId(),
+            subCategory.getCreatedAt(),
+            subCategory.getUpdatedAt()
         );
     }
 
