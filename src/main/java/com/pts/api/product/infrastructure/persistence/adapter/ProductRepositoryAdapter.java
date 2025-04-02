@@ -1,5 +1,6 @@
 package com.pts.api.product.infrastructure.persistence.adapter;
 
+import com.pts.api.global.infrastructure.cache.CustomCacheable;
 import com.pts.api.product.application.port.out.ProductRepositoryPort;
 import com.pts.api.product.domain.model.Product;
 import com.pts.api.product.infrastructure.persistence.entity.ProductEntity;
@@ -37,6 +38,11 @@ public class ProductRepositoryAdapter implements ProductRepositoryPort {
     }
 
     @Override
+    @CustomCacheable(
+        prefix = "productRead",
+        keys = {"idolId", "categoryId", "subCategoryId", "offset", "limit"},
+        ttlSeconds = 60 * 10
+    )
     public List<Product> findAll(Long idolId, Long categoryId, Long subCategoryId, Long offset,
         int limit) {
         return qProductRepository.findAll(idolId, categoryId, subCategoryId, offset, limit);

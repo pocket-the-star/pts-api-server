@@ -4,6 +4,7 @@ import com.pts.api.category.application.port.out.SubCategoryRepositoryPort;
 import com.pts.api.category.domain.model.SubCategory;
 import com.pts.api.category.infrastructure.persistence.entity.SubCategoryEntity;
 import com.pts.api.category.infrastructure.persistence.repository.SubCategoryRepository;
+import com.pts.api.global.infrastructure.cache.CustomCacheable;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +17,11 @@ public class SubCategoryRepositoryAdapter implements SubCategoryRepositoryPort {
     private final SubCategoryRepository subCategoryRepository;
 
     @Override
+    @CustomCacheable(
+        prefix = "subCategories",
+        keys = {"categoryId"},
+        ttlSeconds = 60 * 30
+    )
     public List<SubCategory> findAllByCategoryId(Long categoryId) {
         return subCategoryRepository.findAllByCategoryId(categoryId).stream()
             .map(SubCategoryEntity::toModel).toList();
