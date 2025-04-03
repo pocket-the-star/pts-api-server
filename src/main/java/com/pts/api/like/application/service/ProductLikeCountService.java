@@ -67,9 +67,6 @@ public class ProductLikeCountService implements ProductLikeCountUseCase {
 
             action.run();
 
-        } catch (Exception e) {
-
-            throw new RuntimeException(e);
         } finally {
             if (lock.isHeldByCurrentThread()) {
                 lock.unlock();

@@ -9,6 +9,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import com.pts.api.category.application.port.dto.response.ReadSubCategoryResponse;
 import com.pts.api.category.application.service.SubCategoryService;
 import com.pts.api.common.base.BaseIntegrationTest;
+import com.pts.api.global.common.exception.NotFoundException;
 import java.time.LocalDateTime;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
@@ -42,13 +43,17 @@ class SubCategoryControllerTest extends BaseIntegrationTest {
         @DisplayName("모든 서브 카테고리 목록을 반환한다")
         void itReturnsAllSubCategories() throws Exception {
             // Given
-            ReadSubCategoryResponse subCategory1 = new ReadSubCategoryResponse(TEST_ID, TEST_NAME, TEST_CATEGORY_ID, TEST_DATE, TEST_DATE);
-            ReadSubCategoryResponse subCategory2 = new ReadSubCategoryResponse(2L, "테스트 서브 카테고리 2", TEST_CATEGORY_ID, TEST_DATE, TEST_DATE);
-            given(subCategoryService.getSubCategories(TEST_CATEGORY_ID)).willReturn(List.of(subCategory1, subCategory2));
+            ReadSubCategoryResponse subCategory1 = new ReadSubCategoryResponse(TEST_ID, TEST_NAME,
+                TEST_CATEGORY_ID, TEST_DATE, TEST_DATE);
+            ReadSubCategoryResponse subCategory2 = new ReadSubCategoryResponse(2L, "테스트 서브 카테고리 2",
+                TEST_CATEGORY_ID, TEST_DATE, TEST_DATE);
+            given(subCategoryService.getSubCategories(TEST_CATEGORY_ID)).willReturn(
+                List.of(subCategory1, subCategory2));
 
             // When
-            ResultActions result = mockMvc.perform(get("/api/v1/categories/{categoryId}/sub-categories", TEST_CATEGORY_ID)
-                .with(user("testUser").roles("USER")));
+            ResultActions result = mockMvc.perform(
+                get("/api/v1/categories/{categoryId}/sub-categories", TEST_CATEGORY_ID)
+                    .with(user("testUser").roles("USER")));
 
             // Then
             result.andExpect(status().isOk());
@@ -67,12 +72,16 @@ class SubCategoryControllerTest extends BaseIntegrationTest {
             @DisplayName("서브 카테고리 정보를 반환한다")
             void itReturnsSubCategory() throws Exception {
                 // Given
-                ReadSubCategoryResponse subCategory = new ReadSubCategoryResponse(TEST_ID, TEST_NAME, TEST_CATEGORY_ID, TEST_DATE, TEST_DATE);
-                given(subCategoryService.getSubCategory(TEST_CATEGORY_ID, TEST_ID)).willReturn(subCategory);
+                ReadSubCategoryResponse subCategory = new ReadSubCategoryResponse(TEST_ID,
+                    TEST_NAME, TEST_CATEGORY_ID, TEST_DATE, TEST_DATE);
+                given(subCategoryService.getSubCategory(TEST_CATEGORY_ID, TEST_ID)).willReturn(
+                    subCategory);
 
                 // When
-                ResultActions result = mockMvc.perform(get("/api/v1/categories/{categoryId}/sub-categories/{id}", TEST_CATEGORY_ID, TEST_ID)
-                    .with(user("testUser").roles("USER")));
+                ResultActions result = mockMvc.perform(
+                    get("/api/v1/categories/{categoryId}/sub-categories/{id}", TEST_CATEGORY_ID,
+                        TEST_ID)
+                        .with(user("testUser").roles("USER")));
 
                 // Then
                 result.andExpect(status().isOk());
@@ -88,11 +97,13 @@ class SubCategoryControllerTest extends BaseIntegrationTest {
             void itReturns404Error() throws Exception {
                 // Given
                 given(subCategoryService.getSubCategory(TEST_CATEGORY_ID, TEST_ID))
-                    .willThrow(new RuntimeException("SubCategory not found with id: " + TEST_ID));
+                    .willThrow(new NotFoundException("SubCategory not found with id: " + TEST_ID));
 
                 // When
-                ResultActions result = mockMvc.perform(get("/api/v1/categories/{categoryId}/sub-categories/{id}", TEST_CATEGORY_ID, TEST_ID)
-                    .with(user("testUser").roles("USER")));
+                ResultActions result = mockMvc.perform(
+                    get("/api/v1/categories/{categoryId}/sub-categories/{id}", TEST_CATEGORY_ID,
+                        TEST_ID)
+                        .with(user("testUser").roles("USER")));
 
                 // Then
                 result.andExpect(status().isNotFound());
