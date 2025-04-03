@@ -3,7 +3,7 @@ package com.pts.api.idol.application.service;
 import com.pts.api.global.common.exception.NotFoundException;
 import com.pts.api.idol.application.dto.response.ReadArtistResponse;
 import com.pts.api.idol.application.port.in.ReadArtistUseCase;
-import com.pts.api.idol.infrastructure.persistence.repository.ArtistRepository;
+import com.pts.api.idol.application.port.out.ArtistRepositoryPort;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class ArtistService implements ReadArtistUseCase {
 
-    private final ArtistRepository artistRepository;
+    private final ArtistRepositoryPort artistRepository;
 
     @Override
     public List<ReadArtistResponse> getArtists(Long idolId) {

@@ -3,7 +3,7 @@ package com.pts.api.idol.application.service;
 import com.pts.api.global.common.exception.NotFoundException;
 import com.pts.api.idol.application.dto.response.ReadIdolResponse;
 import com.pts.api.idol.application.port.in.ReadIdolUseCase;
-import com.pts.api.idol.infrastructure.persistence.repository.IdolRepository;
+import com.pts.api.idol.application.port.out.IdolRepositoryPort;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class IdolService implements ReadIdolUseCase {
 
-    private final IdolRepository idolRepository;
+    private final IdolRepositoryPort idolRepository;
 
     @Override
     public List<ReadIdolResponse> getIdols(Long offset, Integer limit) {

@@ -1,6 +1,6 @@
 package com.pts.api.idol.application.dto.response;
 
-import com.pts.api.idol.infrastructure.persistence.entity.IdolEntity;
+import com.pts.api.idol.domain.model.Idol;
 import java.time.LocalDateTime;
 
 public record ReadIdolResponse(
@@ -10,7 +10,7 @@ public record ReadIdolResponse(
     LocalDateTime updatedAt
 ) {
 
-    public static ReadIdolResponse of(IdolEntity idolEntity) {
+    public static ReadIdolResponse of(Idol idolEntity) {
         return new ReadIdolResponse(
             idolEntity.getId(),
             idolEntity.getName(),
