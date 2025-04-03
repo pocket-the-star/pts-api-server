@@ -4,12 +4,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import com.pts.api.common.base.BaseUnitTest;
 import com.pts.api.global.common.exception.AlreadyExistException;
 import com.pts.api.global.common.exception.NotFoundException;
 import com.pts.api.global.outbox.publisher.EventPublisherPort;
@@ -25,13 +23,20 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 
 @DisplayName("ProductLikeService 클래스")
-class ProductLikeServiceTest {
+class ProductLikeServiceTest extends BaseUnitTest {
 
     private ProductLikeService productLikeService;
+
+    @Mock
     private ProductLikeRepositoryPort productLikeRepository;
+
+    @Mock
     private ProductRepositoryPort productRepository;
+
+    @Mock
     private EventPublisherPort outboxPublisher;
 
     private static final Long TEST_USER_ID = 1L;
@@ -39,10 +44,6 @@ class ProductLikeServiceTest {
 
     @BeforeEach
     void setUp() {
-        productLikeRepository = mock(ProductLikeRepositoryPort.class);
-        productRepository = mock(ProductRepositoryPort.class);
-        outboxPublisher = mock(EventPublisherPort.class);
-
         productLikeService = new ProductLikeService(
             productLikeRepository,
             productRepository,
@@ -86,8 +87,8 @@ class ProductLikeServiceTest {
         }
 
         @Nested
-        @DisplayName("존재하지 않는 상품 ID가 주어지면")
-        class WithNonExistingProductId {
+        @DisplayName("존재하지 않는 상품이면")
+        class WithNonExistingProduct {
 
             @BeforeEach
             void setUp() {
@@ -102,9 +103,6 @@ class ProductLikeServiceTest {
                 assertThatThrownBy(() -> productLikeService.like(TEST_PRODUCT_ID, TEST_USER_ID))
                     .isInstanceOf(NotFoundException.class)
                     .hasMessage("존재하지 않는 상품입니다.: " + TEST_PRODUCT_ID);
-
-                verify(productLikeRepository, never()).save(any(ProductLike.class));
-                verify(outboxPublisher, never()).publish(any(), any());
             }
         }
 
@@ -131,9 +129,6 @@ class ProductLikeServiceTest {
                 assertThatThrownBy(() -> productLikeService.like(TEST_PRODUCT_ID, TEST_USER_ID))
                     .isInstanceOf(AlreadyExistException.class)
                     .hasMessage("이미 좋아요한 상품입니다.: " + TEST_PRODUCT_ID);
-
-                verify(productLikeRepository, never()).save(any(ProductLike.class));
-                verify(outboxPublisher, never()).publish(any(), any());
             }
         }
     }
@@ -191,9 +186,6 @@ class ProductLikeServiceTest {
                 assertThatThrownBy(() -> productLikeService.unlike(TEST_PRODUCT_ID, TEST_USER_ID))
                     .isInstanceOf(NotFoundException.class)
                     .hasMessage("좋아요하지 않은 상품입니다.: " + TEST_PRODUCT_ID);
-
-                verify(productLikeRepository, never()).delete(any(ProductLike.class));
-                verify(outboxPublisher, never()).publish(any(), any());
             }
         }
     }

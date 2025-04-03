@@ -3,10 +3,10 @@ package com.pts.api.like.application.service;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import com.pts.api.common.base.BaseUnitTest;
 import com.pts.api.global.common.exception.NotFoundException;
 import com.pts.api.global.lock.repository.LockRepository;
 import com.pts.api.like.application.port.out.ProductLikeCountRepositoryPort;
@@ -17,14 +17,21 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.redisson.api.RLock;
 
 @DisplayName("ProductLikeCountService 클래스")
-class ProductLikeCountServiceTest {
+class ProductLikeCountServiceTest extends BaseUnitTest {
 
     private ProductLikeCountService productLikeCountService;
+
+    @Mock
     private ProductLikeCountRepositoryPort productLikeCountRepository;
+
+    @Mock
     private LockRepository productLikeLockRepository;
+
+    @Mock
     private RLock mockLock;
 
     private static final Long TEST_PRODUCT_ID = 1L;
@@ -32,14 +39,10 @@ class ProductLikeCountServiceTest {
 
     @BeforeEach
     void setUp() {
-        productLikeCountRepository = mock(ProductLikeCountRepositoryPort.class);
-        productLikeLockRepository = mock(LockRepository.class);
-        mockLock = mock(RLock.class);
-
-        when(productLikeLockRepository.getFairLock(any())).thenReturn(mockLock);
-
-        productLikeCountService = new ProductLikeCountService(productLikeCountRepository,
-            productLikeLockRepository);
+        productLikeCountService = new ProductLikeCountService(
+            productLikeCountRepository,
+            productLikeLockRepository
+        );
     }
 
     @Nested
@@ -116,6 +119,7 @@ class ProductLikeCountServiceTest {
                     .updatedAt(LocalDateTime.now())
                     .build();
 
+                when(productLikeLockRepository.getFairLock(any())).thenReturn(mockLock);
                 when(productLikeCountRepository.findByProductId(TEST_PRODUCT_ID))
                     .thenReturn(Optional.of(productLikeCount));
                 when(productLikeCountRepository.save(any(ProductLikeCount.class)))
@@ -140,6 +144,7 @@ class ProductLikeCountServiceTest {
 
             @BeforeEach
             void setUp() {
+                when(productLikeLockRepository.getFairLock(any())).thenReturn(mockLock);
                 when(productLikeCountRepository.findByProductId(TEST_PRODUCT_ID))
                     .thenReturn(Optional.empty());
             }
@@ -175,6 +180,7 @@ class ProductLikeCountServiceTest {
                     .updatedAt(LocalDateTime.now())
                     .build();
 
+                when(productLikeLockRepository.getFairLock(any())).thenReturn(mockLock);
                 when(productLikeCountRepository.findByProductId(TEST_PRODUCT_ID))
                     .thenReturn(Optional.of(productLikeCount));
                 when(productLikeCountRepository.save(any(ProductLikeCount.class)))
@@ -199,6 +205,7 @@ class ProductLikeCountServiceTest {
 
             @BeforeEach
             void setUp() {
+                when(productLikeLockRepository.getFairLock(any())).thenReturn(mockLock);
                 when(productLikeCountRepository.findByProductId(TEST_PRODUCT_ID))
                     .thenReturn(Optional.empty());
             }
@@ -210,7 +217,6 @@ class ProductLikeCountServiceTest {
                 assertThatThrownBy(() -> productLikeCountService.decrease(TEST_PRODUCT_ID))
                     .isInstanceOf(NotFoundException.class)
                     .hasMessage("좋아요 카운트가 존재하지 않습니다.: " + TEST_PRODUCT_ID);
-
             }
         }
     }
