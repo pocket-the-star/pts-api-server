@@ -1,5 +1,6 @@
 package com.pts.api.like.infrastructure.persistence.adapter;
 
+import com.pts.api.global.infrastructure.cache.CustomCacheable;
 import com.pts.api.like.application.port.out.ProductLikeCountRepositoryPort;
 import com.pts.api.like.domain.model.ProductLikeCount;
 import com.pts.api.like.infrastructure.persistence.entity.ProductLikeCountEntity;
@@ -22,6 +23,11 @@ public class ProductLikeCountRepositoryAdapter implements ProductLikeCountReposi
     }
 
     @Override
+    @CustomCacheable(
+        prefix = "productLikeCount",
+        ttlSeconds = 60 * 30,
+        keys = {"productId"}
+    )
     public Optional<ProductLikeCount> findByProductId(Long productId) {
         return productLikeCountRepository.findOneByProductId(productId)
             .map(ProductLikeCountEntity::toDomain);

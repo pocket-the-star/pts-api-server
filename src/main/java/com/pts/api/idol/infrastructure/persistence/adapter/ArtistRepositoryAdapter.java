@@ -1,5 +1,6 @@
 package com.pts.api.idol.infrastructure.persistence.adapter;
 
+import com.pts.api.global.infrastructure.cache.CustomCacheable;
 import com.pts.api.idol.application.port.out.ArtistRepositoryPort;
 import com.pts.api.idol.domain.model.Artist;
 import com.pts.api.idol.infrastructure.persistence.entity.ArtistEntity;
@@ -17,6 +18,11 @@ public class ArtistRepositoryAdapter implements ArtistRepositoryPort {
 
 
     @Override
+    @CustomCacheable(
+        prefix = "artists",
+        ttlSeconds = 60 * 30,
+        keys = {"idolId"}
+    )
     public List<Artist> findAll(Long idolId) {
         return artistRepository.findAll(idolId).stream().map(ArtistEntity::toModel).toList();
     }

@@ -4,6 +4,7 @@ import com.pts.api.feed.application.port.out.FeedRepositoryPort;
 import com.pts.api.feed.domain.model.Feed;
 import com.pts.api.feed.infrastructure.persistence.entity.FeedEntity;
 import com.pts.api.feed.infrastructure.persistence.repository.FeedRepository;
+import com.pts.api.global.infrastructure.cache.CustomCacheable;
 import com.pts.api.lib.internal.shared.enums.FeedStatus;
 import java.util.List;
 import java.util.Optional;
@@ -30,6 +31,11 @@ public class FeedRepositoryAdapter implements FeedRepositoryPort {
     }
 
     @Override
+    @CustomCacheable(
+        prefix = "feeds",
+        ttlSeconds = 60 * 30,
+        keys = {"userId, offset", "limit"}
+    )
     public List<Feed> findByUserIdAndDeletedAtIsNull(Long userId, Long offset, Integer limit) {
         return feedRepository.findByUserIdAndDeletedAtIsNull(userId, offset, limit).stream()
             .map(FeedEntity::toModel)
