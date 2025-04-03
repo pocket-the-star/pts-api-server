@@ -2,7 +2,7 @@ package com.pts.api.order.application.service;
 
 import com.pts.api.feed.application.port.out.FeedRepositoryPort;
 import com.pts.api.global.common.exception.NotFoundException;
-import com.pts.api.global.common.exception.UnauthorizedException;
+import com.pts.api.global.common.exception.UnAuthorizedException;
 import com.pts.api.lib.internal.shared.enums.OrderStatus;
 import com.pts.api.lib.internal.shared.util.date.DateTimeUtil;
 import com.pts.api.order.application.dto.request.CreateOrderRequest;
@@ -69,7 +69,7 @@ public class OrderApplicationService implements CreateOrderUseCase, UpdateOrderU
             .orElseThrow(() -> new NotFoundException("주문을 찾을 수 없습니다."));
 
         if (!order.getUserId().equals(userId)) {
-            throw new UnauthorizedException("해당 주문에 대한 권한이 없습니다.");
+            throw new UnAuthorizedException("해당 주문에 대한 권한이 없습니다.");
         }
 
         order.updateStatus(request.orderStatus(), dateTimeUtil.now());
@@ -83,7 +83,7 @@ public class OrderApplicationService implements CreateOrderUseCase, UpdateOrderU
             .orElseThrow(() -> new NotFoundException("주문을 찾을 수 없습니다."));
 
         if (!order.getUserId().equals(userId)) {
-            throw new UnauthorizedException("해당 주문에 대한 권한이 없습니다.");
+            throw new UnAuthorizedException("해당 주문에 대한 권한이 없습니다.");
         }
 
         order.cancel(dateTimeUtil.now());
@@ -97,7 +97,7 @@ public class OrderApplicationService implements CreateOrderUseCase, UpdateOrderU
             .orElseThrow(() -> new NotFoundException("주문을 찾을 수 없습니다."));
 
         if (!order.getUserId().equals(userId)) {
-            throw new UnauthorizedException("해당 주문에 대한 권한이 없습니다.");
+            throw new UnAuthorizedException("해당 주문에 대한 권한이 없습니다.");
         }
 
         order.delete(dateTimeUtil.now());

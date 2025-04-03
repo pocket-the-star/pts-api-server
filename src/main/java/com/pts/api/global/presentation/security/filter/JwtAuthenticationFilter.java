@@ -1,6 +1,6 @@
 package com.pts.api.global.presentation.security.filter;
 
-import com.pts.api.global.common.exception.UnauthorizedException;
+import com.pts.api.global.common.exception.UnAuthorizedException;
 import com.pts.api.global.presentation.response.ResponseGenerator;
 import com.pts.api.lib.external.security.model.CustomAuthenticationToken;
 import com.pts.api.lib.internal.shared.util.serializer.DataSerializer;
@@ -57,7 +57,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private String extractRefreshToken(Cookie[] cookies) {
         if (cookies == null) {
-            throw new UnauthorizedException("리프레시 토큰은 필수입니다.");
+            throw new UnAuthorizedException("리프레시 토큰은 필수입니다.");
         }
         return Arrays.stream(cookies)
             .filter(cookie -> "refreshToken".equals(cookie.getName()))

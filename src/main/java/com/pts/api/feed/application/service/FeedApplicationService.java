@@ -12,17 +12,17 @@ import com.pts.api.feed.application.port.in.ReadMyFeedUseCase;
 import com.pts.api.feed.application.port.in.RestoreStockUseCase;
 import com.pts.api.feed.application.port.in.UpdateFeedUseCase;
 import com.pts.api.feed.application.port.out.FeedRepositoryPort;
-import com.pts.api.feed.common.exception.FeedAlreadyExistsException;
 import com.pts.api.feed.domain.model.Feed;
 import com.pts.api.feed.domain.model.FeedImage;
 import com.pts.api.global.common.exception.NotFoundException;
-import com.pts.api.global.common.exception.UnauthorizedException;
+import com.pts.api.global.common.exception.UnAuthorizedException;
 import com.pts.api.global.outbox.publisher.EventPublisherPort;
 import com.pts.api.lib.internal.shared.enums.FeedStatus;
 import com.pts.api.lib.internal.shared.event.EventType;
 import com.pts.api.lib.internal.shared.event.data.FeedCreateData;
 import com.pts.api.lib.internal.shared.util.date.DateTimeUtil;
 import com.pts.api.product.application.port.out.ProductRepositoryPort;
+import com.pts.api.user.common.exception.AlreadyExistsException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -52,7 +52,7 @@ public class FeedApplicationService implements CreateFeedUseCase, ReadFeedListUs
             userId, request.productId(), FeedStatus.PENDING);
 
         if (feed.isPresent()) {
-            throw new FeedAlreadyExistsException(
+            throw new AlreadyExistsException(
                 "이미 등록된 피드가 존재합니다. userId: " + userId + ", productId: " + request.productId());
         }
 
@@ -104,7 +104,7 @@ public class FeedApplicationService implements CreateFeedUseCase, ReadFeedListUs
         Feed feed = getFeed(id);
 
         if (!feed.getUserId().equals(userId)) {
-            throw new UnauthorizedException(
+            throw new UnAuthorizedException(
                 "수정 권한이 없는 피드입니다. feedId: " + feed.getId() + ", userId: " + userId);
         }
 
@@ -129,7 +129,7 @@ public class FeedApplicationService implements CreateFeedUseCase, ReadFeedListUs
     public void delete(Long userId, Long id) {
         Feed feed = getFeed(id);
         if (!feed.getUserId().equals(userId)) {
-            throw new UnauthorizedException(
+            throw new UnAuthorizedException(
                 "삭제 권한이 없는 피드입니다. feedId: " + feed.getId() + ", userId: " + userId);
         }
 
