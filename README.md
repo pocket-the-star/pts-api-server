@@ -1,8 +1,4 @@
-# PTS API 서버
-
-## 프로젝트 소개
-
-### 포켓 더 스타 (Pocket The Star) 🌟
+# 포켓 더 스타 (Pocket The Star) 🌟
 
 **프로젝트 비전:**  
 "당신의 스타를 주머니에 담다"
@@ -42,9 +38,16 @@
 - **Redis** - 인메모리 데이터 저장소
 - **MySQL** - 영구 데이터 저장소
 
-## 아키텍처
+## 시스템 구조도 & 아키텍처
+
+
+![pts drawio](https://github.com/user-attachments/assets/79dcfede-d483-4c0a-99c7-e4420199b35c)
+
 
 이 프로젝트는 헥사고날 아키텍처(포트 및 어댑터 패턴)를 기반으로 구현되었습니다:
+
+![아키텍처](https://github.com/user-attachments/assets/5012decf-2d8e-4e72-a5fa-d82c75d30c62)
+
 
 - **Domain Layer**: 핵심 비즈니스 로직과 엔티티
   - 도메인 모델: User, Product, Order, Feed 등
@@ -65,6 +68,10 @@
 - **아웃박스 패턴**: 트랜잭션 일관성을 보장하기 위한 이벤트 발행 패턴
 - **분산 락**: Redisson을 활용한 분산 환경에서의 동시성 제어
 - **이벤트 기반 아키텍처**: Kafka를 활용한 비동기 이벤트 처리
+
+## ERD
+![pts-erd](https://github.com/user-attachments/assets/2c431f29-cf75-4a50-a23f-67b5acc780c9)
+
 
 ## 주요 기능
 
