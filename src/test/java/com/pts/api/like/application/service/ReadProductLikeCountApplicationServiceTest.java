@@ -17,9 +17,9 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 
 @DisplayName("ProductLikeCountService 클래스")
-class ReadProductLikeCountServiceTest extends BaseUnitTest {
+class ReadProductLikeCountApplicationServiceTest extends BaseUnitTest {
 
-    private ReadProductLikeCountService productLikeCountService;
+    private ReadProductLikeCountApplicationService productLikeCountService;
 
     @Mock
     private ProductLikeCountRepositoryPort productLikeCountRepository;
@@ -29,7 +29,7 @@ class ReadProductLikeCountServiceTest extends BaseUnitTest {
 
     @BeforeEach
     void setUp() {
-        productLikeCountService = new ReadProductLikeCountService(
+        productLikeCountService = new ReadProductLikeCountApplicationService(
             productLikeCountRepository);
     }
 
