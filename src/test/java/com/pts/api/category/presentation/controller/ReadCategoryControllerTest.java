@@ -7,7 +7,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.pts.api.category.application.port.dto.response.ReadCategoryResponse;
-import com.pts.api.category.application.service.CategoryService;
+import com.pts.api.category.application.service.ReadCategoryService;
 import com.pts.api.category.common.exception.CategoryNotFoundException;
 import com.pts.api.common.base.BaseIntegrationTest;
 import java.time.LocalDateTime;
@@ -20,10 +20,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.ResultActions;
 
 @DisplayName("CategoryController 클래스")
-class CategoryControllerTest extends BaseIntegrationTest {
+class ReadCategoryControllerTest extends BaseIntegrationTest {
 
     @Autowired
-    private CategoryService categoryService;
+    private ReadCategoryService readCategoryService;
 
     private static final Long TEST_ID_1 = 1L;
     private static final Long TEST_ID_2 = 2L;
@@ -32,7 +32,7 @@ class CategoryControllerTest extends BaseIntegrationTest {
 
     @BeforeEach
     void setUp() {
-        reset(categoryService);
+        reset(readCategoryService);
     }
 
     @Nested
@@ -43,9 +43,11 @@ class CategoryControllerTest extends BaseIntegrationTest {
         @DisplayName("모든 카테고리 목록을 반환한다")
         void itReturnsAllCategories() throws Exception {
             // Given
-            ReadCategoryResponse category1 = new ReadCategoryResponse(TEST_ID_1, TEST_NAME, TEST_DATE, TEST_DATE);
-            ReadCategoryResponse category2 = new ReadCategoryResponse(TEST_ID_2, "테스트 카테고리 2", TEST_DATE, TEST_DATE);
-            given(categoryService.getCategories()).willReturn(List.of(category1, category2));
+            ReadCategoryResponse category1 = new ReadCategoryResponse(TEST_ID_1, TEST_NAME,
+                TEST_DATE, TEST_DATE);
+            ReadCategoryResponse category2 = new ReadCategoryResponse(TEST_ID_2, "테스트 카테고리 2",
+                TEST_DATE, TEST_DATE);
+            given(readCategoryService.getCategories()).willReturn(List.of(category1, category2));
 
             // When
             ResultActions result = mockMvc.perform(get("/api/v1/categories")
@@ -68,8 +70,9 @@ class CategoryControllerTest extends BaseIntegrationTest {
             @DisplayName("카테고리 정보를 반환한다")
             void itReturnsCategory() throws Exception {
                 // Given
-                ReadCategoryResponse category = new ReadCategoryResponse(TEST_ID_1, TEST_NAME, TEST_DATE, TEST_DATE);
-                given(categoryService.getCategory(TEST_ID_1)).willReturn(category);
+                ReadCategoryResponse category = new ReadCategoryResponse(TEST_ID_1, TEST_NAME,
+                    TEST_DATE, TEST_DATE);
+                given(readCategoryService.getCategory(TEST_ID_1)).willReturn(category);
 
                 // When
                 ResultActions result = mockMvc.perform(get("/api/v1/categories/{id}", TEST_ID_1)
@@ -88,8 +91,9 @@ class CategoryControllerTest extends BaseIntegrationTest {
             @DisplayName("404 에러를 반환한다")
             void itReturns404Error() throws Exception {
                 // Given
-                given(categoryService.getCategory(TEST_ID_2))
-                    .willThrow(new CategoryNotFoundException("Category not found with id: " + TEST_ID_2));
+                given(readCategoryService.getCategory(TEST_ID_2))
+                    .willThrow(
+                        new CategoryNotFoundException("Category not found with id: " + TEST_ID_2));
 
                 // When
                 ResultActions result = mockMvc.perform(get("/api/v1/categories/{id}", TEST_ID_2)

@@ -1,7 +1,7 @@
 package com.pts.api.category.presentation.controller;
 
 import com.pts.api.category.application.port.dto.response.ReadCategoryResponse;
-import com.pts.api.category.application.service.CategoryService;
+import com.pts.api.category.application.service.ReadCategoryService;
 import com.pts.api.global.presentation.response.BaseResponse;
 import com.pts.api.global.presentation.response.ResponseGenerator;
 import com.pts.api.global.presentation.response.ResponseMsg;
@@ -20,14 +20,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v1/categories")
 @RequiredArgsConstructor
-public class CategoryController {
+public class ReadCategoryController {
 
-    private final CategoryService categoryService;
+    private final ReadCategoryService readCategoryService;
 
     @Operation(summary = "카테고리 조회", description = "카테고리 목록을 조회합니다.")
     @GetMapping
     public ResponseEntity<BaseResponse<List<ReadCategoryResponse>>> getCategories() {
-        List<ReadCategoryResponse> categories = categoryService.getCategories();
+        List<ReadCategoryResponse> categories = readCategoryService.getCategories();
 
         return ResponseGenerator.ok(ResponseMsg.OK, HttpStatus.OK, categories);
     }
@@ -35,7 +35,7 @@ public class CategoryController {
     @Operation(summary = "카테고리 상세 조회", description = "카테고리 상세 정보를 조회합니다.")
     @GetMapping("/{id}")
     public ResponseEntity<BaseResponse<ReadCategoryResponse>> getCategory(@PathVariable Long id) {
-        ReadCategoryResponse category = categoryService.getCategory(id);
+        ReadCategoryResponse category = readCategoryService.getCategory(id);
 
         return ResponseGenerator.ok(ResponseMsg.OK, HttpStatus.OK, category);
     }

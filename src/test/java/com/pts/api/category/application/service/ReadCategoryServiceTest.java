@@ -19,12 +19,12 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 
 @DisplayName("CategoryService 클래스")
-class CategoryServiceTest extends BaseUnitTest {
+class ReadCategoryServiceTest extends BaseUnitTest {
 
     @Mock
     private CategoryRepositoryPort categoryRepositoryPort;
 
-    private CategoryService categoryService;
+    private ReadCategoryService readCategoryService;
 
     private static final Long TEST_ID = 1L;
     private static final String TEST_NAME = "테스트 카테고리";
@@ -32,7 +32,7 @@ class CategoryServiceTest extends BaseUnitTest {
 
     @BeforeEach
     void setUp() {
-        categoryService = new CategoryService(categoryRepositoryPort);
+        readCategoryService = new ReadCategoryService(categoryRepositoryPort);
     }
 
     @Nested
@@ -57,7 +57,7 @@ class CategoryServiceTest extends BaseUnitTest {
                     .thenReturn(Optional.of(category));
 
                 // When
-                ReadCategoryResponse response = categoryService.getCategory(TEST_ID);
+                ReadCategoryResponse response = readCategoryService.getCategory(TEST_ID);
 
                 // Then
                 assertThat(response.id()).isEqualTo(TEST_ID);
@@ -79,7 +79,7 @@ class CategoryServiceTest extends BaseUnitTest {
                     .thenReturn(Optional.empty());
 
                 // When & Then
-                assertThatThrownBy(() -> categoryService.getCategory(TEST_ID))
+                assertThatThrownBy(() -> readCategoryService.getCategory(TEST_ID))
                     .isInstanceOf(CategoryNotFoundException.class)
                     .hasMessage("Category not found with id: " + TEST_ID);
             }
@@ -110,7 +110,7 @@ class CategoryServiceTest extends BaseUnitTest {
                 .thenReturn(List.of(category1, category2));
 
             // When
-            List<ReadCategoryResponse> responses = categoryService.getCategories();
+            List<ReadCategoryResponse> responses = readCategoryService.getCategories();
 
             // Then
             assertThat(responses).hasSize(2);
