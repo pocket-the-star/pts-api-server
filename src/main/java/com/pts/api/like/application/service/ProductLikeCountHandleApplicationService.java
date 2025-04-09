@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class ProductLikeCountHandleService implements ProductLikeCountHandleUseCase {
+public class ProductLikeCountHandleApplicationService implements ProductLikeCountHandleUseCase {
 
     private final List<ProductLikeCountEventHandler<EventData>> eventHandlers;
 

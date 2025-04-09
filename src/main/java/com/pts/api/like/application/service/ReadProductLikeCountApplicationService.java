@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-public class ReadProductLikeCountService implements ReadProductLikeCountUseCase {
+public class ReadProductLikeCountApplicationService implements ReadProductLikeCountUseCase {
 
     private final ProductLikeCountRepositoryPort productLikeCountRepository;
 
