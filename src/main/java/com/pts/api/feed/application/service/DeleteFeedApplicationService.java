@@ -17,6 +17,14 @@ public class DeleteFeedApplicationService implements DeleteFeedUseCase {
     private final FeedRepositoryPort feedRepository;
     private final DateTimeUtil dateTimeUtil;
 
+    /**
+     * 피드 삭제
+     *
+     * @param userId 사용자 ID
+     * @param id     피드 ID
+     * @throws NotFoundException     피드가 존재하지 않을 경우
+     * @throws UnAuthorizedException 피드 삭제 권한이 없는 경우
+     */
     @Override
     @Transactional
     public void delete(Long userId, Long id) {
@@ -26,11 +34,25 @@ public class DeleteFeedApplicationService implements DeleteFeedUseCase {
         feedRepository.save(feed);
     }
 
+    /**
+     * 피드 조회
+     *
+     * @param id 피드 ID
+     * @return 피드
+     * @throws NotFoundException 피드가 존재하지 않을 경우
+     */
     private Feed getFeed(Long id) {
         return feedRepository.findOneById(id)
             .orElseThrow(() -> new NotFoundException("존재하지 않는 피드입니다. id=" + id));
     }
 
+    /**
+     * 피드 삭제 권한 검증
+     *
+     * @param feed   피드
+     * @param userId 사용자 ID
+     * @throws UnAuthorizedException 피드 삭제 권한이 없는 경우
+     */
     private void validateFeedOwnership(Feed feed, Long userId) {
         if (!feed.getUserId().equals(userId)) {
             throw new UnAuthorizedException(
