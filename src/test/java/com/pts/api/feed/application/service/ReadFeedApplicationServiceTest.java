@@ -31,7 +31,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 
 @DisplayName("FeedApplicationService 클래스")
-class FeedApplicationServiceTest extends BaseUnitTest {
+class ReadFeedApplicationServiceTest extends BaseUnitTest {
 
     @Mock
     private FeedRepositoryPort feedRepository;
@@ -42,7 +42,7 @@ class FeedApplicationServiceTest extends BaseUnitTest {
     @Mock
     private DateTimeUtil dateTimeUtil;
 
-    private FeedApplicationService feedService;
+    private ReadFeedApplicationService feedService;
 
     private static final Long TEST_USER_ID = 1L;
     private static final Long TEST_FEED_ID = 1L;
@@ -56,7 +56,8 @@ class FeedApplicationServiceTest extends BaseUnitTest {
 
     @BeforeEach
     void setUp() {
-        feedService = new FeedApplicationService(feedRepository, productRepository, eventPublisher,
+        feedService = new ReadFeedApplicationService(feedRepository, productRepository,
+            eventPublisher,
             dateTimeUtil);
     }
 
@@ -392,7 +393,7 @@ class FeedApplicationServiceTest extends BaseUnitTest {
                 .thenReturn(List.of(feed));
 
             // When
-            List<MyFeedResponse> responses = feedService.findByUserId(TEST_USER_ID, null, 20);
+            List<MyFeedResponse> responses = feedService.getMyFeeds(TEST_USER_ID, null, 20);
 
             // Then
             assertThat(responses).hasSize(1);
@@ -429,7 +430,7 @@ class FeedApplicationServiceTest extends BaseUnitTest {
                 .thenReturn(List.of(feed));
 
             // When
-            List<FeedResponse> responses = feedService.findAll(null, 20);
+            List<FeedResponse> responses = feedService.getFeeds(null, 20);
 
             // Then
             assertThat(responses).hasSize(1);

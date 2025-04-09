@@ -19,8 +19,7 @@ import com.pts.api.feed.application.dto.response.FeedResponse;
 import com.pts.api.feed.application.dto.response.MyFeedResponse;
 import com.pts.api.feed.application.port.in.DeleteFeedUseCase;
 import com.pts.api.feed.application.port.in.PostFeedUseCase;
-import com.pts.api.feed.application.port.in.ReadFeedListUseCase;
-import com.pts.api.feed.application.port.in.ReadMyFeedUseCase;
+import com.pts.api.feed.application.port.in.ReadFeedUseCase;
 import com.pts.api.feed.application.port.in.UpdateFeedUseCase;
 import com.pts.api.feed.domain.model.Feed;
 import com.pts.api.global.common.exception.NotFoundException;
@@ -43,13 +42,11 @@ class FeedControllerTest extends BaseIntegrationTest {
     @Autowired
     private PostFeedUseCase postFeedUseCase;
     @Autowired
-    private ReadFeedListUseCase readFeedListUseCase;
-    @Autowired
     private UpdateFeedUseCase updateFeedUseCase;
     @Autowired
     private DeleteFeedUseCase deleteFeedUseCase;
     @Autowired
-    private ReadMyFeedUseCase readMyFeedUseCase;
+    private ReadFeedUseCase readFeedUseCase;
 
     private static final String BASE_URL = "/api/v1/feeds";
     private static final Long TEST_USER_ID = 1L;
@@ -64,8 +61,7 @@ class FeedControllerTest extends BaseIntegrationTest {
 
     @BeforeEach
     void setUp() {
-        reset(postFeedUseCase, readFeedListUseCase, updateFeedUseCase, deleteFeedUseCase,
-            readMyFeedUseCase);
+        reset(readFeedUseCase);
     }
 
     @Nested
@@ -378,7 +374,7 @@ class FeedControllerTest extends BaseIntegrationTest {
                 .createdAt(TEST_DATE)
                 .updatedAt(TEST_DATE)
                 .build();
-            when(readMyFeedUseCase.findByUserId(TEST_USER_ID, null, 20))
+            when(readFeedUseCase.getMyFeeds(TEST_USER_ID, null, 20))
                 .thenReturn(List.of(MyFeedResponse.from(feed)));
 
             // When & Then
@@ -415,7 +411,7 @@ class FeedControllerTest extends BaseIntegrationTest {
                 .createdAt(TEST_DATE)
                 .updatedAt(TEST_DATE)
                 .build();
-            when(readFeedListUseCase.findAll(null, 20))
+            when(readFeedUseCase.getFeeds(null, 20))
                 .thenReturn(List.of(FeedResponse.from(feed)));
 
             // When & Then

@@ -6,8 +6,7 @@ import com.pts.api.feed.application.dto.response.FeedResponse;
 import com.pts.api.feed.application.dto.response.MyFeedResponse;
 import com.pts.api.feed.application.port.in.DeleteFeedUseCase;
 import com.pts.api.feed.application.port.in.PostFeedUseCase;
-import com.pts.api.feed.application.port.in.ReadFeedListUseCase;
-import com.pts.api.feed.application.port.in.ReadMyFeedUseCase;
+import com.pts.api.feed.application.port.in.ReadFeedUseCase;
 import com.pts.api.feed.application.port.in.UpdateFeedUseCase;
 import com.pts.api.global.presentation.response.BaseResponse;
 import com.pts.api.global.presentation.response.ResponseGenerator;
@@ -37,10 +36,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class FeedController {
 
     private final PostFeedUseCase postFeedUseCase;
-    private final ReadFeedListUseCase readFeedListUseCase;
     private final UpdateFeedUseCase updateFeedUseCase;
     private final DeleteFeedUseCase deleteFeedUseCase;
-    private final ReadMyFeedUseCase readMyFeedUseCase;
+    private final ReadFeedUseCase readFeedUseCase;
 
     @Operation(summary = "피드 생성", description = "피드를 생성합니다.")
     @PostMapping
@@ -57,7 +55,7 @@ public class FeedController {
     public ResponseEntity<BaseResponse<List<FeedResponse>>> findById(@RequestParam Long lastFeedId,
         @RequestParam Integer limit) {
         return ResponseGenerator.ok(ResponseMsg.OK, HttpStatus.OK,
-            readFeedListUseCase.findAll(lastFeedId, limit));
+            readFeedUseCase.getFeeds(lastFeedId, limit));
     }
 
     @Operation(summary = "피드 수정", description = "피드를 수정합니다.")
@@ -86,6 +84,6 @@ public class FeedController {
         @RequestParam(required = false) Integer limit) {
 
         return ResponseGenerator.ok(ResponseMsg.OK, HttpStatus.OK,
-            readMyFeedUseCase.findByUserId(userId, lastFeedId, limit));
+            readFeedUseCase.getMyFeeds(userId, lastFeedId, limit));
     }
 } 
