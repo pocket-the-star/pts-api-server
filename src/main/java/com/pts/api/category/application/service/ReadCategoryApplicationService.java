@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-public class ReadCategoryService implements ReadCategoryUseCase {
+public class ReadCategoryApplicationService implements ReadCategoryUseCase {
 
     private final CategoryRepositoryPort categoryRepositoryPort;
 

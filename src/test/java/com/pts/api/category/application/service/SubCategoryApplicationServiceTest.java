@@ -18,12 +18,12 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 
 @DisplayName("SubCategoryService 클래스")
-class SubCategoryServiceTest extends BaseUnitTest {
+class SubCategoryApplicationServiceTest extends BaseUnitTest {
 
     @Mock
     private SubCategoryRepositoryPort subCategoryRepositoryPort;
 
-    private SubCategoryService subCategoryService;
+    private SubCategoryApplicationService subCategoryApplicationService;
 
     private static final Long TEST_CATEGORY_ID = 1L;
     private static final Long TEST_ID = 1L;
@@ -32,7 +32,8 @@ class SubCategoryServiceTest extends BaseUnitTest {
 
     @BeforeEach
     void setUp() {
-        subCategoryService = new SubCategoryService(subCategoryRepositoryPort);
+        subCategoryApplicationService = new SubCategoryApplicationService(
+            subCategoryRepositoryPort);
     }
 
     @Nested
@@ -58,7 +59,8 @@ class SubCategoryServiceTest extends BaseUnitTest {
                     .thenReturn(Optional.of(subCategory));
 
                 // When
-                ReadSubCategoryResponse response = subCategoryService.getSubCategory(TEST_CATEGORY_ID, TEST_ID);
+                ReadSubCategoryResponse response = subCategoryApplicationService.getSubCategory(
+                    TEST_CATEGORY_ID, TEST_ID);
 
                 // Then
                 assertThat(response.id()).isEqualTo(TEST_ID);
@@ -81,7 +83,8 @@ class SubCategoryServiceTest extends BaseUnitTest {
                     .thenReturn(Optional.empty());
 
                 // When & Then
-                assertThatThrownBy(() -> subCategoryService.getSubCategory(TEST_CATEGORY_ID, TEST_ID))
+                assertThatThrownBy(
+                    () -> subCategoryApplicationService.getSubCategory(TEST_CATEGORY_ID, TEST_ID))
                     .isInstanceOf(RuntimeException.class)
                     .hasMessage("SubCategory not found with id: " + TEST_ID);
             }
@@ -114,7 +117,8 @@ class SubCategoryServiceTest extends BaseUnitTest {
                 .thenReturn(List.of(subCategory1, subCategory2));
 
             // When
-            List<ReadSubCategoryResponse> responses = subCategoryService.getSubCategories(TEST_CATEGORY_ID);
+            List<ReadSubCategoryResponse> responses = subCategoryApplicationService.getSubCategories(
+                TEST_CATEGORY_ID);
 
             // Then
             assertThat(responses).hasSize(2);

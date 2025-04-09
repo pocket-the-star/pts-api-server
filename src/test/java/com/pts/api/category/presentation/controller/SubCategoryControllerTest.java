@@ -7,7 +7,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.pts.api.category.application.port.dto.response.ReadSubCategoryResponse;
-import com.pts.api.category.application.service.SubCategoryService;
+import com.pts.api.category.application.service.SubCategoryApplicationService;
 import com.pts.api.common.base.BaseIntegrationTest;
 import com.pts.api.global.common.exception.NotFoundException;
 import java.time.LocalDateTime;
@@ -23,7 +23,7 @@ import org.springframework.test.web.servlet.ResultActions;
 class SubCategoryControllerTest extends BaseIntegrationTest {
 
     @Autowired
-    private SubCategoryService subCategoryService;
+    private SubCategoryApplicationService subCategoryApplicationService;
 
     private static final Long TEST_CATEGORY_ID = 1L;
     private static final Long TEST_ID = 1L;
@@ -32,7 +32,7 @@ class SubCategoryControllerTest extends BaseIntegrationTest {
 
     @BeforeEach
     void setUp() {
-        reset(subCategoryService);
+        reset(subCategoryApplicationService);
     }
 
     @Nested
@@ -47,7 +47,7 @@ class SubCategoryControllerTest extends BaseIntegrationTest {
                 TEST_CATEGORY_ID, TEST_DATE, TEST_DATE);
             ReadSubCategoryResponse subCategory2 = new ReadSubCategoryResponse(2L, "테스트 서브 카테고리 2",
                 TEST_CATEGORY_ID, TEST_DATE, TEST_DATE);
-            given(subCategoryService.getSubCategories(TEST_CATEGORY_ID)).willReturn(
+            given(subCategoryApplicationService.getSubCategories(TEST_CATEGORY_ID)).willReturn(
                 List.of(subCategory1, subCategory2));
 
             // When
@@ -74,7 +74,8 @@ class SubCategoryControllerTest extends BaseIntegrationTest {
                 // Given
                 ReadSubCategoryResponse subCategory = new ReadSubCategoryResponse(TEST_ID,
                     TEST_NAME, TEST_CATEGORY_ID, TEST_DATE, TEST_DATE);
-                given(subCategoryService.getSubCategory(TEST_CATEGORY_ID, TEST_ID)).willReturn(
+                given(subCategoryApplicationService.getSubCategory(TEST_CATEGORY_ID,
+                    TEST_ID)).willReturn(
                     subCategory);
 
                 // When
@@ -96,7 +97,7 @@ class SubCategoryControllerTest extends BaseIntegrationTest {
             @DisplayName("404 에러를 반환한다")
             void itReturns404Error() throws Exception {
                 // Given
-                given(subCategoryService.getSubCategory(TEST_CATEGORY_ID, TEST_ID))
+                given(subCategoryApplicationService.getSubCategory(TEST_CATEGORY_ID, TEST_ID))
                     .willThrow(new NotFoundException("SubCategory not found with id: " + TEST_ID));
 
                 // When

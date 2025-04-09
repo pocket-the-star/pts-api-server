@@ -7,7 +7,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.pts.api.category.application.port.dto.response.ReadCategoryResponse;
-import com.pts.api.category.application.service.ReadCategoryService;
+import com.pts.api.category.application.service.ReadCategoryApplicationService;
 import com.pts.api.category.common.exception.CategoryNotFoundException;
 import com.pts.api.common.base.BaseIntegrationTest;
 import java.time.LocalDateTime;
@@ -23,7 +23,7 @@ import org.springframework.test.web.servlet.ResultActions;
 class ReadCategoryControllerTest extends BaseIntegrationTest {
 
     @Autowired
-    private ReadCategoryService readCategoryService;
+    private ReadCategoryApplicationService readCategoryApplicationService;
 
     private static final Long TEST_ID_1 = 1L;
     private static final Long TEST_ID_2 = 2L;
@@ -32,7 +32,7 @@ class ReadCategoryControllerTest extends BaseIntegrationTest {
 
     @BeforeEach
     void setUp() {
-        reset(readCategoryService);
+        reset(readCategoryApplicationService);
     }
 
     @Nested
@@ -47,7 +47,8 @@ class ReadCategoryControllerTest extends BaseIntegrationTest {
                 TEST_DATE, TEST_DATE);
             ReadCategoryResponse category2 = new ReadCategoryResponse(TEST_ID_2, "테스트 카테고리 2",
                 TEST_DATE, TEST_DATE);
-            given(readCategoryService.getCategories()).willReturn(List.of(category1, category2));
+            given(readCategoryApplicationService.getCategories()).willReturn(
+                List.of(category1, category2));
 
             // When
             ResultActions result = mockMvc.perform(get("/api/v1/categories")
@@ -72,7 +73,7 @@ class ReadCategoryControllerTest extends BaseIntegrationTest {
                 // Given
                 ReadCategoryResponse category = new ReadCategoryResponse(TEST_ID_1, TEST_NAME,
                     TEST_DATE, TEST_DATE);
-                given(readCategoryService.getCategory(TEST_ID_1)).willReturn(category);
+                given(readCategoryApplicationService.getCategory(TEST_ID_1)).willReturn(category);
 
                 // When
                 ResultActions result = mockMvc.perform(get("/api/v1/categories/{id}", TEST_ID_1)
@@ -91,7 +92,7 @@ class ReadCategoryControllerTest extends BaseIntegrationTest {
             @DisplayName("404 에러를 반환한다")
             void itReturns404Error() throws Exception {
                 // Given
-                given(readCategoryService.getCategory(TEST_ID_2))
+                given(readCategoryApplicationService.getCategory(TEST_ID_2))
                     .willThrow(
                         new CategoryNotFoundException("Category not found with id: " + TEST_ID_2));
 

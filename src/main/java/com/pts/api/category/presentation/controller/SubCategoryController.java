@@ -2,7 +2,7 @@ package com.pts.api.category.presentation.controller;
 
 
 import com.pts.api.category.application.port.dto.response.ReadSubCategoryResponse;
-import com.pts.api.category.application.service.SubCategoryService;
+import com.pts.api.category.application.service.SubCategoryApplicationService;
 import com.pts.api.global.presentation.response.BaseResponse;
 import com.pts.api.global.presentation.response.ResponseGenerator;
 import com.pts.api.global.presentation.response.ResponseMsg;
@@ -23,13 +23,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class SubCategoryController {
 
-    private final SubCategoryService subCategoryService;
+    private final SubCategoryApplicationService subCategoryApplicationService;
 
     @Operation(summary = "서브 카테고리 조회", description = "서브 카테고리 목록을 조회합니다.")
     @GetMapping("/sub-categories")
     public ResponseEntity<BaseResponse<List<ReadSubCategoryResponse>>> getSubCategories(
         @PathVariable Long categoryId) {
-        List<ReadSubCategoryResponse> subCategories = subCategoryService.getSubCategories(
+        List<ReadSubCategoryResponse> subCategories = subCategoryApplicationService.getSubCategories(
             categoryId);
 
         return ResponseGenerator.ok(ResponseMsg.OK, HttpStatus.OK, subCategories);
@@ -40,7 +40,8 @@ public class SubCategoryController {
     public ResponseEntity<BaseResponse<ReadSubCategoryResponse>> getSubCategory(
         @PathVariable Long categoryId,
         @PathVariable Long id) {
-        ReadSubCategoryResponse subCategory = subCategoryService.getSubCategory(categoryId,
+        ReadSubCategoryResponse subCategory = subCategoryApplicationService.getSubCategory(
+            categoryId,
             id);
 
         return ResponseGenerator.ok(ResponseMsg.OK, HttpStatus.OK, subCategory);

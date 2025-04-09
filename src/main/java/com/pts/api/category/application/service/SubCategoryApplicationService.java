@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-public class SubCategoryService implements ReadSubCategoryUseCase {
+public class SubCategoryApplicationService implements ReadSubCategoryUseCase {
 
     private final SubCategoryRepositoryPort subCategoryRepositoryPort;
 

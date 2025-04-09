@@ -19,12 +19,12 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 
 @DisplayName("CategoryService 클래스")
-class ReadCategoryServiceTest extends BaseUnitTest {
+class ReadCategoryApplicationServiceTest extends BaseUnitTest {
 
     @Mock
     private CategoryRepositoryPort categoryRepositoryPort;
 
-    private ReadCategoryService readCategoryService;
+    private ReadCategoryApplicationService readCategoryApplicationService;
 
     private static final Long TEST_ID = 1L;
     private static final String TEST_NAME = "테스트 카테고리";
@@ -32,7 +32,7 @@ class ReadCategoryServiceTest extends BaseUnitTest {
 
     @BeforeEach
     void setUp() {
-        readCategoryService = new ReadCategoryService(categoryRepositoryPort);
+        readCategoryApplicationService = new ReadCategoryApplicationService(categoryRepositoryPort);
     }
 
     @Nested
@@ -57,7 +57,7 @@ class ReadCategoryServiceTest extends BaseUnitTest {
                     .thenReturn(Optional.of(category));
 
                 // When
-                ReadCategoryResponse response = readCategoryService.getCategory(TEST_ID);
+                ReadCategoryResponse response = readCategoryApplicationService.getCategory(TEST_ID);
 
                 // Then
                 assertThat(response.id()).isEqualTo(TEST_ID);
@@ -79,7 +79,7 @@ class ReadCategoryServiceTest extends BaseUnitTest {
                     .thenReturn(Optional.empty());
 
                 // When & Then
-                assertThatThrownBy(() -> readCategoryService.getCategory(TEST_ID))
+                assertThatThrownBy(() -> readCategoryApplicationService.getCategory(TEST_ID))
                     .isInstanceOf(CategoryNotFoundException.class)
                     .hasMessage("Category not found with id: " + TEST_ID);
             }
@@ -110,7 +110,7 @@ class ReadCategoryServiceTest extends BaseUnitTest {
                 .thenReturn(List.of(category1, category2));
 
             // When
-            List<ReadCategoryResponse> responses = readCategoryService.getCategories();
+            List<ReadCategoryResponse> responses = readCategoryApplicationService.getCategories();
 
             // Then
             assertThat(responses).hasSize(2);
