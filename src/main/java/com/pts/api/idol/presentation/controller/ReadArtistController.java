@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api/v1/idols")
 @RequiredArgsConstructor
-public class ArtistController {
+public class ReadArtistController {
 
     private final ReadArtistUseCase readArtistUseCase;
 

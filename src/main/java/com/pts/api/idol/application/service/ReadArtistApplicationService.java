@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class ArtistService implements ReadArtistUseCase {
+public class ReadArtistApplicationService implements ReadArtistUseCase {
 
     private final ArtistRepositoryPort artistRepository;
 

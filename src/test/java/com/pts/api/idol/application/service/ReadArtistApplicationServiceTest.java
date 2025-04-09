@@ -4,12 +4,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.when;
 
+import com.pts.api.common.base.BaseUnitTest;
 import com.pts.api.global.common.exception.NotFoundException;
 import com.pts.api.idol.application.dto.response.ReadArtistResponse;
 import com.pts.api.idol.application.port.out.ArtistRepositoryPort;
 import com.pts.api.idol.domain.model.Artist;
 import com.pts.api.idol.domain.model.Idol;
-import com.pts.api.common.base.BaseUnitTest;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -20,12 +20,12 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 
 @DisplayName("ArtistService 클래스")
-class ArtistServiceTest extends BaseUnitTest {
+class ReadArtistApplicationServiceTest extends BaseUnitTest {
 
     @Mock
     private ArtistRepositoryPort artistRepositoryPort;
 
-    private ArtistService artistService;
+    private ReadArtistApplicationService readArtistApplicationService;
 
     private static final Long TEST_IDOL_ID = 1L;
     private static final Long TEST_ID = 1L;
@@ -34,7 +34,7 @@ class ArtistServiceTest extends BaseUnitTest {
 
     @BeforeEach
     void setUp() {
-        artistService = new ArtistService(artistRepositoryPort);
+        readArtistApplicationService = new ReadArtistApplicationService(artistRepositoryPort);
     }
 
     @Nested
@@ -55,7 +55,7 @@ class ArtistServiceTest extends BaseUnitTest {
                     .createdAt(TEST_DATE)
                     .updatedAt(TEST_DATE)
                     .build();
-                
+
                 Artist artist = Artist.builder()
                     .id(TEST_ID)
                     .name(TEST_NAME)
@@ -63,12 +63,12 @@ class ArtistServiceTest extends BaseUnitTest {
                     .createdAt(TEST_DATE)
                     .updatedAt(TEST_DATE)
                     .build();
-                
+
                 when(artistRepositoryPort.findOneById(TEST_ID))
                     .thenReturn(Optional.of(artist));
 
                 // When
-                ReadArtistResponse response = artistService.getArtist(TEST_ID);
+                ReadArtistResponse response = readArtistApplicationService.getArtist(TEST_ID);
 
                 // Then
                 assertThat(response.id()).isEqualTo(TEST_ID);
@@ -90,7 +90,7 @@ class ArtistServiceTest extends BaseUnitTest {
                     .thenReturn(Optional.empty());
 
                 // When & Then
-                assertThatThrownBy(() -> artistService.getArtist(TEST_ID))
+                assertThatThrownBy(() -> readArtistApplicationService.getArtist(TEST_ID))
                     .isInstanceOf(NotFoundException.class)
                     .hasMessage("존재하지 않는 아티스트입니다. id=" + TEST_ID);
             }
@@ -111,7 +111,7 @@ class ArtistServiceTest extends BaseUnitTest {
                 .createdAt(TEST_DATE)
                 .updatedAt(TEST_DATE)
                 .build();
-            
+
             Artist artist1 = Artist.builder()
                 .id(TEST_ID)
                 .name(TEST_NAME)
@@ -119,7 +119,7 @@ class ArtistServiceTest extends BaseUnitTest {
                 .createdAt(TEST_DATE)
                 .updatedAt(TEST_DATE)
                 .build();
-            
+
             Artist artist2 = Artist.builder()
                 .id(2L)
                 .name("테스트 아티스트 2")
@@ -127,12 +127,13 @@ class ArtistServiceTest extends BaseUnitTest {
                 .createdAt(TEST_DATE)
                 .updatedAt(TEST_DATE)
                 .build();
-            
+
             when(artistRepositoryPort.findAll(TEST_IDOL_ID))
                 .thenReturn(List.of(artist1, artist2));
 
             // When
-            List<ReadArtistResponse> responses = artistService.getArtists(TEST_IDOL_ID);
+            List<ReadArtistResponse> responses = readArtistApplicationService.getArtists(
+                TEST_IDOL_ID);
 
             // Then
             assertThat(responses).hasSize(2);

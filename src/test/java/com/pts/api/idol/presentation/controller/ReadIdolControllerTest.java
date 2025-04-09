@@ -20,7 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.ResultActions;
 
 @DisplayName("IdolController 클래스")
-class IdolControllerTest extends BaseIntegrationTest {
+class ReadIdolControllerTest extends BaseIntegrationTest {
 
     @Autowired
     private ReadIdolUseCase readIdolUseCase;

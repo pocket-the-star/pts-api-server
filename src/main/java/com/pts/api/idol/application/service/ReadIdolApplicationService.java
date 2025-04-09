@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class IdolService implements ReadIdolUseCase {
+public class ReadIdolApplicationService implements ReadIdolUseCase {
 
     private final IdolRepositoryPort idolRepository;
 

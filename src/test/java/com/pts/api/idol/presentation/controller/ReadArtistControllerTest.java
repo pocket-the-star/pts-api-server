@@ -20,7 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.ResultActions;
 
 @DisplayName("ArtistController 클래스")
-class ArtistControllerTest extends BaseIntegrationTest {
+class ReadArtistControllerTest extends BaseIntegrationTest {
 
     @Autowired
     private ReadArtistUseCase readArtistUseCase;

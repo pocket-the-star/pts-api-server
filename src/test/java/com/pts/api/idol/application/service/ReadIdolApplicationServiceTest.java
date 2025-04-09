@@ -4,11 +4,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.when;
 
+import com.pts.api.common.base.BaseUnitTest;
 import com.pts.api.global.common.exception.NotFoundException;
 import com.pts.api.idol.application.dto.response.ReadIdolResponse;
 import com.pts.api.idol.application.port.out.IdolRepositoryPort;
 import com.pts.api.idol.domain.model.Idol;
-import com.pts.api.common.base.BaseUnitTest;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -19,12 +19,12 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 
 @DisplayName("IdolService 클래스")
-class IdolServiceTest extends BaseUnitTest {
+class ReadIdolApplicationServiceTest extends BaseUnitTest {
 
     @Mock
     private IdolRepositoryPort idolRepositoryPort;
 
-    private IdolService idolService;
+    private ReadIdolApplicationService readIdolApplicationService;
 
     private static final Long TEST_ID = 1L;
     private static final String TEST_NAME = "테스트 아이돌";
@@ -32,7 +32,7 @@ class IdolServiceTest extends BaseUnitTest {
 
     @BeforeEach
     void setUp() {
-        idolService = new IdolService(idolRepositoryPort);
+        readIdolApplicationService = new ReadIdolApplicationService(idolRepositoryPort);
     }
 
     @Nested
@@ -57,7 +57,7 @@ class IdolServiceTest extends BaseUnitTest {
                     .thenReturn(Optional.of(idol));
 
                 // When
-                ReadIdolResponse response = idolService.getIdol(TEST_ID);
+                ReadIdolResponse response = readIdolApplicationService.getIdol(TEST_ID);
 
                 // Then
                 assertThat(response.id()).isEqualTo(TEST_ID);
@@ -79,7 +79,7 @@ class IdolServiceTest extends BaseUnitTest {
                     .thenReturn(Optional.empty());
 
                 // When & Then
-                assertThatThrownBy(() -> idolService.getIdol(TEST_ID))
+                assertThatThrownBy(() -> readIdolApplicationService.getIdol(TEST_ID))
                     .isInstanceOf(NotFoundException.class)
                     .hasMessage("존재하지 않는 아이돌입니다. id=" + TEST_ID);
             }
@@ -110,7 +110,7 @@ class IdolServiceTest extends BaseUnitTest {
                 .thenReturn(List.of(idol1, idol2));
 
             // When
-            List<ReadIdolResponse> responses = idolService.getIdols(0L, 20);
+            List<ReadIdolResponse> responses = readIdolApplicationService.getIdols(0L, 20);
 
             // Then
             assertThat(responses).hasSize(2);
