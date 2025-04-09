@@ -37,7 +37,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 
 @DisplayName("FeedController 클래스")
-class FeedControllerTest extends BaseIntegrationTest {
+class ReadFeedControllerTest extends BaseIntegrationTest {
 
     @Autowired
     private PostFeedUseCase postFeedUseCase;
