@@ -23,8 +23,7 @@ class DeleteProductLikeControllerTest extends BaseIntegrationTest {
     @Autowired
     private DeleteProductLikeUseCase deleteProductLikeUseCase;
 
-    private static final String BASE_URL = "/api/v1/products/{productId}/likes";
-    private static final Long TEST_USER_ID = 1L;
+    private static final String BASE_URL = "/api/v1/private/products/{productId}/likes";
     private static final Long TEST_PRODUCT_ID = 1L;
 
     @BeforeEach
