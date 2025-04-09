@@ -17,8 +17,8 @@ import com.pts.api.feed.application.dto.request.CreateFeedRequest;
 import com.pts.api.feed.application.dto.request.UpdateFeedRequest;
 import com.pts.api.feed.application.dto.response.FeedResponse;
 import com.pts.api.feed.application.dto.response.MyFeedResponse;
-import com.pts.api.feed.application.port.in.CreateFeedUseCase;
 import com.pts.api.feed.application.port.in.DeleteFeedUseCase;
+import com.pts.api.feed.application.port.in.PostFeedUseCase;
 import com.pts.api.feed.application.port.in.ReadFeedListUseCase;
 import com.pts.api.feed.application.port.in.ReadMyFeedUseCase;
 import com.pts.api.feed.application.port.in.UpdateFeedUseCase;
@@ -41,7 +41,7 @@ import org.springframework.http.MediaType;
 class FeedControllerTest extends BaseIntegrationTest {
 
     @Autowired
-    private CreateFeedUseCase createFeedUseCase;
+    private PostFeedUseCase postFeedUseCase;
     @Autowired
     private ReadFeedListUseCase readFeedListUseCase;
     @Autowired
@@ -64,7 +64,7 @@ class FeedControllerTest extends BaseIntegrationTest {
 
     @BeforeEach
     void setUp() {
-        reset(createFeedUseCase, readFeedListUseCase, updateFeedUseCase, deleteFeedUseCase,
+        reset(postFeedUseCase, readFeedListUseCase, updateFeedUseCase, deleteFeedUseCase,
             readMyFeedUseCase);
     }
 
@@ -90,7 +90,7 @@ class FeedControllerTest extends BaseIntegrationTest {
                     TEST_PRICE,
                     TEST_QUANTITY
                 );
-                doNothing().when(createFeedUseCase).create(TEST_USER_ID, request);
+                doNothing().when(postFeedUseCase).create(TEST_USER_ID, request);
             }
 
             @Test
@@ -124,7 +124,7 @@ class FeedControllerTest extends BaseIntegrationTest {
                     TEST_QUANTITY
                 );
                 doThrow(new NotFoundException("존재하지 않는 상품입니다. productId: " + TEST_PRODUCT_ID))
-                    .when(createFeedUseCase).create(any(), any());
+                    .when(postFeedUseCase).create(any(), any());
             }
 
             @Test
@@ -160,7 +160,7 @@ class FeedControllerTest extends BaseIntegrationTest {
                 doThrow(new AlreadyExistsException(
                     "이미 등록된 피드가 존재합니다. userId: " + TEST_USER_ID + ", productId: "
                         + TEST_PRODUCT_ID))
-                    .when(createFeedUseCase).create(any(), any());
+                    .when(postFeedUseCase).create(any(), any());
             }
 
             @Test

@@ -4,8 +4,8 @@ import com.pts.api.feed.application.dto.request.CreateFeedRequest;
 import com.pts.api.feed.application.dto.request.UpdateFeedRequest;
 import com.pts.api.feed.application.dto.response.FeedResponse;
 import com.pts.api.feed.application.dto.response.MyFeedResponse;
-import com.pts.api.feed.application.port.in.CreateFeedUseCase;
 import com.pts.api.feed.application.port.in.DeleteFeedUseCase;
+import com.pts.api.feed.application.port.in.PostFeedUseCase;
 import com.pts.api.feed.application.port.in.ReadFeedListUseCase;
 import com.pts.api.feed.application.port.in.ReadMyFeedUseCase;
 import com.pts.api.feed.application.port.in.UpdateFeedUseCase;
@@ -36,7 +36,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class FeedController {
 
-    private final CreateFeedUseCase createFeedUseCase;
+    private final PostFeedUseCase postFeedUseCase;
     private final ReadFeedListUseCase readFeedListUseCase;
     private final UpdateFeedUseCase updateFeedUseCase;
     private final DeleteFeedUseCase deleteFeedUseCase;
@@ -47,7 +47,7 @@ public class FeedController {
     public ResponseEntity<BaseResponse<Void>> create(
         @AuthenticationPrincipal Long userId,
         @Valid @RequestBody CreateFeedRequest request) {
-        createFeedUseCase.create(userId, request);
+        postFeedUseCase.create(userId, request);
 
         return ResponseGenerator.ok(ResponseMsg.OK, HttpStatus.OK);
     }

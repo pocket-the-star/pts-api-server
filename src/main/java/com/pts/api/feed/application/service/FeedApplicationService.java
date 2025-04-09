@@ -4,9 +4,9 @@ import com.pts.api.feed.application.dto.request.CreateFeedRequest;
 import com.pts.api.feed.application.dto.request.UpdateFeedRequest;
 import com.pts.api.feed.application.dto.response.FeedResponse;
 import com.pts.api.feed.application.dto.response.MyFeedResponse;
-import com.pts.api.feed.application.port.in.CreateFeedUseCase;
 import com.pts.api.feed.application.port.in.DecreaseStockUseCase;
 import com.pts.api.feed.application.port.in.DeleteFeedUseCase;
+import com.pts.api.feed.application.port.in.PostFeedUseCase;
 import com.pts.api.feed.application.port.in.ReadFeedListUseCase;
 import com.pts.api.feed.application.port.in.ReadMyFeedUseCase;
 import com.pts.api.feed.application.port.in.RestoreStockUseCase;
@@ -33,7 +33,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-public class FeedApplicationService implements CreateFeedUseCase, ReadFeedListUseCase,
+public class FeedApplicationService implements PostFeedUseCase, ReadFeedListUseCase,
     UpdateFeedUseCase, DeleteFeedUseCase, ReadMyFeedUseCase, DecreaseStockUseCase,
     RestoreStockUseCase {
 
