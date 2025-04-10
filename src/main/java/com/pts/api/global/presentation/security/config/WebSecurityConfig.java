@@ -26,21 +26,15 @@ public class WebSecurityConfig {
             tokenService);
 
         http.csrf(AbstractHttpConfigurer::disable)
-            .httpBasic(AbstractHttpConfigurer::disable).formLogin(AbstractHttpConfigurer::disable)
+            .httpBasic(AbstractHttpConfigurer::disable)
+            .formLogin(AbstractHttpConfigurer::disable)
             .sessionManagement(
                 session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(
-                authz -> authz.requestMatchers("/v3/api-docs/**", "/swagger-ui/**",
-                        "/swagger-ui.html", "/swagger-resources/**", "/api-docs/**",           // 추가
-                        "/api-docs/swagger-config", // 추가
-                        "/webjars/**").permitAll()
-                    .requestMatchers("/actuator/**").permitAll()
-                    .requestMatchers("/api/v1/users/auth-code/confirm").permitAll()
-                    .requestMatchers("/api/v1/users/sign-in").permitAll()
-                    .requestMatchers("/api/v1/users/sign-up").permitAll()
-                    .requestMatchers("/api/v1/users/email/verify").permitAll()
-
-                    .anyRequest().authenticated())
+                authz ->
+                    authz
+                        .requestMatchers("/api/{segment}/private/**").authenticated()
+                        .anyRequest().permitAll())
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
