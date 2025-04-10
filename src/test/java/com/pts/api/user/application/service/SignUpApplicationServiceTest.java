@@ -1,30 +1,20 @@
 package com.pts.api.user.application.service;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import com.pts.api.common.base.BaseUnitTest;
-import com.pts.api.global.outbox.publisher.OutboxPublisher;
 import com.pts.api.lib.internal.shared.enums.UserRole;
-import com.pts.api.lib.internal.shared.event.EventType;
-import com.pts.api.lib.internal.shared.event.data.EmailVerifyData;
 import com.pts.api.lib.internal.shared.util.date.IDateTimeUtil;
-import com.pts.api.lib.internal.shared.util.random.IRandomUtil;
-import com.pts.api.user.application.dto.request.SignInRequest;
 import com.pts.api.user.application.dto.request.SignUpRequest;
-import com.pts.api.user.application.dto.response.TokenResponse;
 import com.pts.api.user.application.port.out.EmailVerifyRepositoryPort;
 import com.pts.api.user.application.port.out.UserRepositoryPort;
 import com.pts.api.user.common.exception.AlreadyExistsException;
-import com.pts.api.user.common.exception.EmailVerifyLockedException;
 import com.pts.api.user.common.exception.EmailVerifyNotFoundException;
 import com.pts.api.user.common.exception.PasswordMismatchException;
-import com.pts.api.user.common.exception.UserNotFoundException;
 import com.pts.api.user.domain.model.EmailVerify;
 import com.pts.api.user.domain.model.LocalAccount;
 import com.pts.api.user.domain.model.User;
@@ -38,7 +28,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 
 @DisplayName("UserApplicationService 클래스")
-class UserApplicationServiceTest extends BaseUnitTest {
+class SignUpApplicationServiceTest extends BaseUnitTest {
 
     @Mock
     private EmailVerifyRepositoryPort emailVerifyRepository;
@@ -47,21 +37,12 @@ class UserApplicationServiceTest extends BaseUnitTest {
     private IDateTimeUtil dateTimeUtil;
 
     @Mock
-    private TokenService tokenService;
-
-    @Mock
-    private IRandomUtil randomUtil;
-
-    @Mock
     private AuthenticationService authenticationService;
-
-    @Mock
-    private OutboxPublisher outboxPublisher;
 
     @Mock
     private UserRepositoryPort userRepository;
 
-    private UserApplicationService userApplicationService;
+    private SignUpApplicationService signUpApplicationService;
 
     private static final String TEST_EMAIL = "test@example.com";
     private static final String TEST_PASSWORD = "password123";
@@ -78,13 +59,10 @@ class UserApplicationServiceTest extends BaseUnitTest {
 
     @BeforeEach
     void setUp() {
-        userApplicationService = new UserApplicationService(
+        signUpApplicationService = new SignUpApplicationService(
             emailVerifyRepository,
             dateTimeUtil,
-            tokenService,
-            randomUtil,
             authenticationService,
-            outboxPublisher,
             userRepository
         );
 
@@ -147,7 +125,7 @@ class UserApplicationServiceTest extends BaseUnitTest {
             when(userRepository.save(any(User.class))).thenReturn(testUser);
 
             // when
-            userApplicationService.signUp(request);
+            signUpApplicationService.signUp(request);
 
             // then
             verify(userRepository).save(any(User.class));
@@ -169,7 +147,7 @@ class UserApplicationServiceTest extends BaseUnitTest {
             when(emailVerifyRepository.findByEmail(TEST_EMAIL)).thenReturn(Optional.empty());
 
             // when & then
-            assertThatThrownBy(() -> userApplicationService.signUp(request))
+            assertThatThrownBy(() -> signUpApplicationService.signUp(request))
                 .isInstanceOf(EmailVerifyNotFoundException.class);
 
             verify(userRepository, never()).save(any(User.class));
@@ -191,7 +169,7 @@ class UserApplicationServiceTest extends BaseUnitTest {
                 Optional.of(testEmailVerify));
 
             // when & then
-            assertThatThrownBy(() -> userApplicationService.signUp(request))
+            assertThatThrownBy(() -> signUpApplicationService.signUp(request))
                 .isInstanceOf(PasswordMismatchException.class);
 
             verify(userRepository, never()).save(any(User.class));
@@ -214,85 +192,10 @@ class UserApplicationServiceTest extends BaseUnitTest {
             when(userRepository.existsByEmail(TEST_EMAIL)).thenReturn(true);
 
             // when & then
-            assertThatThrownBy(() -> userApplicationService.signUp(request))
+            assertThatThrownBy(() -> signUpApplicationService.signUp(request))
                 .isInstanceOf(AlreadyExistsException.class);
 
             verify(userRepository, never()).save(any(User.class));
-        }
-    }
-
-    @Nested
-    @DisplayName("signIn 메서드 호출 시")
-    class DescribeSignIn {
-
-        @Test
-        @DisplayName("유효한 요청이면 로그인에 성공하고 토큰을 반환한다")
-        void signInSuccessfully() {
-            // given
-            SignInRequest request = new SignInRequest(TEST_EMAIL, TEST_PASSWORD);
-            TokenResponse expectedToken = new TokenResponse("access_token", "refresh_token");
-
-            when(userRepository.findByEmail(TEST_EMAIL)).thenReturn(Optional.of(testUser));
-            when(authenticationService.matches(TEST_PASSWORD, TEST_PASSWORD)).thenReturn(true);
-            when(tokenService.generate(TEST_USER_ID, UserRole.USER)).thenReturn(expectedToken);
-
-            // when
-            TokenResponse actualToken = userApplicationService.signIn(request);
-
-            // then
-            assertThat(actualToken).isEqualTo(expectedToken);
-            verify(tokenService).saveRefreshToken(TEST_USER_ID, expectedToken.refreshToken());
-        }
-
-        @Test
-        @DisplayName("존재하지 않는 이메일이면 예외가 발생한다")
-        void throwsExceptionWhenUserNotFound() {
-            // given
-            SignInRequest request = new SignInRequest(TEST_EMAIL, TEST_PASSWORD);
-
-            when(userRepository.findByEmail(TEST_EMAIL)).thenReturn(Optional.empty());
-
-            // when & then
-            assertThatThrownBy(() -> userApplicationService.signIn(request))
-                .isInstanceOf(UserNotFoundException.class);
-        }
-    }
-
-    @Nested
-    @DisplayName("verifyEmail 메서드 호출 시")
-    class DescribeVerifyEmail {
-
-        @Test
-        @DisplayName("이메일 인증 요청에 성공한다")
-        void verifyEmailSuccessfully() {
-            // given
-            when(emailVerifyRepository.getLock(TEST_EMAIL)).thenReturn(true);
-            when(randomUtil.generateRandomString()).thenReturn(TEST_AUTH_CODE);
-            doNothing().when(outboxPublisher)
-                .publish(any(EventType.class), any(EmailVerifyData.class));
-
-            // when
-            userApplicationService.verifyEmail(TEST_EMAIL);
-
-            // then
-            verify(emailVerifyRepository).save(any(EmailVerify.class));
-            verify(outboxPublisher).publish(EventType.EMAIL_AUTH,
-                new EmailVerifyData(TEST_EMAIL, TEST_AUTH_CODE));
-        }
-
-        @Test
-        @DisplayName("이메일 락 획득에 실패하면 예외가 발생한다")
-        void throwsExceptionWhenLockFailed() {
-            // given
-            when(emailVerifyRepository.getLock(TEST_EMAIL)).thenReturn(false);
-
-            // when & then
-            assertThatThrownBy(() -> userApplicationService.verifyEmail(TEST_EMAIL))
-                .isInstanceOf(EmailVerifyLockedException.class);
-
-            verify(emailVerifyRepository, never()).save(any(EmailVerify.class));
-            verify(outboxPublisher, never()).publish(any(EventType.class),
-                any(EmailVerifyData.class));
         }
     }
 } 
