@@ -26,7 +26,7 @@ class UpdateOrderControllerTest extends BaseIntegrationTest {
     @Autowired
     private UpdateOrderUseCase updateOrderUseCase;
 
-    private static final String BASE_URL = "/api/v1/orders";
+    private static final String BASE_URL = "/api/v1/private/orders";
     private static final Long TEST_USER_ID = 1L;
     private static final Long TEST_ORDER_ID = 1L;
 

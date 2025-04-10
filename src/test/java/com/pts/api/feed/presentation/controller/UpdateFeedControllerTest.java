@@ -29,7 +29,7 @@ class UpdateFeedControllerTest extends BaseIntegrationTest {
     private UpdateFeedUseCase updateFeedUseCase;
 
 
-    private static final String BASE_URL = "/api/v1/feeds";
+    private static final String BASE_URL = "/api/v1/private/feeds";
     private static final Long TEST_FEED_ID = 1L;
     private static final String TEST_CONTENT = "테스트 피드 내용";
     private static final List<String> TEST_IMAGE_URLS = List.of("test1.jpg", "test2.jpg");

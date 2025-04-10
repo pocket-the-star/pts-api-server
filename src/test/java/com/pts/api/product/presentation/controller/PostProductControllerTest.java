@@ -25,7 +25,7 @@ class PostProductControllerTest extends BaseIntegrationTest {
     @Autowired
     private PostProductUseCase postProductUseCase;
 
-    private static final String BASE_URL = "/api/v1/products";
+    private static final String BASE_URL = "/api/v1/private/products";
     private static final Long TEST_ID = 1L;
     private static final String TEST_TITLE = "테스트 상품";
     private static final Long TEST_SUB_CATEGORY_ID = 1L;
