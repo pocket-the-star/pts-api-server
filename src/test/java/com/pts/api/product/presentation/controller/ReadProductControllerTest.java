@@ -1,22 +1,15 @@
 package com.pts.api.product.presentation.controller;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.reset;
 import static org.mockito.Mockito.when;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pts.api.common.base.BaseIntegrationTest;
-import com.pts.api.product.application.dto.request.CreateProductRequest;
 import com.pts.api.product.application.dto.response.ProductImageResponse;
 import com.pts.api.product.application.dto.response.ProductResponse;
-import com.pts.api.product.application.port.in.CreateProductUseCase;
-import com.pts.api.product.application.port.in.ReadProductListUseCase;
 import com.pts.api.product.application.port.in.ReadProductUseCase;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -25,20 +18,13 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.ResultActions;
 
-@DisplayName("ProductController 클래스")
-class ProductControllerTest extends BaseIntegrationTest {
-
-    @Autowired
-    private CreateProductUseCase createProductUseCase;
+@DisplayName("ReadProductController 클래스")
+class ReadProductControllerTest extends BaseIntegrationTest {
 
     @Autowired
     private ReadProductUseCase readProductUseCase;
-
-    @Autowired
-    private ReadProductListUseCase readProductListUseCase;
 
     private static final String BASE_URL = "/api/v1/products";
     private static final Long TEST_ID = 1L;
@@ -51,35 +37,7 @@ class ProductControllerTest extends BaseIntegrationTest {
 
     @BeforeEach
     void setUp() {
-        reset(createProductUseCase, readProductUseCase, readProductListUseCase);
-    }
-
-    @Nested
-    @DisplayName("create 메서드 호출 시")
-    class DescribeCreate {
-
-        @Test
-        @DisplayName("유효한 요청이면 200 OK를 반환한다")
-        void returns200Ok() throws Exception {
-            // Given
-            CreateProductRequest request = new CreateProductRequest(
-                TEST_ID,
-                TEST_TITLE,
-                TEST_SUB_CATEGORY_ID,
-                TEST_ARTIST_ID,
-                List.of("image1.jpg", "image2.jpg")
-            );
-
-            doNothing().when(createProductUseCase).create(any(CreateProductRequest.class));
-
-            // When & Then
-            ResultActions result = mockMvc.perform(post(BASE_URL)
-                    .with(user("testUser").roles("USER"))
-                    .contentType(MediaType.APPLICATION_JSON)
-                    .content(objectMapper.writeValueAsString(request)));
-
-            result.andExpect(status().isOk());
-        }
+        reset(readProductUseCase);
     }
 
     @Nested
@@ -112,7 +70,7 @@ class ProductControllerTest extends BaseIntegrationTest {
 
             // When & Then
             ResultActions result = mockMvc.perform(get(BASE_URL + "/{id}", TEST_ID)
-                    .with(user("testUser").roles("USER")));
+                .with(user("testUser").roles("USER")));
 
             result.andExpect(status().isOk())
                 .andExpect(jsonPath("$.data.id").value(TEST_ID))
@@ -168,12 +126,12 @@ class ProductControllerTest extends BaseIntegrationTest {
                 TEST_DATE
             );
 
-            when(readProductListUseCase.findAll(null, null, null, 0L, 20))
+            when(readProductUseCase.findAll(null, null, null, 0L, 20))
                 .thenReturn(List.of(product1, product2));
 
             // When & Then
             ResultActions result = mockMvc.perform(get(BASE_URL)
-                    .with(user("testUser").roles("USER")));
+                .with(user("testUser").roles("USER")));
 
             result.andExpect(status().isOk())
                 .andExpect(jsonPath("$.data[0].id").value(TEST_ID))
@@ -182,4 +140,4 @@ class ProductControllerTest extends BaseIntegrationTest {
                 .andExpect(jsonPath("$.data[1].title").value("테스트 상품 2"));
         }
     }
-} 
+}
