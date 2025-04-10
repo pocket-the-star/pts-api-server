@@ -29,9 +29,9 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 
 @DisplayName("OrderApplicationService 클래스")
-class OrderApplicationServiceTest extends BaseUnitTest {
+class PostOrderApplicationServiceTest extends BaseUnitTest {
 
-    private OrderApplicationService orderApplicationService;
+    private PostOrderApplicationService postOrderApplicationService;
 
     @Mock
     private OrderRepositoryPort orderRepository;
@@ -54,7 +54,7 @@ class OrderApplicationServiceTest extends BaseUnitTest {
 
     @BeforeEach
     void setUp() {
-        orderApplicationService = new OrderApplicationService(
+        postOrderApplicationService = new PostOrderApplicationService(
             orderRepository,
             shippingRepository,
             feedRepository,
@@ -126,7 +126,7 @@ class OrderApplicationServiceTest extends BaseUnitTest {
             @DisplayName("주문을 생성한다")
             void createsOrder() {
                 // When
-                orderApplicationService.create(TEST_USER_ID, request);
+                postOrderApplicationService.create(TEST_USER_ID, request);
 
                 // Then
                 verify(orderRepository).save(any(Order.class));
@@ -161,7 +161,7 @@ class OrderApplicationServiceTest extends BaseUnitTest {
             @DisplayName("NotFoundException을 발생시킨다")
             void throwsNotFoundException() {
                 // When & Then
-                assertThatThrownBy(() -> orderApplicationService.create(TEST_USER_ID, request))
+                assertThatThrownBy(() -> postOrderApplicationService.create(TEST_USER_ID, request))
                     .isInstanceOf(NotFoundException.class)
                     .hasMessage("존재하지 않는 피드입니다. feedId=" + TEST_FEED_ID);
             }
@@ -202,7 +202,7 @@ class OrderApplicationServiceTest extends BaseUnitTest {
             @DisplayName("주문 상태를 업데이트한다")
             void updatesOrderStatus() {
                 // When
-                orderApplicationService.updateStatus(TEST_USER_ID, TEST_ORDER_ID, request);
+                postOrderApplicationService.updateStatus(TEST_USER_ID, TEST_ORDER_ID, request);
 
                 // Then
                 verify(orderRepository).save(any(Order.class));
@@ -227,7 +227,7 @@ class OrderApplicationServiceTest extends BaseUnitTest {
             void throwsNotFoundException() {
                 // When & Then
                 assertThatThrownBy(
-                    () -> orderApplicationService.updateStatus(TEST_USER_ID, TEST_ORDER_ID,
+                    () -> postOrderApplicationService.updateStatus(TEST_USER_ID, TEST_ORDER_ID,
                         request))
                     .isInstanceOf(NotFoundException.class)
                     .hasMessage("주문을 찾을 수 없습니다.");
@@ -264,7 +264,7 @@ class OrderApplicationServiceTest extends BaseUnitTest {
             void throwsUnAuthorizedException() {
                 // When & Then
                 assertThatThrownBy(
-                    () -> orderApplicationService.updateStatus(TEST_USER_ID, TEST_ORDER_ID,
+                    () -> postOrderApplicationService.updateStatus(TEST_USER_ID, TEST_ORDER_ID,
                         request))
                     .isInstanceOf(UnAuthorizedException.class)
                     .hasMessage("해당 주문에 대한 권한이 없습니다.");
@@ -303,7 +303,7 @@ class OrderApplicationServiceTest extends BaseUnitTest {
             @DisplayName("주문을 취소한다")
             void cancelsOrder() {
                 // When
-                orderApplicationService.cancel(TEST_USER_ID, TEST_ORDER_ID);
+                postOrderApplicationService.cancel(TEST_USER_ID, TEST_ORDER_ID);
 
                 // Then
                 verify(orderRepository).save(any(Order.class));
@@ -325,7 +325,7 @@ class OrderApplicationServiceTest extends BaseUnitTest {
             void throwsNotFoundException() {
                 // When & Then
                 assertThatThrownBy(
-                    () -> orderApplicationService.cancel(TEST_USER_ID, TEST_ORDER_ID))
+                    () -> postOrderApplicationService.cancel(TEST_USER_ID, TEST_ORDER_ID))
                     .isInstanceOf(NotFoundException.class)
                     .hasMessage("주문을 찾을 수 없습니다.");
             }
@@ -358,7 +358,7 @@ class OrderApplicationServiceTest extends BaseUnitTest {
             void throwsUnAuthorizedException() {
                 // When & Then
                 assertThatThrownBy(
-                    () -> orderApplicationService.cancel(TEST_USER_ID, TEST_ORDER_ID))
+                    () -> postOrderApplicationService.cancel(TEST_USER_ID, TEST_ORDER_ID))
                     .isInstanceOf(UnAuthorizedException.class)
                     .hasMessage("해당 주문에 대한 권한이 없습니다.");
             }
@@ -396,7 +396,7 @@ class OrderApplicationServiceTest extends BaseUnitTest {
             @DisplayName("주문을 삭제한다")
             void deletesOrder() {
                 // When
-                orderApplicationService.delete(TEST_USER_ID, TEST_ORDER_ID);
+                postOrderApplicationService.delete(TEST_USER_ID, TEST_ORDER_ID);
 
                 // Then
                 verify(orderRepository).save(any(Order.class));
@@ -418,7 +418,7 @@ class OrderApplicationServiceTest extends BaseUnitTest {
             void throwsNotFoundException() {
                 // When & Then
                 assertThatThrownBy(
-                    () -> orderApplicationService.delete(TEST_USER_ID, TEST_ORDER_ID))
+                    () -> postOrderApplicationService.delete(TEST_USER_ID, TEST_ORDER_ID))
                     .isInstanceOf(NotFoundException.class)
                     .hasMessage("주문을 찾을 수 없습니다.");
             }
@@ -451,7 +451,7 @@ class OrderApplicationServiceTest extends BaseUnitTest {
             void throwsUnAuthorizedException() {
                 // When & Then
                 assertThatThrownBy(
-                    () -> orderApplicationService.delete(TEST_USER_ID, TEST_ORDER_ID))
+                    () -> postOrderApplicationService.delete(TEST_USER_ID, TEST_ORDER_ID))
                     .isInstanceOf(UnAuthorizedException.class)
                     .hasMessage("해당 주문에 대한 권한이 없습니다.");
             }
