@@ -10,7 +10,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import com.pts.api.common.base.BaseIntegrationTest;
 import com.pts.api.product.application.dto.request.CreateProductRequest;
 import com.pts.api.product.application.port.in.PostProductUseCase;
-import java.time.LocalDateTime;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -31,9 +30,6 @@ class PostProductControllerTest extends BaseIntegrationTest {
     private static final String TEST_TITLE = "테스트 상품";
     private static final Long TEST_SUB_CATEGORY_ID = 1L;
     private static final Long TEST_ARTIST_ID = 1L;
-    private static final Integer TEST_MIN_BUY_PRICE = 10000;
-    private static final Integer TEST_MAX_SELL_PRICE = 20000;
-    private static final LocalDateTime TEST_DATE = LocalDateTime.now();
 
     @BeforeEach
     void setUp() {
