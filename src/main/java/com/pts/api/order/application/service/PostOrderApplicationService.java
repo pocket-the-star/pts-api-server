@@ -7,7 +7,7 @@ import com.pts.api.lib.internal.shared.enums.OrderStatus;
 import com.pts.api.lib.internal.shared.util.date.DateTimeUtil;
 import com.pts.api.order.application.dto.request.CreateOrderRequest;
 import com.pts.api.order.application.dto.request.UpdateOrderRequest;
-import com.pts.api.order.application.port.in.CreateOrderUseCase;
+import com.pts.api.order.application.port.in.PostOrderUseCase;
 import com.pts.api.order.application.port.in.UpdateOrderUseCase;
 import com.pts.api.order.application.port.out.OrderRepositoryPort;
 import com.pts.api.order.application.port.out.ShippingRepositoryPort;
@@ -20,8 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-@Transactional(readOnly = true)
-public class OrderApplicationService implements CreateOrderUseCase, UpdateOrderUseCase {
+public class PostOrderApplicationService implements PostOrderUseCase, UpdateOrderUseCase {
 
     private final OrderRepositoryPort orderRepository;
     private final ShippingRepositoryPort shippingRepository;
