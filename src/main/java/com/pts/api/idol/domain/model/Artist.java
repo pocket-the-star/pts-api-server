@@ -4,8 +4,10 @@ import com.pts.api.lib.internal.shared.base.model.BaseModel;
 import java.time.LocalDateTime;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
+@NoArgsConstructor
 public class Artist extends BaseModel {
 
     private Long id;
