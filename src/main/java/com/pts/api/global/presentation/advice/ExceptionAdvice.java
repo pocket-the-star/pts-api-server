@@ -3,13 +3,13 @@ package com.pts.api.global.presentation.advice;
 import com.pts.api.global.common.exception.CustomBusinessException;
 import com.pts.api.global.presentation.response.BaseResponse;
 import com.pts.api.global.presentation.response.ResponseGenerator;
-import lombok.extern.log4j.Log4j2;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-@Log4j2
+@Slf4j
 @RestControllerAdvice
 public class ExceptionAdvice {
 
@@ -36,11 +36,5 @@ public class ExceptionAdvice {
         log.error("클래스: {}, 메시지: {}",
             element.getClassName(),
             e.toString());
-//        log.error("클래스: {}, 메서드: {}, 라인: {}, 예외: {}, 메시지: {}",
-//            element.getClassName(),
-//            element.getMethodName(),
-//            element.getLineNumber(),
-//            e.getClass(),
-//            e.getMessage());
     }
 }
